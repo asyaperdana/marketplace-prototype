@@ -12,7 +12,7 @@
 
 <section
     id="hero"
-    class="hero bg-dark-deep min-h-screen flex items-center relative overflow-hidden pt-20"
+    class="hero bg-dark-deep min-h-screen flex items-center relative overflow-hidden pt-12"
 >
     <!-- Sophisticated Background -->
     <div class="absolute inset-0 z-0">
@@ -23,47 +23,45 @@
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div class="hero-content" class:loaded={isLoaded}>
                 <!-- Premium Badge -->
                 <div
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light border border-white/10 text-primary-light text-sm font-semibold mb-8 backdrop-blur-md"
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-light border border-white/10 text-primary-light text-xs font-semibold mb-6 backdrop-blur-md"
                 >
                     <span
-                        class="flex h-2 w-2 rounded-full bg-primary animate-pulse"
+                        class="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse"
                     ></span>
                     Marketplace Preloved #1 di Indonesia
                 </div>
 
                 <!-- Main Heading -->
                 <h1
-                    class="text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight"
+                    class="text-4xl lg:text-6xl font-extrabold text-white leading-[1.1] mb-6 tracking-tight"
                 >
                     Upgrade Gaya,<br />
                     <span class="gradient-text">Hemat</span> Budget Anda
                 </h1>
 
                 <!-- Subtitle -->
-                <p
-                    class="text-xl text-slate-300 leading-relaxed mb-10 max-w-xl"
-                >
+                <p class="text-lg text-slate-300 leading-relaxed mb-8 max-w-lg">
                     Temukan koleksi barang branded original dengan harga miring.
                     Jual barang preloved tak terpakai dan raup keuntungan
                     tambahan setiap hari.
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="flex flex-wrap gap-4 mb-12">
+                <div class="flex flex-wrap gap-3 mb-10">
                     <a
                         href="#newsletter"
-                        class="btn btn-primary text-lg px-8 py-4"
+                        class="btn btn-primary text-base px-6 py-3"
                     >
                         <span>🏪</span>
                         Mulai Jualan
                     </a>
                     <a
                         href="#products"
-                        class="btn btn-secondary text-lg px-8 py-4 bg-white/5 border-white/10 hover:bg-white/10"
+                        class="btn btn-secondary text-base px-6 py-3 bg-white/5 border-white/10 hover:bg-white/10"
                     >
                         <span>🔍</span>
                         Jelajahi Produk
@@ -72,25 +70,25 @@
 
                 <!-- Trust Stats -->
                 <div
-                    class="flex flex-wrap gap-8 items-center border-t border-white/10 pt-8 mt-4"
+                    class="flex flex-wrap gap-6 items-center border-t border-white/10 pt-6 mt-2"
                 >
                     <div class="flex flex-col">
-                        <span class="text-2xl font-bold text-white">50K+</span>
-                        <span class="text-sm text-slate-400"
+                        <span class="text-xl font-bold text-white">50K+</span>
+                        <span class="text-xs text-slate-400"
                             >Pengguna Aktif</span
                         >
                     </div>
-                    <div class="h-8 w-px bg-white/10"></div>
+                    <div class="h-6 w-px bg-white/10"></div>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-bold text-white">120K+</span>
-                        <span class="text-sm text-slate-400"
+                        <span class="text-xl font-bold text-white">120K+</span>
+                        <span class="text-xs text-slate-400"
                             >Produk Terjual</span
                         >
                     </div>
-                    <div class="h-8 w-px bg-white/10"></div>
+                    <div class="h-6 w-px bg-white/10"></div>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-bold text-white">4.9/5</span>
-                        <span class="text-sm text-slate-400"
+                        <span class="text-xl font-bold text-white">4.9/5</span>
+                        <span class="text-xs text-slate-400"
                             >Rating Kepuasan</span
                         >
                     </div>
@@ -102,23 +100,24 @@
                 class="relative hidden lg:block hero-visual"
                 class:loaded={isLoaded}
             >
+                <!-- Removed overflow-hidden so floating icons are not clipped -->
                 <div
-                    class="glass rounded-[2rem] p-8 relative overflow-hidden aspect-[4/5] flex items-center justify-center border border-white/10 shadow-2xl"
+                    class="glass rounded-[2rem] p-8 relative aspect-[4/5] flex items-center justify-center border border-white/10 shadow-2xl"
                 >
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-30"
+                        class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-30 rounded-[2rem] overflow-hidden"
                     ></div>
-                    <div class="text-[12rem] drop-shadow-2xl animate-float">
+                    <div class="text-[10rem] drop-shadow-2xl animate-float">
                         📦
                     </div>
 
                     <!-- Floating Indicator Cards -->
                     <div
-                        class="absolute top-10 -left-10 glass p-5 rounded-2xl shadow-xl animate-float-slow"
+                        class="absolute top-10 -left-10 glass p-4 rounded-2xl shadow-xl animate-float-slow z-20"
                     >
                         <div class="flex items-center gap-3">
                             <div
-                                class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center text-xl"
+                                class="w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center text-lg"
                             >
                                 👗
                             </div>
@@ -126,7 +125,7 @@
                                 <div class="text-sm font-bold text-white">
                                     Flash Sale
                                 </div>
-                                <div class="text-xs text-primary-light">
+                                <div class="text-[10px] text-primary-light">
                                     Hingga 70% Off
                                 </div>
                             </div>
@@ -134,11 +133,11 @@
                     </div>
 
                     <div
-                        class="absolute bottom-20 -right-10 glass p-5 rounded-2xl shadow-xl animate-float-medium"
+                        class="absolute bottom-20 -right-10 glass p-4 rounded-2xl shadow-xl animate-float-medium z-20"
                     >
                         <div class="flex items-center gap-3">
                             <div
-                                class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center text-xl"
+                                class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center text-lg"
                             >
                                 📱
                             </div>
@@ -146,7 +145,7 @@
                                 <div class="text-sm font-bold text-white">
                                     Gadget Second
                                 </div>
-                                <div class="text-xs text-primary-light">
+                                <div class="text-[10px] text-primary-light">
                                     Bergaransi
                                 </div>
                             </div>
@@ -159,12 +158,12 @@
 
     <!-- Scroll Mouse -->
     <div
-        class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50 hidden md:block"
+        class="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-50 hidden md:block"
     >
         <div
-            class="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2"
+            class="w-5 h-8 border-2 border-white/20 rounded-full flex justify-center pt-2"
         >
-            <div class="w-1 h-2 bg-white rounded-full animate-bounce"></div>
+            <div class="w-1 h-1.5 bg-white rounded-full animate-bounce"></div>
         </div>
     </div>
 </section>

@@ -148,7 +148,7 @@
 
 <section
     id="products"
-    class="py-24 relative overflow-hidden bg-dark-deep"
+    class="py-16 relative overflow-hidden bg-dark-deep"
     bind:this={sectionRef}
 >
     <!-- Background Decoration -->
@@ -164,18 +164,18 @@
 
     <div class="container mx-auto px-6 relative z-10">
         <div
-            class="text-center mb-20 space-y-4"
+            class="text-center mb-12 space-y-3"
             class:opacity-0={!isVisible}
             class:translate-y-10={!isVisible}
             class:transition-all={true}
             class:duration-1000={true}
         >
             <h2
-                class="text-4xl lg:text-6xl font-black text-white tracking-tighter"
+                class="text-3xl lg:text-5xl font-black text-white tracking-tighter"
             >
                 Produk <span class="gradient-text">Unggulan</span>
             </h2>
-            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+            <p class="text-lg text-slate-300 max-w-2xl mx-auto">
                 Koleksi barang preloved pilihan dengan kualitas terjamin dan
                 harga yang tak tertandingi.
             </p>
@@ -201,8 +201,9 @@
                         </div>
                     </div>
 
-                    <!-- Wishlist Button -->
                     <button
+                        type="button"
+                        aria-label="Add to wishlist"
                         class="absolute top-6 right-6 z-20 w-12 h-12 rounded-xl glass-light border border-white/10 flex items-center justify-center text-white hover:bg-rose-500 hover:border-rose-500 hover:scale-110 active:scale-95 transition-all duration-300 group/wish"
                     >
                         <svg

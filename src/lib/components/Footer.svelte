@@ -30,7 +30,7 @@
 </script>
 
 <footer
-    class="bg-dark-deep pt-24 pb-12 border-t border-white/5 relative overflow-hidden"
+    class="bg-dark-deep pt-20 pb-12 border-t border-white/5 relative overflow-hidden"
 >
     <!-- Premium Background Decoration -->
     <div class="absolute inset-0 z-0">

@@ -76,7 +76,7 @@
 
 <section
     id="faq"
-    class="py-24 relative overflow-hidden bg-dark-deep"
+    class="py-20 relative overflow-hidden bg-dark-deep"
     bind:this={sectionRef}
 >
     <!-- Background Decoration -->

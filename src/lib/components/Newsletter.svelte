@@ -36,7 +36,7 @@
 
 <section
     id="newsletter"
-    class="py-24 relative overflow-hidden bg-dark-deep"
+    class="py-20 relative overflow-hidden bg-dark-deep"
     bind:this={sectionRef}
 >
     <!-- Premium Background Decoration -->
