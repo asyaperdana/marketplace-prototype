@@ -11,7 +11,21 @@
         seller: string;
         location: string;
         rating: number;
+        stock?: number;
+        viewers?: number;
     }
+
+    interface FilterTab {
+        id: string;
+        label: string;
+        icon: string;
+    }
+
+    const filterTabs: FilterTab[] = [
+        { id: "terbaru", label: "Terbaru", icon: "✨" },
+        { id: "terlaris", label: "Terlaris", icon: "🔥" },
+        { id: "deals", label: "Best Deals", icon: "💎" },
+    ];
 
     const products: Product[] = [
         {
@@ -24,6 +38,8 @@
             seller: "FashionTrust",
             location: "Jakarta",
             rating: 4.9,
+            stock: 2,
+            viewers: 18,
         },
         {
             id: 2,
@@ -35,6 +51,8 @@
             seller: "GadgetKing",
             location: "Bandung",
             rating: 4.8,
+            stock: 1,
+            viewers: 45,
         },
         {
             id: 3,
@@ -46,6 +64,7 @@
             seller: "SneakerHead",
             location: "Surabaya",
             rating: 5.0,
+            viewers: 12,
         },
         {
             id: 4,
@@ -57,6 +76,8 @@
             seller: "TechMaster",
             location: "Jakarta",
             rating: 4.7,
+            stock: 3,
+            viewers: 31,
         },
         {
             id: 5,
@@ -68,6 +89,7 @@
             seller: "LuxBags",
             location: "Medan",
             rating: 4.9,
+            viewers: 22,
         },
         {
             id: 6,
@@ -79,6 +101,8 @@
             seller: "GameZone",
             location: "Yogyakarta",
             rating: 4.8,
+            stock: 1,
+            viewers: 67,
         },
         {
             id: 7,
@@ -101,11 +125,19 @@
             seller: "WatchStore",
             location: "Bali",
             rating: 4.9,
+            stock: 2,
+            viewers: 28,
         },
     ];
 
+    let activeFilter = $state("terbaru");
+    let viewerCount = $state(156);
     let isVisible = $state(false);
     let sectionRef: HTMLElement;
+
+    function setActiveFilter(filterId: string) {
+        activeFilter = filterId;
+    }
 
     function formatPrice(price: number): string {
         return new Intl.NumberFormat("id-ID").format(price);
@@ -142,7 +174,17 @@
             observer.observe(sectionRef);
         }
 
-        return () => observer.disconnect();
+        // Simulate live viewer count
+        const viewerInterval = setInterval(() => {
+            viewerCount += Math.floor(Math.random() * 5) - 2;
+            if (viewerCount < 140) viewerCount = 145;
+            if (viewerCount > 180) viewerCount = 175;
+        }, 3000);
+
+        return () => {
+            observer.disconnect();
+            clearInterval(viewerInterval);
+        };
     });
 </script>
 
@@ -179,6 +221,62 @@
                 Koleksi barang preloved pilihan dengan kualitas terjamin dan
                 harga yang tak tertandingi.
             </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div
+            class="flex justify-center mb-12"
+            class:opacity-0={!isVisible}
+            class:translate-y-10={!isVisible}
+            style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
+        >
+            <div
+                class="inline-flex glass-light p-1.5 rounded-2xl border border-white/10 relative"
+            >
+                {#each filterTabs as tab, index}
+                    <button
+                        class="relative z-10 px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-sm transition-all duration-500 {activeFilter ===
+                        tab.id
+                            ? 'text-white'
+                            : 'text-slate-400 hover:text-white'}"
+                        onclick={() => setActiveFilter(tab.id)}
+                    >
+                        <span class="text-lg">{tab.icon}</span>
+                        <span class="hidden sm:inline">{tab.label}</span>
+                    </button>
+                {/each}
+
+                <!-- Background slider -->
+                <div
+                    class="absolute top-1.5 bottom-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-lg shadow-primary/30"
+                    style="left: calc({filterTabs.findIndex(
+                        (t) => t.id === activeFilter,
+                    )} * 33.33% + 0.375rem); width: calc(33.33% - 0.5rem)"
+                ></div>
+            </div>
+        </div>
+
+        <!-- Live Stats Bar -->
+        <div
+            class="flex justify-center gap-8 mb-8 text-sm"
+            class:opacity-0={!isVisible}
+            style="transition: all 0.8s; transition-delay: 0.15s"
+        >
+            <div class="flex items-center gap-2 text-slate-400">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"
+                ></span>
+                <span class="font-medium"
+                    ><span class="text-white font-bold">{viewerCount}</span> orang
+                    sedang melihat</span
+                >
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-slate-400">
+                <span>🔥</span>
+                <span class="font-medium"
+                    ><span class="text-white font-bold">23</span> terjual dalam 1
+                    jam terakhir</span
+                >
+            </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

@@ -14,12 +14,15 @@
     id="hero"
     class="hero bg-dark-deep min-h-screen flex items-center relative overflow-hidden pt-12"
 >
-    <!-- Sophisticated Background -->
+    <!-- Sophisticated Animated Mesh Background -->
     <div class="absolute inset-0 z-0">
         <div class="bg-noise"></div>
+        <!-- Animated Mesh Gradient -->
+        <div class="mesh-gradient"></div>
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
         <div class="gradient-orb orb-3"></div>
+        <div class="gradient-orb orb-4"></div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
@@ -54,9 +57,11 @@
                 <div class="flex flex-wrap gap-3 mb-10">
                     <a
                         href="#newsletter"
-                        class="btn btn-primary text-base px-6 py-3"
+                        class="btn btn-primary text-base px-6 py-3 group"
                     >
-                        <span>🏪</span>
+                        <span class="group-hover:rotate-12 transition-transform"
+                            >🏪</span
+                        >
                         Mulai Jualan
                     </a>
                     <a
@@ -151,6 +156,44 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- New Floating Card - Top Right -->
+                    <div
+                        class="absolute -top-6 -right-6 glass p-3 rounded-xl shadow-xl animate-float-fast z-20"
+                    >
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="w-8 h-8 bg-rose-500/20 rounded-lg flex items-center justify-center text-sm"
+                            >
+                                ⭐
+                            </div>
+                            <div class="text-xs font-bold text-white">4.9★</div>
+                        </div>
+                    </div>
+
+                    <!-- New Floating Card - Bottom Left -->
+                    <div
+                        class="absolute bottom-6 -left-6 glass p-3 rounded-xl shadow-xl animate-float-reverse z-20"
+                    >
+                        <div
+                            class="flex items-center gap-2 text-emerald-400 text-xs font-bold"
+                        >
+                            <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M5 13l4 4L19 7"
+                                />
+                            </svg>
+                            <span>Verified Seller</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,6 +234,83 @@
         transform: scale(1);
     }
 
+    /* Animated Mesh Gradient Background */
+    .mesh-gradient {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+                at 40% 20%,
+                rgba(14, 165, 233, 0.15) 0px,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 80% 0%,
+                rgba(16, 185, 129, 0.1) 0px,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 0% 50%,
+                rgba(14, 165, 233, 0.1) 0px,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 80% 50%,
+                rgba(16, 185, 129, 0.08) 0px,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 0% 100%,
+                rgba(14, 165, 233, 0.12) 0px,
+                transparent 50%
+            ),
+            radial-gradient(
+                at 80% 100%,
+                rgba(16, 185, 129, 0.1) 0px,
+                transparent 50%
+            );
+        animation: mesh-move 20s ease-in-out infinite;
+    }
+
+    @keyframes mesh-move {
+        0%,
+        100% {
+            background-position:
+                0% 0%,
+                100% 0%,
+                0% 50%,
+                100% 50%,
+                0% 100%,
+                100% 100%;
+        }
+        25% {
+            background-position:
+                20% 10%,
+                80% 10%,
+                10% 60%,
+                90% 40%,
+                10% 90%,
+                90% 90%;
+        }
+        50% {
+            background-position:
+                40% 20%,
+                60% 20%,
+                20% 40%,
+                80% 60%,
+                20% 80%,
+                80% 80%;
+        }
+        75% {
+            background-position:
+                20% 10%,
+                80% 10%,
+                10% 60%,
+                90% 40%,
+                10% 90%,
+                90% 90%;
+        }
+    }
+
     .gradient-orb {
         position: absolute;
         border-radius: 50%;
@@ -225,6 +345,19 @@
         animation: float-slow 18s ease-in-out infinite;
     }
 
+    .orb-4 {
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(
+            135deg,
+            var(--color-primary),
+            var(--color-secondary)
+        );
+        bottom: 30%;
+        right: 20%;
+        animation: float-slow 14s ease-in-out infinite 2s;
+    }
+
     @keyframes float-slow {
         0%,
         100% {
@@ -244,6 +377,12 @@
     .animate-float-medium {
         animation: float 6s ease-in-out infinite 1s;
     }
+    .animate-float-fast {
+        animation: float 4s ease-in-out infinite 0.5s;
+    }
+    .animate-float-reverse {
+        animation: float-reverse 5s ease-in-out infinite 0.3s;
+    }
 
     @keyframes float {
         0%,
@@ -252,6 +391,16 @@
         }
         50% {
             transform: translateY(-20px);
+        }
+    }
+
+    @keyframes float-reverse {
+        0%,
+        100% {
+            transform: translateY(0px) rotate(-2deg);
+        }
+        50% {
+            transform: translateY(-15px) rotate(2deg);
         }
     }
 </style>
