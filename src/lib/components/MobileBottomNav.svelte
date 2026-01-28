@@ -74,6 +74,7 @@
 </nav>
 
 <!-- Floating CTA for Desktop (shows only when scrolled) -->
+<!--
 <div
     class="hidden lg:block fixed bottom-8 right-8 z-50 transition-all duration-500"
     class:opacity-0={!isVisible}
@@ -101,7 +102,7 @@
         </svg>
     </a>
 </div>
-
+-->
 <style>
     .safe-area-pb {
         padding-bottom: env(safe-area-inset-bottom, 0.5rem);
