@@ -1,3 +1,4 @@
-# allow crawling everything by default
+# Sitemap
 User-agent: *
-Disallow:
+Allow: /
+Sitemap: https://okis-garage-sale.vercel.app/sitemap.xml
