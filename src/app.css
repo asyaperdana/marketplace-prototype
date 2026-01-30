@@ -83,12 +83,14 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
-	font-size: 16px; /* Base size */
+	font-size: 16px;
+	/* Base size */
 }
 
 @media (max-width: 640px) {
 	html {
-		font-size: 14px; /* Slightly smaller on mobile to scale REMs down */
+		font-size: 14px;
+		/* Slightly smaller on mobile to scale REMs down */
 	}
 }
 
@@ -267,6 +269,9 @@ body {
 	padding: 1px;
 	background: var(--gradient-primary);
 	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	mask:
 		linear-gradient(#fff 0 0) content-box,
 		linear-gradient(#fff 0 0);
 	-webkit-mask-composite: xor;
