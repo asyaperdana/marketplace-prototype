@@ -219,12 +219,14 @@
 
 		<!-- Filter Tabs -->
 		<div
-			class="flex justify-center mb-12"
+			class="flex justify-center mb-8 sm:mb-12 overflow-x-auto pb-4 no-scrollbar"
 			class:opacity-0={!isVisible}
 			class:translate-y-10={!isVisible}
 			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
 		>
-			<div class="inline-flex glass-light p-1.5 rounded-2xl border border-white/10 relative">
+			<div
+				class="inline-flex glass-light p-1.5 rounded-2xl border border-white/10 relative min-w-max"
+			>
 				{#each filterTabs as tab (tab.id)}
 					<button
 						class="relative z-10 px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-sm transition-all duration-500 {activeFilter ===
@@ -330,7 +332,7 @@
 					</div>
 
 					<!-- Product Info -->
-					<div class="p-8">
+					<div class="p-5 sm:p-8">
 						<h3
 							class="text-xl font-bold text-white mb-4 line-clamp-2 min-h-[3.5rem] group-hover:text-primary-light transition-colors"
 						>

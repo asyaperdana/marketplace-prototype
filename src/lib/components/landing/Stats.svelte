@@ -88,21 +88,23 @@
 		></div>
 	</div>
 
-	<div class="container mx-auto px-6 relative z-10">
-		<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+	<div class="container mx-auto px-4 sm:px-6 relative z-10">
+		<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
 			{#each stats as stat, index (stat.label)}
 				<div
-					class="glass rounded-3xl p-8 text-center border border-white/5 hover:border-primary/30 transition-all duration-700 group hover:shadow-2xl hover:shadow-primary/10"
+					class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-center border border-white/5 hover:border-primary/30 transition-all duration-700 group hover:shadow-2xl hover:shadow-primary/10"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
 					style="transition-delay: {index * 0.15}s"
 				>
 					<div
-						class="text-5xl mb-6 transform group-hover:scale-125 transition-transform duration-500 filter drop-shadow-2xl"
+						class="text-3xl sm:text-5xl mb-4 sm:mb-6 transform group-hover:scale-125 transition-transform duration-500 filter drop-shadow-2xl"
 					>
 						{stat.icon}
 					</div>
-					<div class="text-4xl lg:text-5xl font-black text-white mb-3 tracking-tight">
+					<div
+						class="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-2 sm:mb-3 tracking-tight"
+					>
 						{formatNumber(displayValues[index])}{stat.suffix}
 					</div>
 					<div

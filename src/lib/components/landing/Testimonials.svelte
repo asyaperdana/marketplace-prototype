@@ -119,7 +119,7 @@
 			class:transition-all={true}
 			class:duration-1000={true}
 		>
-			<h2 class="text-4xl lg:text-5xl font-black text-white tracking-tighter">
+			<h2 class="text-3xl lg:text-5xl font-black text-white tracking-tighter">
 				Apa Kata <span class="gradient-text">Mereka</span>?
 			</h2>
 			<p class="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -141,9 +141,9 @@
 					style="transform: translateX(-{currentIndex * 100}%)"
 				>
 					{#each testimonials as testimonial (testimonial.id)}
-						<div class="w-full flex-shrink-0 px-4">
+						<div class="w-full flex-shrink-0 px-2 sm:px-4">
 							<div
-								class="glass rounded-[2.5rem] p-10 md:p-16 text-center border border-white/5 relative group transition-all duration-500"
+								class="glass rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 text-center border border-white/5 relative group transition-all duration-500"
 							>
 								<div
 									class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-4xl shadow-xl shadow-primary/30 transform rotate-12 group-hover:rotate-0 transition-transform duration-500"
@@ -152,7 +152,7 @@
 								</div>
 
 								<blockquote
-									class="text-2xl md:text-3xl text-slate-100 leading-relaxed mb-10 font-medium italic tracking-tight"
+									class="text-xl sm:text-2xl md:text-3xl text-slate-100 leading-relaxed mb-6 sm:mb-10 font-medium italic tracking-tight"
 								>
 									"{testimonial.quote}"
 								</blockquote>

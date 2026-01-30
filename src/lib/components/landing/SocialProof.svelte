@@ -202,10 +202,10 @@
 			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
 		>
 			<div
-				class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+				class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
 			>
 				<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-				<span class="text-sm text-emerald-400 font-bold">LIVE SEKARANG</span>
+				<span class="text-xs sm:text-sm text-emerald-400 font-bold">LIVE SEKARANG</span>
 			</div>
 			<h2 class="text-3xl lg:text-5xl font-black text-white tracking-tight mb-4">
 				Ribuan Transaksi <span class="gradient-text">Setiap Hari</span>
@@ -218,19 +218,21 @@
 
 		<!-- Live Stats Grid -->
 		<div
-			class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12"
+			class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-12"
 			class:opacity-0={!isVisible}
 			class:translate-y-8={!isVisible}
 			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
 		>
 			{#each liveStats as stat, i (stat.label)}
-				<div class="stat-card group">
+				<div class="stat-card group p-4 sm:p-6">
 					<div class="stat-icon bg-gradient-to-br {stat.color}">
 						<span class="text-2xl">{stat.icon}</span>
 					</div>
-					<div class="mt-4">
+					<div class="mt-3 sm:mt-4">
 						<div class="flex items-baseline gap-1">
-							<span class="text-3xl lg:text-4xl font-black text-white tabular-nums">
+							<span
+								class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tabular-nums"
+							>
 								{animatedStats[i].toLocaleString()}
 							</span>
 							{#if stat.suffix}

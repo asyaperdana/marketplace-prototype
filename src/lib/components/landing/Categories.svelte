@@ -111,7 +111,7 @@
 			class:transition-all={true}
 			class:duration-1000={true}
 		>
-			<h2 class="text-4xl lg:text-6xl font-black text-white tracking-tighter">
+			<h2 class="text-3xl sm:text-4xl lg:text-6xl font-black text-white tracking-tighter">
 				Jelajahi <span class="gradient-text">Kategori</span>
 			</h2>
 			<p class="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -120,10 +120,12 @@
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 auto-rows-[220px]">
+		<div
+			class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 auto-rows-[180px] sm:auto-rows-[220px]"
+		>
 			{#each categories as category (category.name)}
 				<button
-					class="group relative overflow-hidden rounded-[2rem] glass hover:border-primary/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 text-left p-10 flex flex-col justify-end {category.class}"
+					class="group relative overflow-hidden rounded-[2rem] glass hover:border-primary/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 text-left p-6 sm:p-10 flex flex-col justify-end {category.class}"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
 					style="transition-delay: {category.delay}s"
@@ -140,7 +142,7 @@
 						class="relative z-10 transition-transform duration-500 group-hover:-translate-y-2"
 					>
 						<span
-							class="text-5xl mb-6 block filter drop-shadow-2xl transform group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500 origin-left"
+							class="text-4xl sm:text-5xl mb-4 sm:mb-6 block filter drop-shadow-2xl transform group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500 origin-left"
 							>{category.icon}</span
 						>
 						<h3

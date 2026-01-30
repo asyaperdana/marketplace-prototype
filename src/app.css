@@ -83,6 +83,13 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
+	font-size: 16px; /* Base size */
+}
+
+@media (max-width: 640px) {
+	html {
+		font-size: 14px; /* Slightly smaller on mobile to scale REMs down */
+	}
 }
 
 /* Custom Scrollbar */

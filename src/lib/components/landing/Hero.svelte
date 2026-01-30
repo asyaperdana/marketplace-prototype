@@ -50,7 +50,7 @@
 	});
 </script>
 
-<section id="hero" class="hero-section relative min-h-[100vh] lg:min-h-[110vh] overflow-hidden">
+<section id="hero" class="hero-section relative min-h-[100dvh] lg:min-h-[110vh] overflow-hidden">
 	<!-- Premium Animated Background -->
 	<div class="absolute inset-0 bg-dark-deep">
 		<div class="bg-noise"></div>
@@ -66,7 +66,7 @@
 	</div>
 
 	<!-- Main Content -->
-	<div class="container mx-auto px-6 relative z-10 h-full">
+	<div class="container mx-auto px-4 sm:px-6 relative z-10 h-full">
 		<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[100vh] py-24 lg:py-32">
 			<!-- Left Content - 7 columns -->
 			<div class="lg:col-span-7 space-y-8" class:animate-in={isLoaded}>
@@ -88,7 +88,7 @@
 				<!-- Main Headline -->
 				<div class="space-y-4">
 					<h1
-						class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[0.95] tracking-tighter"
+						class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.1] sm:leading-[0.95] tracking-tighter"
 					>
 						Preloved
 						<span class="block gradient-text">Premium</span>
@@ -104,8 +104,8 @@
 				</p>
 
 				<!-- CTA Section -->
-				<div class="flex flex-col sm:flex-row gap-4 pt-4">
-					<a href="#newsletter" class="btn-hero-primary group">
+				<div class="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+					<a href="#newsletter" class="btn-hero-primary group w-full sm:w-auto">
 						<span class="relative z-10 flex items-center justify-center gap-3">
 							<span class="text-2xl group-hover:scale-110 transition-transform"
 								>🚀</span
@@ -113,7 +113,7 @@
 							<span class="font-bold text-lg">Mulai Jualan Gratis</span>
 						</span>
 					</a>
-					<a href="#products" class="btn-hero-secondary group">
+					<a href="#products" class="btn-hero-secondary group w-full sm:w-auto">
 						<span class="flex items-center justify-center gap-3">
 							<span class="text-xl">🔍</span>
 							<span class="font-semibold">Jelajahi 120K+ Produk</span>
@@ -146,9 +146,9 @@
 			</div>
 
 			<!-- Right Visual - 5 columns -->
-			<div class="lg:col-span-5 relative" class:animate-in-visual={isLoaded}>
+			<div class="lg:col-span-5 relative mt-12 lg:mt-0" class:animate-in-visual={isLoaded}>
 				<!-- Phone Mockup Container -->
-				<div class="relative mx-auto max-w-[380px] lg:max-w-[420px]">
+				<div class="relative mx-auto max-w-[300px] sm:max-w-[380px] lg:max-w-[420px]">
 					<!-- Phone Frame -->
 					<div class="phone-mockup">
 						<!-- Status Bar -->
