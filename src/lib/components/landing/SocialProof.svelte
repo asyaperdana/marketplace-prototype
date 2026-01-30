@@ -1,572 +1,491 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+	import { onMount } from "svelte";
 
-    interface Transaction {
-        id: number;
-        user: string;
-        avatar: string;
-        action: "beli" | "jual";
-        product: string;
-        productEmoji: string;
-        price: string;
-        time: string;
-        location: string;
-    }
+	interface Transaction {
+		id: number;
+		user: string;
+		avatar: string;
+		action: "beli" | "jual";
+		product: string;
+		productEmoji: string;
+		price: string;
+		time: string;
+		location: string;
+	}
 
-    const recentTransactions: Transaction[] = [
-        {
-            id: 1,
-            user: "Sarah W.",
-            avatar: "👩",
-            action: "beli",
-            product: "iPhone 13 Pro",
-            productEmoji: "📱",
-            price: "Rp 9.5jt",
-            time: "Baru saja",
-            location: "Jakarta",
-        },
-        {
-            id: 2,
-            user: "Budi S.",
-            avatar: "👨",
-            action: "jual",
-            product: "MacBook Air M1",
-            productEmoji: "💻",
-            price: "Rp 8.5jt",
-            time: "2 menit lalu",
-            location: "Bandung",
-        },
-        {
-            id: 3,
-            user: "Anisa P.",
-            avatar: "👩‍🦱",
-            action: "beli",
-            product: "Nike Air Jordan",
-            productEmoji: "👟",
-            price: "Rp 1.2jt",
-            time: "5 menit lalu",
-            location: "Surabaya",
-        },
-        {
-            id: 4,
-            user: "Rizky M.",
-            avatar: "👨‍🦰",
-            action: "jual",
-            product: "PS5 + 3 Games",
-            productEmoji: "🎮",
-            price: "Rp 6.5jt",
-            time: "8 menit lalu",
-            location: "Yogyakarta",
-        },
-        {
-            id: 5,
-            user: "Dewi L.",
-            avatar: "👩‍💼",
-            action: "beli",
-            product: "Coach Tote Bag",
-            productEmoji: "👜",
-            price: "Rp 1.8jt",
-            time: "12 menit lalu",
-            location: "Medan",
-        },
-    ];
+	const recentTransactions: Transaction[] = [
+		{
+			id: 1,
+			user: "Sarah W.",
+			avatar: "👩",
+			action: "beli",
+			product: "iPhone 13 Pro",
+			productEmoji: "📱",
+			price: "Rp 9.5jt",
+			time: "Baru saja",
+			location: "Jakarta"
+		},
+		{
+			id: 2,
+			user: "Budi S.",
+			avatar: "👨",
+			action: "jual",
+			product: "MacBook Air M1",
+			productEmoji: "💻",
+			price: "Rp 8.5jt",
+			time: "2 menit lalu",
+			location: "Bandung"
+		},
+		{
+			id: 3,
+			user: "Anisa P.",
+			avatar: "👩‍🦱",
+			action: "beli",
+			product: "Nike Air Jordan",
+			productEmoji: "👟",
+			price: "Rp 1.2jt",
+			time: "5 menit lalu",
+			location: "Surabaya"
+		},
+		{
+			id: 4,
+			user: "Rizky M.",
+			avatar: "👨‍🦰",
+			action: "jual",
+			product: "PS5 + 3 Games",
+			productEmoji: "🎮",
+			price: "Rp 6.5jt",
+			time: "8 menit lalu",
+			location: "Yogyakarta"
+		},
+		{
+			id: 5,
+			user: "Dewi L.",
+			avatar: "👩‍💼",
+			action: "beli",
+			product: "Coach Tote Bag",
+			productEmoji: "👜",
+			price: "Rp 1.8jt",
+			time: "12 menit lalu",
+			location: "Medan"
+		}
+	];
 
-    const liveStats = [
-        {
-            label: "Transaksi Hari Ini",
-            value: 8524,
-            suffix: "+",
-            icon: "⚡",
-            color: "from-primary to-cyan-400",
-        },
-        {
-            label: "Sedang Online",
-            value: 1847,
-            suffix: "",
-            icon: "🟢",
-            color: "from-emerald-400 to-green-500",
-        },
-        {
-            label: "Produk Terjual/Jam",
-            value: 342,
-            suffix: "",
-            icon: "🛒",
-            color: "from-secondary to-emerald-400",
-        },
-        {
-            label: "Rating Hari Ini",
-            value: 4.9,
-            suffix: "★",
-            icon: "⭐",
-            color: "from-amber-400 to-orange-500",
-        },
-    ];
+	const liveStats = [
+		{
+			label: "Transaksi Hari Ini",
+			value: 8524,
+			suffix: "+",
+			icon: "⚡",
+			color: "from-primary to-cyan-400"
+		},
+		{
+			label: "Sedang Online",
+			value: 1847,
+			suffix: "",
+			icon: "🟢",
+			color: "from-emerald-400 to-green-500"
+		},
+		{
+			label: "Produk Terjual/Jam",
+			value: 342,
+			suffix: "",
+			icon: "🛒",
+			color: "from-secondary to-emerald-400"
+		},
+		{
+			label: "Rating Hari Ini",
+			value: 4.9,
+			suffix: "★",
+			icon: "⭐",
+			color: "from-amber-400 to-orange-500"
+		}
+	];
 
-    const trustLogos = [
-        { name: "QRIS", icon: "📱" },
-        { name: "DANA", icon: "💙" },
-        { name: "OVO", icon: "💜" },
-        { name: "GoPay", icon: "💚" },
-        { name: "JNE", icon: "📦" },
-        { name: "J&T", icon: "🚚" },
-        { name: "SiCepat", icon: "⚡" },
-        { name: "SSL", icon: "🔒" },
-    ];
+	const trustLogos = [
+		{ name: "QRIS", icon: "📱" },
+		{ name: "DANA", icon: "💙" },
+		{ name: "OVO", icon: "💜" },
+		{ name: "GoPay", icon: "💚" },
+		{ name: "JNE", icon: "📦" },
+		{ name: "J&T", icon: "🚚" },
+		{ name: "SiCepat", icon: "⚡" },
+		{ name: "SSL", icon: "🔒" }
+	];
 
-    let currentTransaction = $state(0);
-    let animatedStats = $state(liveStats.map(() => 0));
-    let isVisible = $state(false);
-    let sectionRef: HTMLElement;
+	let currentTransaction = $state(0);
+	let animatedStats = $state(liveStats.map(() => 0));
+	let isVisible = $state(false);
+	let sectionRef: HTMLElement;
 
-    function animateValue(
-        start: number,
-        end: number,
-        duration: number,
-        index: number,
-    ) {
-        const startTime = performance.now();
-        const isDecimal = end % 1 !== 0;
+	function animateValue(start: number, end: number, duration: number, index: number) {
+		const startTime = performance.now();
+		const isDecimal = end % 1 !== 0;
 
-        function update(currentTime: number) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easeOut = 1 - Math.pow(1 - progress, 3);
+		function update(currentTime: number) {
+			const elapsed = currentTime - startTime;
+			const progress = Math.min(elapsed / duration, 1);
+			const easeOut = 1 - Math.pow(1 - progress, 3);
 
-            animatedStats[index] = isDecimal
-                ? Math.round((start + (end - start) * easeOut) * 10) / 10
-                : Math.round(start + (end - start) * easeOut);
+			animatedStats[index] = isDecimal
+				? Math.round((start + (end - start) * easeOut) * 10) / 10
+				: Math.round(start + (end - start) * easeOut);
 
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-        requestAnimationFrame(update);
-    }
+			if (progress < 1) {
+				requestAnimationFrame(update);
+			}
+		}
+		requestAnimationFrame(update);
+	}
 
-    onMount(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && !isVisible) {
-                        isVisible = true;
-                        // Animate counters
-                        liveStats.forEach((stat, i) => {
-                            setTimeout(() => {
-                                animateValue(0, stat.value, 2000, i);
-                            }, i * 100);
-                        });
-                    }
-                });
-            },
-            { threshold: 0.2 },
-        );
+	onMount(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && !isVisible) {
+						isVisible = true;
+						// Animate counters
+						liveStats.forEach((stat, i) => {
+							setTimeout(() => {
+								animateValue(0, stat.value, 2000, i);
+							}, i * 100);
+						});
+					}
+				});
+			},
+			{ threshold: 0.2 }
+		);
 
-        if (sectionRef) observer.observe(sectionRef);
+		if (sectionRef) observer.observe(sectionRef);
 
-        // Rotate transactions
-        const transactionInterval = setInterval(() => {
-            currentTransaction =
-                (currentTransaction + 1) % recentTransactions.length;
-        }, 4000);
+		// Rotate transactions
+		const transactionInterval = setInterval(() => {
+			currentTransaction = (currentTransaction + 1) % recentTransactions.length;
+		}, 4000);
 
-        // Simulate live updates
-        const statsInterval = setInterval(() => {
-            if (isVisible) {
-                animatedStats[0] += Math.floor(Math.random() * 3);
-                animatedStats[1] += Math.floor(Math.random() * 5) - 2;
-                if (animatedStats[1] < 1800) animatedStats[1] = 1820;
-            }
-        }, 5000);
+		// Simulate live updates
+		const statsInterval = setInterval(() => {
+			if (isVisible) {
+				animatedStats[0] += Math.floor(Math.random() * 3);
+				animatedStats[1] += Math.floor(Math.random() * 5) - 2;
+				if (animatedStats[1] < 1800) animatedStats[1] = 1820;
+			}
+		}, 5000);
 
-        return () => {
-            observer.disconnect();
-            clearInterval(transactionInterval);
-            clearInterval(statsInterval);
-        };
-    });
+		return () => {
+			observer.disconnect();
+			clearInterval(transactionInterval);
+			clearInterval(statsInterval);
+		};
+	});
 </script>
 
-<section
-    id="social-proof"
-    class="relative py-16 lg:py-20 overflow-hidden"
-    bind:this={sectionRef}
->
-    <!-- Background -->
-    <div
-        class="absolute inset-0 bg-gradient-to-b from-dark-deep via-dark to-dark-deep"
-    ></div>
-    <div class="absolute inset-0 bg-noise opacity-30"></div>
+<section id="social-proof" class="relative py-16 lg:py-20 overflow-hidden" bind:this={sectionRef}>
+	<!-- Background -->
+	<div class="absolute inset-0 bg-gradient-to-b from-dark-deep via-dark to-dark-deep"></div>
+	<div class="absolute inset-0 bg-noise opacity-30"></div>
 
-    <!-- Accent Glow -->
-    <div
-        class="absolute top-0 left-1/4 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2"
-    ></div>
-    <div
-        class="absolute bottom-0 right-1/4 w-[600px] h-[300px] bg-secondary/10 rounded-full blur-[100px] translate-y-1/2"
-    ></div>
+	<!-- Accent Glow -->
+	<div
+		class="absolute top-0 left-1/4 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2"
+	></div>
+	<div
+		class="absolute bottom-0 right-1/4 w-[600px] h-[300px] bg-secondary/10 rounded-full blur-[100px] translate-y-1/2"
+	></div>
 
-    <div class="container mx-auto px-6 relative z-10">
-        <!-- Header -->
-        <div
-            class="text-center mb-12"
-            class:opacity-0={!isVisible}
-            class:translate-y-8={!isVisible}
-            style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
-        >
-            <div
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
-            >
-                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"
-                ></span>
-                <span class="text-sm text-emerald-400 font-bold"
-                    >LIVE SEKARANG</span
-                >
-            </div>
-            <h2
-                class="text-3xl lg:text-5xl font-black text-white tracking-tight mb-4"
-            >
-                Ribuan Transaksi <span class="gradient-text">Setiap Hari</span>
-            </h2>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                Bergabung dengan komunitas jual-beli terbesar. Lihat aktivitas
-                real-time di platform kami.
-            </p>
-        </div>
+	<div class="container mx-auto px-6 relative z-10">
+		<!-- Header -->
+		<div
+			class="text-center mb-12"
+			class:opacity-0={!isVisible}
+			class:translate-y-8={!isVisible}
+			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+		>
+			<div
+				class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+			>
+				<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+				<span class="text-sm text-emerald-400 font-bold">LIVE SEKARANG</span>
+			</div>
+			<h2 class="text-3xl lg:text-5xl font-black text-white tracking-tight mb-4">
+				Ribuan Transaksi <span class="gradient-text">Setiap Hari</span>
+			</h2>
+			<p class="text-lg text-slate-400 max-w-2xl mx-auto">
+				Bergabung dengan komunitas jual-beli terbesar. Lihat aktivitas real-time di platform
+				kami.
+			</p>
+		</div>
 
-        <!-- Live Stats Grid -->
-        <div
-            class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12"
-            class:opacity-0={!isVisible}
-            class:translate-y-8={!isVisible}
-            style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
-        >
-            {#each liveStats as stat, i}
-                <div class="stat-card group">
-                    <div class="stat-icon bg-gradient-to-br {stat.color}">
-                        <span class="text-2xl">{stat.icon}</span>
-                    </div>
-                    <div class="mt-4">
-                        <div class="flex items-baseline gap-1">
-                            <span
-                                class="text-3xl lg:text-4xl font-black text-white tabular-nums"
-                            >
-                                {animatedStats[i].toLocaleString()}
-                            </span>
-                            {#if stat.suffix}
-                                <span
-                                    class="text-xl font-bold text-{stat.color
-                                        .split(' ')[0]
-                                        .replace('from-', '')}"
-                                    >{stat.suffix}</span
-                                >
-                            {/if}
-                        </div>
-                        <p class="text-sm text-slate-400 mt-1 font-medium">
-                            {stat.label}
-                        </p>
-                    </div>
+		<!-- Live Stats Grid -->
+		<div
+			class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-12"
+			class:opacity-0={!isVisible}
+			class:translate-y-8={!isVisible}
+			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
+		>
+			{#each liveStats as stat, i}
+				<div class="stat-card group">
+					<div class="stat-icon bg-gradient-to-br {stat.color}">
+						<span class="text-2xl">{stat.icon}</span>
+					</div>
+					<div class="mt-4">
+						<div class="flex items-baseline gap-1">
+							<span class="text-3xl lg:text-4xl font-black text-white tabular-nums">
+								{animatedStats[i].toLocaleString()}
+							</span>
+							{#if stat.suffix}
+								<span
+									class="text-xl font-bold text-{stat.color
+										.split(' ')[0]
+										.replace('from-', '')}">{stat.suffix}</span
+								>
+							{/if}
+						</div>
+						<p class="text-sm text-slate-400 mt-1 font-medium">
+							{stat.label}
+						</p>
+					</div>
 
-                    <!-- Live indicator for first two -->
-                    {#if i < 2}
-                        <div
-                            class="absolute top-4 right-4 flex items-center gap-1.5"
-                        >
-                            <span
-                                class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
-                            ></span>
-                            <span
-                                class="text-[10px] text-emerald-400 font-bold uppercase"
-                                >Live</span
-                            >
-                        </div>
-                    {/if}
-                </div>
-            {/each}
-        </div>
+					<!-- Live indicator for first two -->
+					{#if i < 2}
+						<div class="absolute top-4 right-4 flex items-center gap-1.5">
+							<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
+							></span>
+							<span class="text-[10px] text-emerald-400 font-bold uppercase"
+								>Live</span
+							>
+						</div>
+					{/if}
+				</div>
+			{/each}
+		</div>
 
-        <!-- Transaction Feed + Trust Section -->
-        <div
-            class="grid lg:grid-cols-5 gap-6"
-            class:opacity-0={!isVisible}
-            class:translate-y-8={!isVisible}
-            style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.2s"
-        >
-            <!-- Live Transaction Feed - 3 cols -->
-            <div class="lg:col-span-3 transaction-feed">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
-                        >
-                            <span class="text-lg">🔔</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white">
-                                Aktivitas Terkini
-                            </h3>
-                            <p class="text-xs text-slate-400">
-                                Transaksi dalam 24 jam terakhir
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"
-                    >
-                        <span
-                            class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"
-                        ></span>
-                        <span class="text-xs text-emerald-400 font-bold"
-                            >LIVE</span
-                        >
-                    </div>
-                </div>
+		<!-- Transaction Feed + Trust Section -->
+		<div
+			class="grid lg:grid-cols-5 gap-6"
+			class:opacity-0={!isVisible}
+			class:translate-y-8={!isVisible}
+			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.2s"
+		>
+			<!-- Live Transaction Feed - 3 cols -->
+			<div class="lg:col-span-3 transaction-feed">
+				<div class="flex items-center justify-between mb-6">
+					<div class="flex items-center gap-3">
+						<div
+							class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+						>
+							<span class="text-lg">🔔</span>
+						</div>
+						<div>
+							<h3 class="font-bold text-white">Aktivitas Terkini</h3>
+							<p class="text-xs text-slate-400">Transaksi dalam 24 jam terakhir</p>
+						</div>
+					</div>
+					<div
+						class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20"
+					>
+						<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+						<span class="text-xs text-emerald-400 font-bold">LIVE</span>
+					</div>
+				</div>
 
-                <div class="space-y-3">
-                    {#each recentTransactions as tx, i}
-                        <div
-                            class="transaction-item"
-                            class:active={i === currentTransaction}
-                        >
-                            <div class="flex items-center gap-4">
-                                <div
-                                    class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-2xl shrink-0"
-                                >
-                                    {tx.avatar}
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div
-                                        class="flex items-center gap-2 flex-wrap"
-                                    >
-                                        <span class="font-bold text-white"
-                                            >{tx.user}</span
-                                        >
-                                        <span class="text-slate-400">
-                                            {tx.action === "beli"
-                                                ? "membeli"
-                                                : "menjual"}
-                                        </span>
-                                        <span class="text-xl"
-                                            >{tx.productEmoji}</span
-                                        >
-                                        <span
-                                            class="font-semibold text-white truncate"
-                                            >{tx.product}</span
-                                        >
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-3 mt-1 text-sm"
-                                    >
-                                        <span
-                                            class="font-bold text-primary-light"
-                                            >{tx.price}</span
-                                        >
-                                        <span class="text-slate-500">•</span>
-                                        <span class="text-slate-500"
-                                            >{tx.location}</span
-                                        >
-                                        <span class="text-slate-500">•</span>
-                                        <span class="text-slate-500"
-                                            >{tx.time}</span
-                                        >
-                                    </div>
-                                </div>
-                                {#if tx.action === "beli"}
-                                    <div
-                                        class="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold shrink-0"
-                                    >
-                                        SOLD ✓
-                                    </div>
-                                {:else}
-                                    <div
-                                        class="px-3 py-1.5 rounded-lg bg-primary/10 text-primary-light text-xs font-bold shrink-0"
-                                    >
-                                        LISTED
-                                    </div>
-                                {/if}
-                            </div>
-                        </div>
-                    {/each}
-                </div>
-            </div>
+				<div class="space-y-3">
+					{#each recentTransactions as tx, i}
+						<div class="transaction-item" class:active={i === currentTransaction}>
+							<div class="flex items-center gap-4">
+								<div
+									class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-2xl shrink-0"
+								>
+									{tx.avatar}
+								</div>
+								<div class="flex-1 min-w-0">
+									<div class="flex items-center gap-2 flex-wrap">
+										<span class="font-bold text-white">{tx.user}</span>
+										<span class="text-slate-400">
+											{tx.action === "beli" ? "membeli" : "menjual"}
+										</span>
+										<span class="text-xl">{tx.productEmoji}</span>
+										<span class="font-semibold text-white truncate"
+											>{tx.product}</span
+										>
+									</div>
+									<div class="flex items-center gap-3 mt-1 text-sm">
+										<span class="font-bold text-primary-light">{tx.price}</span>
+										<span class="text-slate-500">•</span>
+										<span class="text-slate-500">{tx.location}</span>
+										<span class="text-slate-500">•</span>
+										<span class="text-slate-500">{tx.time}</span>
+									</div>
+								</div>
+								{#if tx.action === "beli"}
+									<div
+										class="px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold shrink-0"
+									>
+										SOLD ✓
+									</div>
+								{:else}
+									<div
+										class="px-3 py-1.5 rounded-lg bg-primary/10 text-primary-light text-xs font-bold shrink-0"
+									>
+										LISTED
+									</div>
+								{/if}
+							</div>
+						</div>
+					{/each}
+				</div>
+			</div>
 
-            <!-- Trust Badges - 2 cols -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Security Card -->
-                <div class="trust-card">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center"
-                        >
-                            <span class="text-lg">🛡️</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white">100% Aman</h3>
-                            <p class="text-xs text-slate-400">
-                                Transaksi terlindungi
-                            </p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-4 gap-3">
-                        {#each trustLogos as logo}
-                            <div class="trust-logo">
-                                <span class="text-xl mb-1">{logo.icon}</span>
-                                <span
-                                    class="text-[10px] text-slate-400 font-medium"
-                                    >{logo.name}</span
-                                >
-                            </div>
-                        {/each}
-                    </div>
-                </div>
+			<!-- Trust Badges - 2 cols -->
+			<div class="lg:col-span-2 space-y-6">
+				<!-- Security Card -->
+				<div class="trust-card">
+					<div class="flex items-center gap-3 mb-4">
+						<div
+							class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center"
+						>
+							<span class="text-lg">🛡️</span>
+						</div>
+						<div>
+							<h3 class="font-bold text-white">100% Aman</h3>
+							<p class="text-xs text-slate-400">Transaksi terlindungi</p>
+						</div>
+					</div>
+					<div class="grid grid-cols-4 gap-3">
+						{#each trustLogos as logo}
+							<div class="trust-logo">
+								<span class="text-xl mb-1">{logo.icon}</span>
+								<span class="text-[10px] text-slate-400 font-medium"
+									>{logo.name}</span
+								>
+							</div>
+						{/each}
+					</div>
+				</div>
 
-                <!-- Guarantee Card -->
-                <div class="guarantee-card">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl"
-                    ></div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div
-                                class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
-                            >
-                                <span class="text-3xl">💯</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-black text-white">
-                                    Garansi
-                                </h3>
-                                <p class="text-lg font-bold gradient-text">
-                                    Uang Kembali
-                                </p>
-                            </div>
-                        </div>
-                        <p class="text-slate-300 text-sm leading-relaxed">
-                            Barang tidak sesuai? Tidak masalah! Kami jamin
-                            refund 100% dalam 7 hari.
-                        </p>
-                        <div
-                            class="flex items-center gap-2 mt-4 text-primary-light font-bold text-sm"
-                        >
-                            <span>Pelajari lebih lanjut</span>
-                            <span>→</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<!-- Guarantee Card -->
+				<div class="guarantee-card">
+					<div
+						class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl"
+					></div>
+					<div class="relative z-10">
+						<div class="flex items-center gap-4 mb-4">
+							<div
+								class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+							>
+								<span class="text-3xl">💯</span>
+							</div>
+							<div>
+								<h3 class="text-xl font-black text-white">Garansi</h3>
+								<p class="text-lg font-bold gradient-text">Uang Kembali</p>
+							</div>
+						</div>
+						<p class="text-slate-300 text-sm leading-relaxed">
+							Barang tidak sesuai? Tidak masalah! Kami jamin refund 100% dalam 7 hari.
+						</p>
+						<div
+							class="flex items-center gap-2 mt-4 text-primary-light font-bold text-sm"
+						>
+							<span>Pelajari lebih lanjut</span>
+							<span>→</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <style>
-    .stat-card {
-        position: relative;
-        padding: 1.5rem;
-        background: linear-gradient(
-            145deg,
-            rgba(30, 41, 59, 0.5),
-            rgba(15, 23, 42, 0.8)
-        );
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 1.5rem;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-    }
+	.stat-card {
+		position: relative;
+		padding: 1.5rem;
+		background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 1.5rem;
+		transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+		overflow: hidden;
+	}
 
-    .stat-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            135deg,
-            rgba(14, 165, 233, 0.1),
-            rgba(16, 185, 129, 0.1)
-        );
-        opacity: 0;
-        transition: opacity 0.4s;
-    }
+	.stat-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(16, 185, 129, 0.1));
+		opacity: 0;
+		transition: opacity 0.4s;
+	}
 
-    .stat-card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(255, 255, 255, 0.1);
-    }
+	.stat-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(255, 255, 255, 0.1);
+	}
 
-    .stat-card:hover::before {
-        opacity: 1;
-    }
+	.stat-card:hover::before {
+		opacity: 1;
+	}
 
-    .stat-icon {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.3);
-    }
+	.stat-icon {
+		width: 3rem;
+		height: 3rem;
+		border-radius: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.3);
+	}
 
-    .transaction-feed {
-        padding: 1.5rem;
-        background: linear-gradient(
-            145deg,
-            rgba(30, 41, 59, 0.5),
-            rgba(15, 23, 42, 0.8)
-        );
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 1.5rem;
-    }
+	.transaction-feed {
+		padding: 1.5rem;
+		background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 1.5rem;
+	}
 
-    .transaction-item {
-        padding: 1rem;
-        border-radius: 1rem;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid transparent;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+	.transaction-item {
+		padding: 1rem;
+		border-radius: 1rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid transparent;
+		transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	}
 
-    .transaction-item.active {
-        background: rgba(14, 165, 233, 0.05);
-        border-color: rgba(14, 165, 233, 0.2);
-        box-shadow: 0 0 30px -10px rgba(14, 165, 233, 0.3);
-    }
+	.transaction-item.active {
+		background: rgba(14, 165, 233, 0.05);
+		border-color: rgba(14, 165, 233, 0.2);
+		box-shadow: 0 0 30px -10px rgba(14, 165, 233, 0.3);
+	}
 
-    .trust-card {
-        padding: 1.5rem;
-        background: linear-gradient(
-            145deg,
-            rgba(30, 41, 59, 0.5),
-            rgba(15, 23, 42, 0.8)
-        );
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 1.5rem;
-    }
+	.trust-card {
+		padding: 1.5rem;
+		background: linear-gradient(145deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 1.5rem;
+	}
 
-    .trust-logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0.75rem;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 0.75rem;
-        transition: all 0.3s;
-    }
+	.trust-logo {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0.75rem;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.05);
+		border-radius: 0.75rem;
+		transition: all 0.3s;
+	}
 
-    .trust-logo:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(14, 165, 233, 0.3);
-        transform: translateY(-2px);
-    }
+	.trust-logo:hover {
+		background: rgba(255, 255, 255, 0.06);
+		border-color: rgba(14, 165, 233, 0.3);
+		transform: translateY(-2px);
+	}
 
-    .guarantee-card {
-        position: relative;
-        padding: 1.5rem;
-        background: linear-gradient(
-            145deg,
-            rgba(30, 41, 59, 0.8),
-            rgba(15, 23, 42, 0.9)
-        );
-        border: 1px solid rgba(14, 165, 233, 0.2);
-        border-radius: 1.5rem;
-        overflow: hidden;
-    }
+	.guarantee-card {
+		position: relative;
+		padding: 1.5rem;
+		background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+		border: 1px solid rgba(14, 165, 233, 0.2);
+		border-radius: 1.5rem;
+		overflow: hidden;
+	}
 </style>

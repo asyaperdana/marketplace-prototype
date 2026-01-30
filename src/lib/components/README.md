@@ -21,7 +21,9 @@ components/
 ## 📂 Component Categories
 
 ### `ui/` - Base UI Components
+
 Atomic, reusable UI primitives:
+
 - `Button.svelte` - Button variants
 - `Input.svelte` - Input fields
 - `Card.svelte` - Card container
@@ -32,7 +34,9 @@ Atomic, reusable UI primitives:
 - `Toast.svelte` - Notifications
 
 ### `layout/` - Layout Components
+
 Page structure components:
+
 - `Header.svelte` - Page header
 - `Footer.svelte` - Page footer
 - `Sidebar.svelte` - Sidebar navigation
@@ -40,36 +44,44 @@ Page structure components:
 - `Grid.svelte` - Grid layout
 
 ### `features/` - Feature Components
+
 Domain-specific components:
 
 #### `auth/`
+
 - `LoginForm.svelte`
 - `RegisterForm.svelte`
 - `ForgotPasswordForm.svelte`
 
 #### `products/`
+
 - `ProductCard.svelte`
 - `ProductGrid.svelte`
 - `ProductFilters.svelte`
 - `ProductSearch.svelte`
 
 #### `cart/`
+
 - `CartItem.svelte`
 - `CartSummary.svelte`
 - `CartDrawer.svelte`
 
 #### `checkout/`
+
 - `CheckoutForm.svelte`
 - `PaymentForm.svelte`
 - `OrderSummary.svelte`
 
 #### `dashboard/`
+
 - `StatsCard.svelte`
 - `OrderTable.svelte`
 - `UserProfile.svelte`
 
 ### `forms/` - Form Components
+
 Form-specific components:
+
 - `FormField.svelte`
 - `Select.svelte`
 - `Checkbox.svelte`
@@ -77,7 +89,9 @@ Form-specific components:
 - `FileUpload.svelte`
 
 ### `common/` - Common Components
+
 Shared utility components:
+
 - `ErrorBoundary.svelte`
 - `LoadingState.svelte`
 - `EmptyState.svelte`
@@ -86,63 +100,67 @@ Shared utility components:
 ## 📝 Component Guidelines
 
 ### File Structure
+
 ```svelte
 <script lang="ts">
-  // 1. Imports
-  import { createEventDispatcher } from 'svelte';
-  
-  // 2. Props
-  export let variant: 'primary' | 'secondary' = 'primary';
-  export let disabled = false;
-  
-  // 3. Local state
-  let isLoading = false;
-  
-  // 4. Computed values
-  $: classes = `btn btn-${variant}`;
-  
-  // 5. Event handlers
-  const dispatch = createEventDispatcher();
-  function handleClick() {
-    dispatch('click');
-  }
+	// 1. Imports
+	import { createEventDispatcher } from "svelte";
+
+	// 2. Props
+	export let variant: "primary" | "secondary" = "primary";
+	export let disabled = false;
+
+	// 3. Local state
+	let isLoading = false;
+
+	// 4. Computed values
+	$: classes = `btn btn-${variant}`;
+
+	// 5. Event handlers
+	const dispatch = createEventDispatcher();
+	function handleClick() {
+		dispatch("click");
+	}
 </script>
 
 <!-- Template -->
 <button class={classes} {disabled} on:click={handleClick}>
-  <slot />
+	<slot />
 </button>
 
 <style>
-  /* Scoped styles */
+	/* Scoped styles */
 </style>
 ```
 
 ### Naming Conventions
+
 - **Files**: PascalCase (`ProductCard.svelte`)
 - **Props**: camelCase (`isLoading`)
 - **Events**: kebab-case (`on:add-to-cart`)
 - **CSS classes**: BEM or utility-first
 
 ### Export Pattern
+
 Create `index.ts` barrel files:
+
 ```typescript
 // components/ui/index.ts
-export { default as Button } from './Button.svelte';
-export { default as Card } from './Card.svelte';
-export { default as Input } from './Input.svelte';
+export { default as Button } from "./Button.svelte";
+export { default as Card } from "./Card.svelte";
+export { default as Input } from "./Input.svelte";
 ```
 
 ## 🔧 Usage
 
 ```svelte
 <script>
-  import { Button, Card } from '$lib/components/ui';
-  import { ProductCard } from '$lib/components/features/products';
+	import { Button, Card } from "$lib/components/ui";
+	import { ProductCard } from "$lib/components/features/products";
 </script>
 
 <Card>
-  <ProductCard product={product} />
-  <Button variant="primary">Add to Cart</Button>
+	<ProductCard {product} />
+	<Button variant="primary">Add to Cart</Button>
 </Card>
 ```

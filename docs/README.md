@@ -16,28 +16,36 @@ docs/
 ## 📂 Subdirectories
 
 ### `api/`
+
 API endpoint documentation:
+
 - REST API reference
 - Request/Response schemas
 - Authentication guide
 - Error codes
 
 ### `architecture/`
+
 System design documentation:
+
 - Architecture overview
 - Database schema
 - System diagrams
 - Technical decisions (ADRs)
 
 ### `components/`
+
 Component library documentation:
+
 - Component catalog
 - Props & events reference
 - Usage examples
 - Storybook integration (if applicable)
 
 ### `guides/`
+
 Developer guides:
+
 - Getting started
 - Development workflow
 - Deployment guide
@@ -47,6 +55,7 @@ Developer guides:
 ## 📄 Suggested Files
 
 ### API Documentation
+
 ```
 api/
 ├── README.md           # API overview
@@ -57,6 +66,7 @@ api/
 ```
 
 ### Architecture
+
 ```
 architecture/
 ├── README.md           # Architecture overview
@@ -70,6 +80,7 @@ architecture/
 ```
 
 ### Guides
+
 ```
 guides/
 ├── getting-started.md  # Setup instructions

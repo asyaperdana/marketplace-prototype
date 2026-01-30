@@ -37,13 +37,17 @@ routes/
 ## 🏗️ Route Groups
 
 ### `(app)/`
+
 Protected routes requiring authentication:
+
 - Uses shared layout with navigation & footer
 - Middleware checks for valid session
 - Common UI elements for authenticated users
 
 ### `(auth)/`
+
 Public authentication routes:
+
 - Minimal layout (no navigation)
 - Redirects authenticated users to dashboard
 - Shared auth form styling
@@ -54,34 +58,35 @@ All API routes are in the `/api` directory and export handlers:
 
 ```typescript
 // src/routes/api/products/+server.ts
-import type { RequestHandler } from './$types';
+import type { RequestHandler } from "./$types";
 
 export const GET: RequestHandler = async ({ url }) => {
-  // Handle GET request
+	// Handle GET request
 };
 
 export const POST: RequestHandler = async ({ request }) => {
-  // Handle POST request
+	// Handle POST request
 };
 ```
 
 ### API Naming Conventions
+
 - `+server.ts` - API endpoint handlers
 - `[id]/+server.ts` - Dynamic parameter endpoints
 - Use RESTful conventions (GET, POST, PUT, DELETE)
 
 ## 📄 Route Files
 
-| File | Purpose |
-|------|---------|
-| `+page.svelte` | Page component |
-| `+page.ts` | Universal load function |
-| `+page.server.ts` | Server-only load function |
-| `+layout.svelte` | Layout component |
-| `+layout.ts` | Layout load function |
-| `+layout.server.ts` | Server-only layout load |
-| `+server.ts` | API endpoint |
-| `+error.svelte` | Error boundary |
+| File                | Purpose                   |
+| ------------------- | ------------------------- |
+| `+page.svelte`      | Page component            |
+| `+page.ts`          | Universal load function   |
+| `+page.server.ts`   | Server-only load function |
+| `+layout.svelte`    | Layout component          |
+| `+layout.ts`        | Layout load function      |
+| `+layout.server.ts` | Server-only layout load   |
+| `+server.ts`        | API endpoint              |
+| `+error.svelte`     | Error boundary            |
 
 ## 🔐 Route Protection
 
@@ -89,25 +94,27 @@ Protected routes should use `+layout.server.ts`:
 
 ```typescript
 // src/routes/(app)/+layout.server.ts
-import { redirect } from '@sveltejs/kit';
-import type { LayoutServerLoad } from './$types';
+import { redirect } from "@sveltejs/kit";
+import type { LayoutServerLoad } from "./$types";
 
 export const load: LayoutServerLoad = async ({ locals }) => {
-  if (!locals.user) {
-    throw redirect(302, '/login');
-  }
-  return { user: locals.user };
+	if (!locals.user) {
+		throw redirect(302, "/login");
+	}
+	return { user: locals.user };
 };
 ```
 
 ## 🔗 Dynamic Routes
 
 Use brackets for dynamic parameters:
+
 - `[slug]` - Required parameter
 - `[[slug]]` - Optional parameter
 - `[...rest]` - Rest parameter (catch-all)
 
 Example:
+
 ```
 products/[slug]/+page.svelte  → /products/vintage-chair
 users/[id]/orders/+page.svelte → /users/123/orders

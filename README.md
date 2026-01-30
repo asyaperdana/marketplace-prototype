@@ -87,13 +87,13 @@
   <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
 </p>
 
-| Category | Technology |
-|----------|------------|
-| **Framework** | [SvelteKit](https://kit.svelte.dev/) v2.50+ |
-| **Language** | [TypeScript](https://www.typescriptlang.org/) v5.9+ |
-| **Styling** | [TailwindCSS](https://tailwindcss.com/) v4.1+ |
-| **Build Tool** | [Vite](https://vitejs.dev/) v7.3+ |
-| **Deployment** | GitHub Pages / Vercel |
+| Category       | Technology                                          |
+| -------------- | --------------------------------------------------- |
+| **Framework**  | [SvelteKit](https://kit.svelte.dev/) v2.50+         |
+| **Language**   | [TypeScript](https://www.typescriptlang.org/) v5.9+ |
+| **Styling**    | [TailwindCSS](https://tailwindcss.com/) v4.1+       |
+| **Build Tool** | [Vite](https://vitejs.dev/) v7.3+                   |
+| **Deployment** | GitHub Pages / Vercel                               |
 
 ---
 
@@ -124,12 +124,12 @@ npm run dev
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server di `localhost:5173` |
-| `npm run build` | Build untuk production |
-| `npm run preview` | Preview production build |
-| `npm run check` | Run TypeScript & Svelte checks |
+| Command           | Description                                  |
+| ----------------- | -------------------------------------------- |
+| `npm run dev`     | Start development server di `localhost:5173` |
+| `npm run build`   | Build untuk production                       |
+| `npm run preview` | Preview production build                     |
+| `npm run check`   | Run TypeScript & Svelte checks               |
 
 ---
 
@@ -174,28 +174,36 @@ marketplace-prototype/
 ## 🗺️ Roadmap
 
 ### Phase 1: Foundation (Current) 🏗️
+
 **Q1 2026**
+
 - [x] Landing page MVP
 - [x] Responsive design implementation
 - [x] Component library setup
 - [ ] GitHub Pages deployment
 
 ### Phase 2: Core Features 🔨
+
 **Q2 2026**
+
 - [ ] User authentication system
 - [ ] Product listing CRUD
 - [ ] Search & filter functionality
 - [ ] Database integration (Supabase/PocketBase)
 
 ### Phase 3: Marketplace Features 🛒
+
 **Q3 2026**
+
 - [ ] In-app messaging
 - [ ] Payment gateway integration
 - [ ] Order management
 - [ ] Rating & review system
 
 ### Phase 4: Scale & Optimize 📈
+
 **Q4 2026**
+
 - [ ] Performance optimization
 - [ ] SEO improvements
 - [ ] Mobile app (PWA)
@@ -205,9 +213,10 @@ marketplace-prototype/
 
 ## 🤝 Contributing
 
-Kami sangat menghargai kontribusi dari community! 
+Kami sangat menghargai kontribusi dari community!
 
 Silakan baca [**CONTRIBUTING.md**](CONTRIBUTING.md) untuk panduan lengkap tentang:
+
 - Code of conduct
 - Development workflow
 - Pull request process

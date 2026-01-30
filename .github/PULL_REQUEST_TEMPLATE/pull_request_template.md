@@ -5,6 +5,7 @@
 ## 🔗 Related Issue
 
 <!-- Link to the issue this PR addresses -->
+
 Closes #
 
 ## 🏷️ Type of Change
@@ -25,7 +26,7 @@ Closes #
 <!-- If applicable, add screenshots to show the changes -->
 
 | Before | After |
-|--------|-------|
+| ------ | ----- |
 |        |       |
 
 ## 🧪 Testing

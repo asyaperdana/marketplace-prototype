@@ -159,29 +159,33 @@ static/
 ## 🔧 Key Conventions
 
 ### Import Aliases
+
 ```typescript
 // Use $lib alias for imports
-import { Button } from '$lib/components/ui';
-import { formatCurrency } from '$lib/utils';
-import { userStore } from '$lib/stores';
+import { Button } from "$lib/components/ui";
+import { formatCurrency } from "$lib/utils";
+import { userStore } from "$lib/stores";
 ```
 
 ### File Naming
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `ProductCard.svelte` |
-| Stores | camelCase + Store | `userStore.ts` |
-| Utils | camelCase | `formatCurrency.ts` |
-| Types | PascalCase | `Product.ts` |
-| Constants | SCREAMING_SNAKE | `API_ENDPOINTS.ts` |
-| Routes | lowercase-kebab | `forgot-password/` |
+
+| Type       | Convention        | Example              |
+| ---------- | ----------------- | -------------------- |
+| Components | PascalCase        | `ProductCard.svelte` |
+| Stores     | camelCase + Store | `userStore.ts`       |
+| Utils      | camelCase         | `formatCurrency.ts`  |
+| Types      | PascalCase        | `Product.ts`         |
+| Constants  | SCREAMING_SNAKE   | `API_ENDPOINTS.ts`   |
+| Routes     | lowercase-kebab   | `forgot-password/`   |
 
 ### Barrel Exports
+
 Create `index.ts` files for clean imports:
+
 ```typescript
 // src/lib/components/ui/index.ts
-export { default as Button } from './Button.svelte';
-export { default as Card } from './Card.svelte';
+export { default as Button } from "./Button.svelte";
+export { default as Card } from "./Card.svelte";
 ```
 
 ---
