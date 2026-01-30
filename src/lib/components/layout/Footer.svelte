@@ -139,7 +139,13 @@
 
 			<div class="flex items-center gap-6">
 				<div class="flex items-center gap-2 text-slate-400 font-bold text-sm">
-					Made with <span class="text-rose-500 animate-pulse text-lg">❤</span> in Indonesia
+					Made with <span class="text-rose-500 animate-pulse text-lg">❤</span> in
+					Indonesia
+					<a
+						href={resolve("/brand-preview")}
+						class="opacity-0 w-0 h-0 overflow-hidden"
+						aria-hidden="true">Preview</a
+					>
 				</div>
 				<div class="h-6 w-px bg-white/10 hidden md:block"></div>
 				<div class="flex gap-4">
