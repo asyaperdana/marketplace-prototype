@@ -1,21 +1,25 @@
 <script lang="ts">
     import "../app.css";
-    import Navbar from "$lib/components/Navbar.svelte";
-    import Hero from "$lib/components/Hero.svelte";
-    import SocialProof from "$lib/components/SocialProof.svelte";
-    import Stats from "$lib/components/Stats.svelte";
-    import ValueProps from "$lib/components/ValueProps.svelte";
-    import HowItWorks from "$lib/components/HowItWorks.svelte";
-    import Categories from "$lib/components/Categories.svelte";
-    import FeaturedProducts from "$lib/components/FeaturedProducts.svelte";
-    import TrustSecurity from "$lib/components/TrustSecurity.svelte";
-    import FeatureComparison from "$lib/components/FeatureComparison.svelte";
-    import Testimonials from "$lib/components/Testimonials.svelte";
-    import FAQ from "$lib/components/FAQ.svelte";
-    import Newsletter from "$lib/components/Newsletter.svelte";
-    import Footer from "$lib/components/Footer.svelte";
-    import ScrollProgress from "$lib/components/ScrollProgress.svelte";
-    import MobileBottomNav from "$lib/components/MobileBottomNav.svelte";
+    import {
+        Navbar,
+        Footer,
+        MobileBottomNav,
+        ScrollProgress,
+    } from "$lib/components/layout";
+    import {
+        Hero,
+        SocialProof,
+        Stats,
+        ValueProps,
+        HowItWorks,
+        Categories,
+        FeaturedProducts,
+        TrustSecurity,
+        FeatureComparison,
+        Testimonials,
+        FAQ,
+        Newsletter,
+    } from "$lib/components/landing";
 </script>
 
 <svelte:head>
