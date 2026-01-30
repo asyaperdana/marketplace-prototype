@@ -7,6 +7,7 @@
 		count: string;
 		class: string;
 		delay: number;
+		image?: string;
 	}
 
 	const categories: Category[] = [
@@ -15,56 +16,64 @@
 			name: "Fashion Wanita",
 			count: "25K+ produk",
 			class: "md:col-span-2 md:row-span-2",
-			delay: 0
+			delay: 0,
+			image: "/assets/generated/categories/category-fashion-women.png"
 		},
 		{
 			icon: "📱",
 			name: "Elektronik",
 			count: "15K+ produk",
 			class: "md:col-span-2",
-			delay: 0.1
+			delay: 0.1,
+			image: "/assets/generated/categories/category-electronics.png"
 		},
 		{
 			icon: "👔",
 			name: "Fashion Pria",
 			count: "18K+ produk",
 			class: "",
-			delay: 0.2
+			delay: 0.2,
+			image: "/assets/generated/categories/category-fashion-men.png"
 		},
 		{
 			icon: "🏠",
 			name: "Peralatan Rumah",
 			count: "12K+ produk",
 			class: "",
-			delay: 0.3
+			delay: 0.3,
+			image: "/assets/generated/categories/category-home.png"
 		},
 		{
 			icon: "🎮",
 			name: "Games & Toys",
 			count: "7K+ produk",
 			class: "md:col-span-2",
-			delay: 0.4
+			delay: 0.4,
+			image: "/assets/generated/categories/category-gaming.png"
 		},
 		{
 			icon: "📚",
 			name: "Buku & Hobi",
 			count: "10K+ produk",
 			class: "",
-			delay: 0.5
+			delay: 0.5,
+			image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "👶",
 			name: "Perlengkapan Bayi",
 			count: "8K+ produk",
 			class: "",
-			delay: 0.6
+			delay: 0.6,
+			image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "💄",
 			name: "Kecantikan",
 			count: "9K+ produk",
 			class: "md:col-span-2",
-			delay: 0.7
+			delay: 0.7,
+			image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop&q=80"
 		}
 	];
 
@@ -125,33 +134,44 @@
 		>
 			{#each categories as category (category.name)}
 				<button
-					class="group relative overflow-hidden rounded-[2rem] glass hover:border-primary/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 text-left p-6 sm:p-10 flex flex-col justify-end {category.class}"
+					class="group relative overflow-hidden rounded-4xl glass hover:border-primary/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 text-left p-6 sm:p-10 flex flex-col justify-end {category.class}"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
 					style="transition-delay: {category.delay}s"
 				>
-					<!-- Hover Background Overlay -->
+					<!-- Background Image -->
+					{#if category.image}
+						<img
+							src={category.image}
+							alt={category.name}
+							loading="lazy"
+							class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700"
+						/>
+					{/if}
+					<!-- Overlay Gradients -->
 					<div
-						class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700"
+						class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/20 transition-all duration-700"
 					></div>
 					<div
-						class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-30"
+						class="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-30"
 					></div>
 
 					<div
 						class="relative z-10 transition-transform duration-500 group-hover:-translate-y-2"
 					>
-						<span
-							class="text-4xl sm:text-5xl mb-4 sm:mb-6 block filter drop-shadow-2xl transform group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500 origin-left"
-							>{category.icon}</span
-						>
+						{#if !category.image}
+							<span
+								class="text-4xl sm:text-5xl mb-4 sm:mb-6 block filter drop-shadow-2xl transform group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500 origin-left"
+								>{category.icon}</span
+							>
+						{/if}
 						<h3
-							class="text-2xl font-black text-white mb-2 group-hover:text-primary-light transition-colors"
+							class="text-2xl font-black text-white mb-2 group-hover:text-primary-light transition-colors drop-shadow-lg"
 						>
 							{category.name}
 						</h3>
 						<p
-							class="text-base text-slate-300 font-bold tracking-wide uppercase text-xs group-hover:text-white transition-colors"
+							class="text-sm text-slate-200 font-bold tracking-wide uppercase group-hover:text-white transition-colors drop-shadow-md"
 						>
 							{category.count}
 						</p>

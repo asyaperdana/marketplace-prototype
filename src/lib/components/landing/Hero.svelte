@@ -56,6 +56,14 @@
 		<div class="bg-noise"></div>
 		<div class="mesh-gradient"></div>
 
+		<!-- Hero Brand Visual -->
+		<img
+			src="/assets/generated/hero/hero-main.png"
+			alt=""
+			loading="eager"
+			class="absolute bottom-0 right-0 w-[60%] lg:w-[45%] h-auto opacity-20 lg:opacity-30 pointer-events-none object-contain object-right-bottom"
+		/>
+
 		<!-- Animated Gradient Orbs -->
 		<div class="orb orb-primary"></div>
 		<div class="orb orb-secondary"></div>

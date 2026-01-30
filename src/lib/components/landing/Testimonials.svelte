@@ -15,7 +15,7 @@
 			id: 1,
 			name: "Sarah Wijaya",
 			role: "Seller Fashion",
-			avatar: "👩",
+			avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&q=80",
 			quote: "Udah setahun jualan di Okis GS, omzet bulanan bisa tembus 15 juta! Prosesnya gampang banget dan buyer-nya banyak.",
 			rating: 5
 		},
@@ -23,7 +23,7 @@
 			id: 2,
 			name: "Rizky Pratama",
 			role: "Buyer Elektronik",
-			avatar: "👨",
+			avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&q=80",
 			quote: "Beli iPhone bekas di sini jauh lebih worth it. Kondisi sesuai deskripsi dan ada garansi dari seller. Recommended!",
 			rating: 5
 		},
@@ -31,7 +31,7 @@
 			id: 3,
 			name: "Anisa Putri",
 			role: "Seller & Buyer",
-			avatar: "👩‍🦱",
+			avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&q=80",
 			quote: "Platform favorit buat declutter lemari! Sekarang bisa dapat income tambahan dari barang-barang yang udah ga kepake.",
 			rating: 5
 		},
@@ -39,7 +39,7 @@
 			id: 4,
 			name: "Budi Santoso",
 			role: "Seller Buku",
-			avatar: "👨‍🦳",
+			avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&q=80",
 			quote: "Koleksi buku lama saya akhirnya ketemu pemilik baru. Senang bisa berbagi dengan sesama pecinta buku.",
 			rating: 5
 		},
@@ -47,7 +47,7 @@
 			id: 5,
 			name: "Dewi Lestari",
 			role: "Buyer Fashion",
-			avatar: "👩‍🦰",
+			avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&q=80",
 			quote: "Dapat branded bag authentic dengan harga 70% lebih murah! Seller-nya ramah dan packingnya rapi.",
 			rating: 5
 		}
@@ -167,11 +167,12 @@
 								</div>
 
 								<div class="flex flex-col items-center gap-4">
-									<div
-										class="w-20 h-20 rounded-full bg-linear-to-br from-white/10 to-white/5 flex items-center justify-center text-4xl border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500"
-									>
-										{testimonial.avatar}
-									</div>
+									<img
+										src={testimonial.avatar}
+										alt={testimonial.name}
+										loading="lazy"
+										class="w-20 h-20 rounded-full object-cover border-2 border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500"
+									/>
 									<div class="text-center">
 										<h4 class="text-2xl font-black text-white mb-1">
 											{testimonial.name}
