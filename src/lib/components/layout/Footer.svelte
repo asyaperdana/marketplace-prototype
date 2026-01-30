@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from "$lib/utils";
+	import Logo from "../ui/Logo.svelte";
 	const currentYear = new Date().getFullYear();
 
 	const footerLinks = {
@@ -47,11 +48,10 @@
 			<!-- Brand & Mission -->
 			<div class="lg:col-span-4 max-w-sm">
 				<a href={resolve("#hero")} class="flex items-center gap-3 mb-8 group">
-					<div
-						class="w-12 h-12 bg-linear-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
-					>
-						🛍️
-					</div>
+					<Logo
+						size="md"
+						class="group-hover:rotate-12 transition-transform duration-300"
+					/>
 					<span class="text-3xl font-black tracking-tighter text-white">
 						OKIS <span class="text-primary-light">GS</span>
 					</span>
@@ -139,13 +139,7 @@
 
 			<div class="flex items-center gap-6">
 				<div class="flex items-center gap-2 text-slate-400 font-bold text-sm">
-					Made with <span class="text-rose-500 animate-pulse text-lg">❤</span> in
-					Indonesia
-					<a
-						href={resolve("/brand-preview")}
-						class="opacity-0 w-0 h-0 overflow-hidden"
-						aria-hidden="true">Preview</a
-					>
+					Made with <span class="text-rose-500 animate-pulse text-lg">❤</span> in Indonesia
 				</div>
 				<div class="h-6 w-px bg-white/10 hidden md:block"></div>
 				<div class="flex gap-4">

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Logo from "../ui/Logo.svelte";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
@@ -174,11 +175,7 @@
 						<div class="px-5 py-4 border-b border-white/10">
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-3">
-									<div
-										class="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold"
-									>
-										🛍️
-									</div>
+									<Logo size="sm" />
 									<span class="font-bold text-white text-lg">Okis GS</span>
 								</div>
 								<div class="flex items-center gap-2">

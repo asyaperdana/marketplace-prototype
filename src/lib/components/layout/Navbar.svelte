@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { resolve } from "$lib/utils";
+	import Logo from "../ui/Logo.svelte";
 
 	let isScrolled = $state(false);
 	let isMobileMenuOpen = $state(false);
@@ -40,11 +41,7 @@
 	<div class="container mx-auto px-6 flex items-center justify-between">
 		<!-- Logo -->
 		<a href={resolve("#hero")} class="flex items-center gap-2 group" onclick={closeMobileMenu}>
-			<div
-				class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
-			>
-				🛍️
-			</div>
+			<Logo size="sm" class="group-hover:rotate-12 transition-transform duration-300" />
 			<span class="text-2xl font-black tracking-tighter text-white"
 				>OKIS <span class="text-primary-light">GS</span></span
 			>
