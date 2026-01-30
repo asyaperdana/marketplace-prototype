@@ -50,7 +50,7 @@
 	});
 </script>
 
-<section id="hero" class="hero-section relative min-h-[100dvh] lg:min-h-[110vh] overflow-hidden">
+<section id="hero" class="hero-section relative min-h-dvh lg:min-h-[110vh] overflow-hidden">
 	<!-- Premium Animated Background -->
 	<div class="absolute inset-0 bg-dark-deep">
 		<div class="bg-noise"></div>
@@ -61,7 +61,7 @@
 			src="/assets/generated/hero/hero-main.png"
 			alt=""
 			loading="eager"
-			class="absolute bottom-0 right-0 w-[60%] lg:w-[45%] h-auto opacity-20 lg:opacity-30 pointer-events-none object-contain object-right-bottom"
+			class="absolute bottom-0 right-0 w-[60%] lg:w-[45%] h-auto opacity-20 lg:opacity-30 pointer-events-none object-contain object-bottom-right"
 		/>
 
 		<!-- Animated Gradient Orbs -->
@@ -75,7 +75,7 @@
 
 	<!-- Main Content -->
 	<div class="container mx-auto px-4 sm:px-6 relative z-10 h-full">
-		<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[100vh] py-24 lg:py-32">
+		<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen py-24 lg:py-32">
 			<!-- Left Content - 7 columns -->
 			<div class="lg:col-span-7 space-y-8" class:animate-in={isLoaded}>
 				<!-- Live Badge -->
@@ -175,7 +175,7 @@
 							<div class="flex items-center justify-between">
 								<div class="flex items-center gap-3">
 									<div
-										class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold"
+										class="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-white font-bold"
 									>
 										🛍️
 									</div>
@@ -209,7 +209,7 @@
 						<!-- Category Pills -->
 						<div class="px-5 pb-4 flex gap-2 overflow-hidden">
 							<span
-								class="px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-white text-xs font-bold whitespace-nowrap"
+								class="px-4 py-2 rounded-full bg-linear-to-r from-primary to-secondary text-white text-xs font-bold whitespace-nowrap"
 								>🔥 Flash Sale</span
 							>
 							<span
@@ -226,7 +226,7 @@
 						<div class="px-5 pb-6 grid grid-cols-2 gap-3">
 							<div class="product-card-mini">
 								<div
-									class="aspect-square rounded-xl bg-gradient-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center text-4xl mb-2"
+									class="aspect-square rounded-xl bg-linear-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center text-4xl mb-2"
 								>
 									👗
 								</div>
@@ -240,7 +240,7 @@
 							</div>
 							<div class="product-card-mini">
 								<div
-									class="aspect-square rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-4xl mb-2"
+									class="aspect-square rounded-xl bg-linear-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-4xl mb-2"
 								>
 									📱
 								</div>
