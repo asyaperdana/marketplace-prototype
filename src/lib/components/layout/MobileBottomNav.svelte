@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { resolve } from "$lib/utils";
 
 	interface NavItem {
 		icon: string;
@@ -16,14 +17,12 @@
 	];
 
 	let isVisible = $state(false);
-	let lastScrollY = 0;
 
 	onMount(() => {
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
 			// Show when scrolled past hero section
 			isVisible = currentScrollY > 500;
-			lastScrollY = currentScrollY;
 		};
 
 		window.addEventListener("scroll", handleScroll, { passive: true });
@@ -41,18 +40,18 @@
 	<div class="absolute inset-0 bg-dark-deep/90 backdrop-blur-xl border-t border-white/10"></div>
 
 	<div class="relative z-10 flex items-center justify-around px-2 py-3 safe-area-pb">
-		{#each navItems as item, index}
+		{#each navItems as item, index (item.label)}
 			{#if index === 2}
 				<!-- Center CTA Button -->
 				<a
-					href="#newsletter"
+					href={resolve("#newsletter")}
 					class="relative -top-4 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-primary/40 hover:scale-110 active:scale-95 transition-transform duration-300 border-4 border-dark-deep"
 				>
 					➕
 				</a>
 			{:else}
 				<a
-					href={item.href}
+					href={resolve(item.href)}
 					class="flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/5 active:scale-95 group"
 				>
 					<span class="text-xl group-hover:scale-110 transition-transform"

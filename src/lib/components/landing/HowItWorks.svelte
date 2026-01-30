@@ -98,11 +98,7 @@
 		activeTab = tab;
 	}
 
-	$effect(() => {
-		steps = activeTab === "seller" ? sellerSteps : buyerSteps;
-	});
-
-	let steps = $state<Step[]>(sellerSteps);
+	const steps = $derived(activeTab === "seller" ? sellerSteps : buyerSteps);
 </script>
 
 <section

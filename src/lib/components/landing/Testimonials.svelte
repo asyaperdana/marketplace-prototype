@@ -140,7 +140,7 @@
 					class="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
 					style="transform: translateX(-{currentIndex * 100}%)"
 				>
-					{#each testimonials as testimonial}
+					{#each testimonials as testimonial (testimonial.id)}
 						<div class="w-full flex-shrink-0 px-4">
 							<div
 								class="glass rounded-[2.5rem] p-10 md:p-16 text-center border border-white/5 relative group transition-all duration-500"
@@ -158,7 +158,7 @@
 								</blockquote>
 
 								<div class="flex justify-center gap-2 mb-10">
-									{#each Array(testimonial.rating) as _}
+									{#each Array(testimonial.rating) as _, i (i)}
 										<span
 											class="text-yellow-400 text-2xl drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]"
 											>⭐</span
@@ -237,7 +237,7 @@
 			class:duration-1000={true}
 			style="transition-delay: 0.4s"
 		>
-			{#each testimonials as _, index}
+			{#each testimonials as _, index (testimonials[index].id)}
 				<button
 					class="h-3 rounded-full transition-all duration-500 {currentIndex === index
 						? 'w-12 bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/40'

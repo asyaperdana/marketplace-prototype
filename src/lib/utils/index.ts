@@ -1,6 +1,6 @@
-// =============================================
 // Okis Garage Sale - Utility Functions
 // =============================================
+import { base } from "$app/paths";
 
 /**
  * Format number to Indonesian Rupiah currency
@@ -160,4 +160,15 @@ export function calculateDiscount(originalPrice: number, currentPrice: number): 
  */
 export function cn(...classes: (string | undefined | null | false)[]): string {
 	return classes.filter(Boolean).join(" ");
+}
+/**
+ * Resolve URL with base path
+ */
+export function resolve(path: string): string {
+	if (!path) return "";
+	if (path.startsWith("http") || path.startsWith("mailto:") || path.startsWith("tel:"))
+		return path;
+	if (path.startsWith("#")) return `${base}/${path}`;
+	const cleanPath = path.startsWith("/") ? path : `/${path}`;
+	return `${base}${cleanPath}`;
 }

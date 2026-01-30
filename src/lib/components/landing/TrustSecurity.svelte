@@ -192,7 +192,7 @@
 			class:translate-y-10={!isVisible}
 			style="transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.2s"
 		>
-			{#each protectionFeatures as feature, index}
+			{#each protectionFeatures as feature, index (feature.title)}
 				<div
 					class="glass rounded-2xl p-8 border border-white/5 hover:border-primary/30 transition-all duration-500 group hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
 					style="transition-delay: {index * 0.05}s"
@@ -227,7 +227,7 @@
 					<span class="text-2xl">💳</span> Metode Pembayaran
 				</h4>
 				<div class="grid grid-cols-4 gap-3">
-					{#each paymentMethods as method}
+					{#each paymentMethods as method (method.name)}
 						<div
 							class="glass-light rounded-xl p-3 text-center hover:border-primary/30 border border-transparent transition-all group"
 						>
@@ -253,7 +253,7 @@
 					<span class="text-2xl">🚚</span> Partner Pengiriman
 				</h4>
 				<div class="flex flex-wrap gap-3">
-					{#each shippingPartners as partner}
+					{#each shippingPartners as partner (partner)}
 						<div
 							class="px-4 py-2 glass-light rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:border-primary/30 border border-transparent transition-all"
 						>

@@ -225,7 +225,7 @@
 			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
 		>
 			<div class="inline-flex glass-light p-1.5 rounded-2xl border border-white/10 relative">
-				{#each filterTabs as tab, index}
+				{#each filterTabs as tab (tab.id)}
 					<button
 						class="relative z-10 px-6 py-3 rounded-xl flex items-center gap-2 font-bold text-sm transition-all duration-500 {activeFilter ===
 						tab.id
@@ -269,7 +269,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-			{#each products as product, index}
+			{#each products as product, index (product.id)}
 				<div
 					class="glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-700 hover:-translate-y-3 group hover:shadow-2xl hover:shadow-primary/10 relative"
 					class:opacity-0={!isVisible}

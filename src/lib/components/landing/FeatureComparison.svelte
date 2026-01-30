@@ -145,7 +145,7 @@
 
 			<!-- Table Body -->
 			<div class="divide-y divide-white/5">
-				{#each comparisonData as row, index}
+				{#each comparisonData as row, index (row.feature)}
 					<div
 						class="grid grid-cols-4 gap-4 p-6 hover:bg-white/5 transition-colors duration-300"
 						style="transition-delay: {index * 0.03}s"

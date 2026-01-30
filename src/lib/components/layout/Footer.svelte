@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$lib/utils";
 	const currentYear = new Date().getFullYear();
 
 	const footerLinks = {
@@ -45,7 +46,7 @@
 		<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
 			<!-- Brand & Mission -->
 			<div class="lg:col-span-4 max-w-sm">
-				<a href="#hero" class="flex items-center gap-3 mb-8 group">
+				<a href={resolve("#hero")} class="flex items-center gap-3 mb-8 group">
 					<div
 						class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
 					>
@@ -60,9 +61,9 @@
 					berkelanjutan dengan cara yang stylish dan menguntungkan.
 				</p>
 				<div class="flex gap-4">
-					{#each socialLinks as social}
+					{#each socialLinks as social (social.label)}
 						<a
-							href={social.href}
+							href={resolve(social.href === "#" ? "javascript:void(0)" : social.href)}
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30"
 							aria-label={social.label}
 						>
@@ -79,10 +80,10 @@
 						Perusahaan
 					</h4>
 					<ul class="flex flex-col gap-4">
-						{#each footerLinks.company as link}
+						{#each footerLinks.company as link (link.label)}
 							<li>
 								<a
-									href={link.href}
+									href={resolve(link.href)}
 									class="text-slate-400 hover:text-primary-light text-base font-bold transition-all hover:translate-x-1 inline-block"
 								>
 									{link.label}
@@ -96,10 +97,10 @@
 						Bantuan
 					</h4>
 					<ul class="flex flex-col gap-4">
-						{#each footerLinks.support as link}
+						{#each footerLinks.support as link (link.label)}
 							<li>
 								<a
-									href={link.href}
+									href={resolve(link.href)}
 									class="text-slate-400 hover:text-primary-light text-base font-bold transition-all hover:translate-x-1 inline-block"
 								>
 									{link.label}
@@ -113,10 +114,10 @@
 						Legal
 					</h4>
 					<ul class="flex flex-col gap-4">
-						{#each footerLinks.legal as link}
+						{#each footerLinks.legal as link (link.label)}
 							<li>
 								<a
-									href={link.href}
+									href={resolve(link.href)}
 									class="text-slate-400 hover:text-primary-light text-base font-bold transition-all hover:translate-x-1 inline-block"
 								>
 									{link.label}

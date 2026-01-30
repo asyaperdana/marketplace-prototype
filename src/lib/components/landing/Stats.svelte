@@ -90,7 +90,7 @@
 
 	<div class="container mx-auto px-6 relative z-10">
 		<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-			{#each stats as stat, index}
+			{#each stats as stat, index (stat.label)}
 				<div
 					class="glass rounded-3xl p-8 text-center border border-white/5 hover:border-primary/30 transition-all duration-700 group hover:shadow-2xl hover:shadow-primary/10"
 					class:opacity-0={!isVisible}

@@ -223,7 +223,7 @@
 			class:translate-y-8={!isVisible}
 			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
 		>
-			{#each liveStats as stat, i}
+			{#each liveStats as stat, i (stat.label)}
 				<div class="stat-card group">
 					<div class="stat-icon bg-gradient-to-br {stat.color}">
 						<span class="text-2xl">{stat.icon}</span>
@@ -290,7 +290,7 @@
 				</div>
 
 				<div class="space-y-3">
-					{#each recentTransactions as tx, i}
+					{#each recentTransactions as tx, i (tx.id)}
 						<div class="transaction-item" class:active={i === currentTransaction}>
 							<div class="flex items-center gap-4">
 								<div
@@ -352,7 +352,7 @@
 						</div>
 					</div>
 					<div class="grid grid-cols-4 gap-3">
-						{#each trustLogos as logo}
+						{#each trustLogos as logo (logo.name)}
 							<div class="trust-logo">
 								<span class="text-xl mb-1">{logo.icon}</span>
 								<span class="text-[10px] text-slate-400 font-medium"

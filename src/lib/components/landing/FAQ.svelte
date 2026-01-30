@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { SvelteSet } from "svelte/reactivity";
 
 	interface FAQItem {
 		id: number;
@@ -40,18 +41,16 @@
 		}
 	];
 
-	let openItems = $state<Set<number>>(new Set());
+	let openItems = new SvelteSet<number>();
 	let isVisible = $state(false);
 	let sectionRef: HTMLElement;
 
 	function toggleItem(id: number) {
-		const newSet = new Set(openItems);
-		if (newSet.has(id)) {
-			newSet.delete(id);
+		if (openItems.has(id)) {
+			openItems.delete(id);
 		} else {
-			newSet.add(id);
+			openItems.add(id);
 		}
-		openItems = newSet;
 	}
 
 	onMount(() => {
@@ -101,7 +100,7 @@
 		</div>
 
 		<div class="space-y-4">
-			{#each faqItems as item, index}
+			{#each faqItems as item, index (item.id)}
 				<div
 					class="glass rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-white/5 {openItems.has(
 						item.id

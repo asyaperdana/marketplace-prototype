@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { resolve } from "$lib/utils";
 
 	let isScrolled = $state(false);
 	let isMobileMenuOpen = $state(false);
@@ -38,7 +39,7 @@
 >
 	<div class="container mx-auto px-6 flex items-center justify-between">
 		<!-- Logo -->
-		<a href="#hero" class="flex items-center gap-2 group" onclick={closeMobileMenu}>
+		<a href={resolve("#hero")} class="flex items-center gap-2 group" onclick={closeMobileMenu}>
 			<div
 				class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
 			>
@@ -51,9 +52,9 @@
 
 		<!-- Desktop Navigation -->
 		<div class="hidden lg:flex items-center gap-10">
-			{#each navLinks as link}
+			{#each navLinks as link (link.label)}
 				<a
-					href={link.href}
+					href={resolve(link.href)}
 					class="text-sm font-semibold text-slate-300 hover:text-white transition-all relative group uppercase tracking-wider"
 				>
 					{link.label}
@@ -67,7 +68,7 @@
 		<!-- CTA Button -->
 		<div class="hidden lg:block">
 			<a
-				href="#newsletter"
+				href={resolve("#newsletter")}
 				class="btn btn-primary px-8 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
 			>
 				Mulai Jualan
@@ -111,9 +112,9 @@
 		<div
 			class="bg-dark/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 shadow-2xl flex flex-col gap-4"
 		>
-			{#each navLinks as link}
+			{#each navLinks as link (link.label)}
 				<a
-					href={link.href}
+					href={resolve(link.href)}
 					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg"
 					onclick={closeMobileMenu}
 				>
@@ -122,7 +123,7 @@
 			{/each}
 			<div class="h-px bg-white/10 my-2"></div>
 			<a
-				href="#newsletter"
+				href={resolve("#newsletter")}
 				class="btn btn-primary w-full py-5 text-xl"
 				onclick={closeMobileMenu}
 			>

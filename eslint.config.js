@@ -20,16 +20,16 @@ export default [
 		},
 		rules: {
 			"@typescript-eslint/no-unused-vars": [
-				"warn",
+				"error",
 				{
 					argsIgnorePattern: "^_",
 					varsIgnorePattern: "^_"
 				}
 			],
-			"svelte/require-each-key": "warn",
-			"svelte/prefer-svelte-reactivity": "warn",
-			"svelte/prefer-writable-derived": "warn",
-			"svelte/no-navigation-without-resolve": "warn"
+			"svelte/require-each-key": "error",
+			"svelte/prefer-svelte-reactivity": "error",
+			"svelte/prefer-writable-derived": "error",
+			"svelte/no-navigation-without-resolve": "off"
 		}
 	},
 	{

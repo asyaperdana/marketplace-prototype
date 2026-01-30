@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$lib/utils";
 	import type { Product } from "$lib/types";
 	import {
 		formatCurrency,
@@ -15,13 +16,13 @@
 
 	let { product, class: className = "" }: Props = $props();
 
-	const discount = product.originalPrice
-		? calculateDiscount(product.originalPrice, product.price)
-		: 0;
+	const discount = $derived(
+		product.originalPrice ? calculateDiscount(product.originalPrice, product.price) : 0
+	);
 </script>
 
 <a
-	href="/products/{product.id}"
+	href={resolve(`/products/${product.id}`)}
 	class={cn(
 		"group block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
 		className

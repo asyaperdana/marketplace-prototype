@@ -121,7 +121,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 auto-rows-[220px]">
-			{#each categories as category, i}
+			{#each categories as category (category.name)}
 				<button
 					class="group relative overflow-hidden rounded-[2rem] glass hover:border-primary/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 text-left p-10 flex flex-col justify-end {category.class}"
 					class:opacity-0={!isVisible}

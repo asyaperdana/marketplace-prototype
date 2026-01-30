@@ -31,7 +31,7 @@
 		onchange
 	}: Props = $props();
 
-	const inputId = `input-${name || crypto.randomUUID()}`;
+	const inputId = $derived(`input-${name || crypto.randomUUID()}`);
 </script>
 
 <div class="w-full">

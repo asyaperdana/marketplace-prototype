@@ -274,7 +274,7 @@
 					</div>
 
 					<!-- Floating Product Cards -->
-					{#each floatingProducts as product, i}
+					{#each floatingProducts as product, i (product.label)}
 						<div
 							class="floating-card absolute {product.position}"
 							style="animation-delay: {i * 0.2}s"
