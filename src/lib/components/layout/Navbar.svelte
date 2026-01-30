@@ -107,7 +107,7 @@
 		class:-translate-y-10={!isMobileMenuOpen}
 	>
 		<div
-			class="bg-dark/95 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-8 shadow-2xl flex flex-col gap-4"
+			class="bg-dark/95 backdrop-blur-2xl border border-white/10 rounded-4xl p-8 shadow-2xl flex flex-col gap-4"
 		>
 			{#each navLinks as link (link.label)}
 				<a
