@@ -141,12 +141,12 @@
 					style="transform: translateX(-{currentIndex * 100}%)"
 				>
 					{#each testimonials as testimonial (testimonial.id)}
-						<div class="w-full flex-shrink-0 px-2 sm:px-4">
+						<div class="w-full shrink-0 px-2 sm:px-4">
 							<div
-								class="glass rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 text-center border border-white/5 relative group transition-all duration-500"
+								class="glass rounded-4xl sm:rounded-[2.5rem] p-6 sm:p-10 md:p-16 text-center border border-white/5 relative group transition-all duration-500"
 							>
 								<div
-									class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-4xl shadow-xl shadow-primary/30 transform rotate-12 group-hover:rotate-0 transition-transform duration-500"
+									class="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 bg-linear-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-4xl shadow-xl shadow-primary/30 transform rotate-12 group-hover:rotate-0 transition-transform duration-500"
 								>
 									"
 								</div>
@@ -168,7 +168,7 @@
 
 								<div class="flex flex-col items-center gap-4">
 									<div
-										class="w-20 h-20 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center text-4xl border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500"
+										class="w-20 h-20 rounded-full bg-linear-to-br from-white/10 to-white/5 flex items-center justify-center text-4xl border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500"
 									>
 										{testimonial.avatar}
 									</div>
@@ -190,7 +190,7 @@
 
 			<!-- Enhanced Navigation Arrows -->
 			<button
-				class="absolute -left-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl glass-light border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-500 hidden md:flex group shadow-xl z-20"
+				class="absolute -left-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl glass-light border border-white/10 hidden md:flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-500 group shadow-xl z-20"
 				onclick={prevSlide}
 				aria-label="Previous testimonial"
 			>
@@ -209,7 +209,7 @@
 				</svg>
 			</button>
 			<button
-				class="absolute -right-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl glass-light border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-500 hidden md:flex group shadow-xl z-20"
+				class="absolute -right-6 top-1/2 -translate-y-1/2 w-16 h-16 rounded-2xl glass-light border border-white/10 hidden md:flex items-center justify-center text-white hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-500 group shadow-xl z-20"
 				onclick={nextSlide}
 				aria-label="Next testimonial"
 			>
@@ -240,7 +240,7 @@
 			{#each testimonials as _, index (testimonials[index].id)}
 				<button
 					class="h-3 rounded-full transition-all duration-500 {currentIndex === index
-						? 'w-12 bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/40'
+						? 'w-12 bg-linear-to-r from-primary to-secondary shadow-lg shadow-primary/40'
 						: 'w-3 bg-white/20 hover:bg-white/40'}"
 					onclick={() => goToSlide(index)}
 					aria-label="Go to testimonial {index + 1}"

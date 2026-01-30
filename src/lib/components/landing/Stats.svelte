@@ -115,7 +115,7 @@
 
 					<!-- Decorative line -->
 					<div
-						class="w-12 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mt-6 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-500"
+						class="w-12 h-1 bg-linear-to-r from-primary to-secondary mx-auto mt-6 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-500"
 					></div>
 				</div>
 			{/each}

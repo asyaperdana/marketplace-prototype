@@ -48,7 +48,7 @@
 			<div class="lg:col-span-4 max-w-sm">
 				<a href={resolve("#hero")} class="flex items-center gap-3 mb-8 group">
 					<div
-						class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
+						class="w-12 h-12 bg-linear-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-primary/20 group-hover:rotate-12 transition-transform duration-300"
 					>
 						🛍️
 					</div>
@@ -76,7 +76,7 @@
 			<!-- Navigation Links -->
 			<div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
 				<div class="flex flex-col gap-8">
-					<h4 class="text-white text-lg font-black uppercase tracking-widest text-xs">
+					<h4 class="text-white font-black uppercase tracking-widest text-xs">
 						Perusahaan
 					</h4>
 					<ul class="flex flex-col gap-4">
@@ -93,9 +93,7 @@
 					</ul>
 				</div>
 				<div class="flex flex-col gap-8">
-					<h4 class="text-white text-lg font-black uppercase tracking-widest text-xs">
-						Bantuan
-					</h4>
+					<h4 class="text-white font-black uppercase tracking-widest text-xs">Bantuan</h4>
 					<ul class="flex flex-col gap-4">
 						{#each footerLinks.support as link (link.label)}
 							<li>
@@ -110,9 +108,7 @@
 					</ul>
 				</div>
 				<div class="flex flex-col gap-8 col-span-2 md:col-span-1">
-					<h4 class="text-white text-lg font-black uppercase tracking-widest text-xs">
-						Legal
-					</h4>
+					<h4 class="text-white font-black uppercase tracking-widest text-xs">Legal</h4>
 					<ul class="flex flex-col gap-4">
 						{#each footerLinks.legal as link (link.label)}
 							<li>

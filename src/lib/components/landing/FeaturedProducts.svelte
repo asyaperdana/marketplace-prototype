@@ -242,7 +242,7 @@
 
 				<!-- Background slider -->
 				<div
-					class="absolute top-1.5 bottom-1.5 rounded-xl bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-lg shadow-primary/30"
+					class="absolute top-1.5 bottom-1.5 rounded-xl bg-linear-to-r from-primary to-secondary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-lg shadow-primary/30"
 					style="left: calc({filterTabs.findIndex(
 						(t) => t.id === activeFilter
 					)} * 33.33% + 0.375rem); width: calc(33.33% - 0.5rem)"
@@ -281,7 +281,7 @@
 					<!-- Discount Badge -->
 					<div class="absolute top-6 left-6 z-20">
 						<div
-							class="bg-gradient-to-br from-rose-500 to-pink-600 text-white text-sm font-black px-4 py-2 rounded-xl shadow-lg shadow-rose-500/30"
+							class="bg-linear-to-br from-rose-500 to-pink-600 text-white text-sm font-black px-4 py-2 rounded-xl shadow-lg shadow-rose-500/30"
 						>
 							-{getDiscount(product.price, product.originalPrice)}%
 						</div>
@@ -312,7 +312,7 @@
 						class="relative h-64 bg-white/5 flex items-center justify-center overflow-hidden"
 					>
 						<div
-							class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 pointer-events-none"
+							class="absolute inset-0 bg-linear-to-br from-primary/10 to-secondary/10 pointer-events-none"
 						></div>
 						<span
 							class="text-7xl drop-shadow-2xl transform group-hover:scale-125 group-hover:rotate-6 transition-all duration-700"
@@ -334,7 +334,7 @@
 					<!-- Product Info -->
 					<div class="p-5 sm:p-8">
 						<h3
-							class="text-xl font-bold text-white mb-4 line-clamp-2 min-h-[3.5rem] group-hover:text-primary-light transition-colors"
+							class="text-xl font-bold text-white mb-4 line-clamp-2 min-h-14 group-hover:text-primary-light transition-colors"
 						>
 							{product.title}
 						</h3>
@@ -355,7 +355,7 @@
 						>
 							<div class="flex items-center gap-3">
 								<div
-									class="w-10 h-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-xl shadow-lg"
+									class="w-10 h-10 rounded-full bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-xl shadow-lg"
 								>
 									👤
 								</div>
