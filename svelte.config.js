@@ -17,7 +17,7 @@ const config = {
 		},
 		prerender: {
 			crawl: false,
-			entries: ["/"]
+			entries: ["/", "/brand-preview"]
 		}
 	}
 };
