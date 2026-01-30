@@ -1,1 +1,2 @@
+./scripts/check-staged-files.sh
 npx lint-staged
