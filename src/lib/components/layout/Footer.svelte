@@ -63,7 +63,7 @@
 				<div class="flex gap-4">
 					{#each socialLinks as social (social.label)}
 						<a
-							href={resolve(social.href === "#" ? "javascript:void(0)" : social.href)}
+							href={resolve(social.href)}
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30"
 							aria-label={social.label}
 						>
