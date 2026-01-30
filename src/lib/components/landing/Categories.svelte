@@ -17,7 +17,7 @@
 			count: "25K+ produk",
 			class: "md:col-span-2 md:row-span-2",
 			delay: 0,
-			image: "/assets/generated/categories/category-fashion-women.png"
+			image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "📱",
@@ -25,7 +25,7 @@
 			count: "15K+ produk",
 			class: "md:col-span-2",
 			delay: 0.1,
-			image: "/assets/generated/categories/category-electronics.png"
+			image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "👔",
@@ -33,7 +33,7 @@
 			count: "18K+ produk",
 			class: "",
 			delay: 0.2,
-			image: "/assets/generated/categories/category-fashion-men.png"
+			image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "🏠",
@@ -41,7 +41,7 @@
 			count: "12K+ produk",
 			class: "",
 			delay: 0.3,
-			image: "/assets/generated/categories/category-home.png"
+			image: "https://images.unsplash.com/photo-1583847661884-3883d67e0686?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "🎮",
@@ -49,7 +49,7 @@
 			count: "7K+ produk",
 			class: "md:col-span-2",
 			delay: 0.4,
-			image: "/assets/generated/categories/category-gaming.png"
+			image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "📚",
