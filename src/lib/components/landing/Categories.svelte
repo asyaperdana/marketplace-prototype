@@ -41,7 +41,7 @@
 			count: "12K+ produk",
 			class: "",
 			delay: 0.3,
-			image: "https://images.unsplash.com/photo-1513519245088-0e12902e15bc?w=600&h=600&fit=crop&q=80"
+			image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&h=600&fit=crop&q=80"
 		},
 		{
 			icon: "🎮",
