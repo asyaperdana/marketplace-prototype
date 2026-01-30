@@ -1,0 +1,33 @@
+name: Governance Guard
+
+on:
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    hygiene-check:
+        runs-on: ubuntu-latest
+        name: 🛡️ Repo Hygiene
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: 🛡️ Audit Repository
+              run: |
+                  chmod +x scripts/verify-repo.sh
+                  npm run repo:check
+
+            - name: ❌ Violation Report
+              if: failure()
+              run: |
+                  echo "::error::Repository hygiene violation detected!"
+                  echo "Refer to REPO_POLICY.md for rules."
+                  echo "Run 'npm run repo:fix' locally and push again."

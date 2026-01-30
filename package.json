@@ -20,6 +20,8 @@
 		"clean": "rm -rf .svelte-kit build dist",
 		"repo:clean": "./scripts/clean-repo.sh && npm run clean",
 		"repo:check": "./scripts/verify-repo.sh",
+		"repo:fix": "./scripts/repo-fix.sh",
+		"repo:audit": "./scripts/repo-audit.sh",
 		"validate": "npm run format:check && npm run lint && npm run check && npm run test:unit"
 	},
 	"devDependencies": {
