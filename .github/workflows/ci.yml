@@ -26,8 +26,8 @@ jobs:
             - name: Run Validation
               run: npm run validate
               env:
-                  PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-                  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+                  PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+                  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
 
     build:
         name: Build
@@ -49,8 +49,8 @@ jobs:
             - name: Build
               run: npm run build
               env:
-                  PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-                  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_KEY }}
+                  PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
+                  PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
 
             - name: Upload build artifacts
               uses: actions/upload-artifact@v4
