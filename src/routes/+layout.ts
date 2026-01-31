@@ -1,20 +1,20 @@
-import { createBrowserClient, createServerClient, isBrowser } from '@supabase/ssr';
-import { config } from '$lib/config';
-import type { LayoutLoad } from './$types';
+import { createBrowserClient, createServerClient, isBrowser } from "@supabase/ssr";
+import { config } from "$lib/config";
+import type { LayoutLoad } from "./$types";
 
 export const prerender = true;
-export const trailingSlash = 'always';
+export const trailingSlash = "always";
 
 export const load: LayoutLoad = async ({ fetch, data, depends }) => {
-	depends('supabase:auth');
+	depends("supabase:auth");
 
 	const supabase = isBrowser()
-		? createBrowserClient(config.supabase.url || '', config.supabase.anonKey || '', {
+		? createBrowserClient(config.supabase.url || "", config.supabase.anonKey || "", {
 				global: {
 					fetch
 				}
 			})
-		: createServerClient(config.supabase.url || '', config.supabase.anonKey || '', {
+		: createServerClient(config.supabase.url || "", config.supabase.anonKey || "", {
 				global: {
 					fetch
 				},
