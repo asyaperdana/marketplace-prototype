@@ -1,58 +1,63 @@
 @import "tailwindcss";
 
 @theme {
-	/* Primary - Professional Blue-Green */
+	/* Primary - Electric & Professional */
 	--color-primary: #0ea5e9;
 	--color-primary-dark: #0284c7;
 	--color-primary-light: #38bdf8;
+	--color-primary-glow: rgba(14, 165, 233, 0.5);
 
 	--color-secondary: #10b981;
 	--color-secondary-dark: #059669;
 	--color-secondary-light: #34d399;
+	--color-secondary-glow: rgba(16, 185, 129, 0.5);
 
-	--color-accent: #06b6d4;
-	--color-accent-dark: #0891b2;
-	--color-accent-light: #22d3ee;
+	--color-accent: #f43f5e;
+	--color-accent-dark: #e11d48;
+	--color-accent-light: #fb7185;
+	--color-accent-glow: rgba(244, 63, 94, 0.5);
 
-	/* Neutrals */
+	/* Deep Neutrals - "Void" Palette */
 	--color-dark: #0f172a;
 	--color-dark-lighter: #1e293b;
-	--color-dark-deep: #020617;
-	--color-gray: #64748b;
-	--color-light: #f8fafc;
+	--color-dark-deep: #020617; /* Almost black */
+	--color-gray: #94a3b8;
+	--color-light: #f1f5f9;
 }
 
 /* ============================================
    OKIS GARAGE SALE - Brand CSS Variables
    ============================================ */
 :root {
-	/* Gradients */
+	/* Gradients - More Vibrant */
 	--gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #10b981 100%);
-	--gradient-hero: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-	--gradient-card: linear-gradient(
+	--gradient-glow: linear-gradient(135deg, rgba(14, 165, 233, 0.4) 0%, rgba(16, 185, 129, 0.4) 100%);
+	--gradient-dark: linear-gradient(180deg, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.8) 100%);
+	--gradient-glass: linear-gradient(
 		145deg,
 		rgba(255, 255, 255, 0.05) 0%,
-		rgba(255, 255, 255, 0.02) 100%
+		rgba(255, 255, 255, 0.01) 100%
 	);
 
-	/* Shadows */
-	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-	--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-	--shadow-primary: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
+	/* Shadows - Smoother & Deeper */
+	--shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+	--shadow-md: 0 8px 24px -6px rgba(0, 0, 0, 0.2), 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 20px 40px -8px rgba(0, 0, 0, 0.3), 0 10px 20px -6px rgba(0, 0, 0, 0.1);
+	--shadow-xl: 0 30px 80px -12px rgba(0, 0, 0, 0.4), 0 15px 30px -8px rgba(0, 0, 0, 0.1);
+	--shadow-neon: 0 0 20px -5px var(--color-primary-glow), 0 0 40px -10px var(--color-primary-glow);
 
 	/* Border Radius */
-	--radius-sm: 0.375rem;
-	--radius-md: 0.5rem;
-	--radius-lg: 1rem;
-	--radius-xl: 1.5rem;
+	--radius-sm: 0.5rem;
+	--radius-md: 0.75rem;
+	--radius-lg: 1.5rem;
+	--radius-xl: 2rem;
 	--radius-full: 9999px;
 
 	/* Transitions */
-	--transition-fast: 150ms ease;
-	--transition-base: 300ms ease;
-	--transition-slow: 500ms ease;
+	--transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-base: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* ============================================
@@ -70,13 +75,8 @@ html {
 body {
 	font-family:
 		"Inter",
-		-apple-system,
-		BlinkMacSystemFont,
-		"Segoe UI",
-		Roboto,
 		sans-serif;
 	color: #e2e8f0;
-	/* Slate 200 for better readability */
 	background-color: var(--color-dark-deep);
 	line-height: 1.6;
 	overflow-x: hidden;
@@ -84,19 +84,17 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
 	font-size: 16px;
-	/* Base size */
 }
 
 @media (max-width: 640px) {
 	html {
 		font-size: 14px;
-		/* Slightly smaller on mobile to scale REMs down */
 	}
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Minimalist */
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -104,107 +102,113 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: rgba(14, 165, 233, 0.1);
-	border-radius: 10px;
-	border: 2px solid var(--color-dark-deep);
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 99px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: rgba(14, 165, 233, 0.3);
+	background: rgba(255, 255, 255, 0.2);
 }
 
 /* ============================================
    Animation Keyframes
    ============================================ */
-@keyframes fadeInUp {
+@keyframes fadeUpReveal {
 	from {
 		opacity: 0;
-		transform: translateY(30px);
+		transform: translateY(40px) scale(0.95);
+		filter: blur(10px);
 	}
-
 	to {
 		opacity: 1;
-		transform: translateY(0);
+		transform: translateY(0) scale(1);
+		filter: blur(0);
 	}
 }
 
-@keyframes float {
-	0%,
-	100% {
-		transform: translateY(0px);
-	}
-
-	50% {
-		transform: translateY(-20px);
-	}
+@keyframes floatInfinite {
+	0%, 100% { transform: translateY(0px) rotate(0deg); }
+	50% { transform: translateY(-15px) rotate(1deg); }
 }
 
-@keyframes pulse-glow {
-	0%,
-	100% {
-		box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
-	}
+@keyframes liquidGradient {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
 
-	50% {
-		box-shadow: 0 0 40px rgba(14, 165, 233, 0.2);
-	}
+@keyframes pulseNeon {
+	0%, 100% { box-shadow: 0 0 15px var(--color-primary-glow); }
+	50% { box-shadow: 0 0 30px var(--color-primary-glow), 0 0 10px var(--color-secondary-glow); }
 }
 
 /* ============================================
    Utility Classes
    ============================================ */
-.animate-fadeInUp {
-	animation: fadeInUp 0.6s ease forwards;
+.animate-reveal {
+	animation: fadeUpReveal 0.8s var(--transition-base) forwards;
 }
 
 .animate-float {
-	animation: float 6s ease-in-out infinite;
+	animation: floatInfinite 6s ease-in-out infinite;
 }
 
-/* Glass Effect Overhaul */
+/* Premium Glassmorphism */
 .glass {
-	background: rgba(15, 23, 42, 0.6);
-	/* Slate 900 semi-transparent */
-	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
+	background: rgba(15, 23, 42, 0.4);
+	backdrop-filter: blur(24px) saturate(180%);
+	-webkit-backdrop-filter: blur(24px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.08);
-	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .glass-light {
 	background: rgba(255, 255, 255, 0.03);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
-	border: 1px solid rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-card {
-	position: relative;
-	background: rgba(30, 41, 59, 0.4);
-	border-radius: var(--radius-xl);
-	backdrop-filter: blur(16px);
+	background: linear-gradient(
+		160deg,
+		rgba(30, 41, 59, 0.6) 0%,
+		rgba(15, 23, 42, 0.8) 100%
+	);
+	backdrop-filter: blur(20px);
 	border: 1px solid rgba(255, 255, 255, 0.05);
+	box-shadow: var(--shadow-xl);
 	transition: all var(--transition-base);
 }
 
 .glass-card:hover {
-	background: rgba(30, 41, 59, 0.6);
 	border-color: rgba(14, 165, 233, 0.3);
-	transform: translateY(-4px);
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+	box-shadow: var(--shadow-neon);
+	transform: translateY(-5px) scale(1.01);
 }
 
+/* Textures */
 .bg-noise {
-	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+	mix-blend-mode: overlay;
 	pointer-events: none;
 	position: absolute;
 	inset: 0;
 	z-index: 0;
-	opacity: 0.3;
+	opacity: 0.07;
 }
 
-/* Gradient Text */
+/* Gradient Text - Liquid Metal */
 .gradient-text {
+	background: linear-gradient(135deg, #fff 10%, #94a3b8 50%, #fff 90%);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: liquidGradient 5s linear infinite;
+}
+
+.gradient-text-color {
 	background: var(--gradient-primary);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;

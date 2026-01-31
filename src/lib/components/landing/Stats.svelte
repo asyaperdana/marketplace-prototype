@@ -76,46 +76,34 @@
 	});
 </script>
 
-<section id="stats" class="py-20 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
-	<!-- Background Decoration -->
-	<div class="absolute inset-0 z-0">
-		<div class="bg-noise opacity-30"></div>
-		<div
-			class="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -translate-y-1/2"
-		></div>
-		<div
-			class="absolute top-1/2 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] -translate-y-1/2"
-		></div>
-	</div>
-
-	<div class="container mx-auto px-4 sm:px-6 relative z-10">
-		<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
+<section id="stats" class="py-32 relative overflow-hidden" bind:this={sectionRef}>
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="flex flex-wrap justify-center gap-8 lg:gap-16">
 			{#each stats as stat, index (stat.label)}
 				<div
-					class="glass rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-center border border-white/5 hover:border-primary/30 transition-all duration-700 group hover:shadow-2xl hover:shadow-primary/10"
+					class="glass-card rounded-4xl p-8 text-center relative group min-w-[200px]"
 					class:opacity-0={!isVisible}
-					class:translate-y-10={!isVisible}
-					style="transition-delay: {index * 0.15}s"
+					class:translate-y-20={!isVisible}
+					style="transition-duration: 1s; transition-delay: {index *
+						0.2}s; margin-top: {index % 2 === 0 ? '0' : '4rem'};"
 				>
 					<div
-						class="text-3xl sm:text-5xl mb-4 sm:mb-6 transform group-hover:scale-125 transition-transform duration-500 filter drop-shadow-2xl"
+						class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl bg-linear-to-br from-dark-lighter to-dark border border-white/10 flex items-center justify-center text-3xl shadow-lg group-hover:-translate-y-2 transition-transform duration-300"
 					>
 						{stat.icon}
 					</div>
-					<div
-						class="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-2 sm:mb-3 tracking-tight"
-					>
-						{formatNumber(displayValues[index])}{stat.suffix}
-					</div>
-					<div
-						class="text-slate-300 font-bold uppercase tracking-widest text-xs lg:text-sm"
-					>
-						{stat.label}
+
+					<div class="mt-8 space-y-2">
+						<div class="text-4xl lg:text-5xl font-black gradient-text tracking-tighter">
+							{formatNumber(displayValues[index])}{stat.suffix}
+						</div>
+						<div class="text-slate-400 font-bold uppercase tracking-widest text-xs">
+							{stat.label}
+						</div>
 					</div>
 
-					<!-- Decorative line -->
 					<div
-						class="w-12 h-1 bg-linear-to-r from-primary to-secondary mx-auto mt-6 rounded-full opacity-0 group-hover:opacity-100 group-hover:w-24 transition-all duration-500"
+						class="absolute inset-0 border border-white/0 group-hover:border-primary/20 rounded-4xl transition-colors duration-500 pointer-events-none"
 					></div>
 				</div>
 			{/each}

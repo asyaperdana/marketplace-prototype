@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
 
 	interface Product {
 		id: number;
@@ -273,15 +274,15 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 			{#each products as product, index (product.id)}
 				<div
-					class="glass rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-primary/40 transition-all duration-700 hover:-translate-y-3 group hover:shadow-2xl hover:shadow-primary/10 relative"
+					class="glass-card group rounded-4xl overflow-hidden relative"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
 					style="transition-delay: {index * 0.1}s"
 				>
-					<!-- Discount Badge -->
-					<div class="absolute top-6 left-6 z-20">
+					<!-- Discount Badge - Neon Style -->
+					<div class="absolute top-4 left-4 z-20">
 						<div
-							class="bg-linear-to-br from-rose-500 to-pink-600 text-white text-sm font-black px-4 py-2 rounded-xl shadow-lg shadow-rose-500/30"
+							class="bg-rose-500/90 backdrop-blur-md text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-[0_0_15px_rgba(244,63,94,0.4)] border border-rose-400/30"
 						>
 							-{getDiscount(product.price, product.originalPrice)}%
 						</div>
@@ -290,10 +291,10 @@
 					<button
 						type="button"
 						aria-label="Add to wishlist"
-						class="absolute top-6 right-6 z-20 w-12 h-12 rounded-xl glass-light border border-white/10 flex items-center justify-center text-white hover:bg-rose-500 hover:border-rose-500 hover:scale-110 active:scale-95 transition-all duration-300 group/wish"
+						class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full glass-light flex items-center justify-center text-white hover:bg-rose-500 hover:scale-110 transition-all duration-300 group/wish"
 					>
 						<svg
-							class="w-6 h-6 group-hover/wish:fill-current"
+							class="w-5 h-5 group-hover/wish:fill-current transition-colors"
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
@@ -301,7 +302,7 @@
 							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
-								stroke-width="2.5"
+								stroke-width="2"
 								d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
 							/>
 						</svg>
@@ -309,106 +310,98 @@
 
 					<!-- Product Image Area -->
 					<div
-						class="relative h-64 bg-white/5 flex items-center justify-center overflow-hidden"
+						class="relative h-72 bg-dark-lighter flex items-center justify-center overflow-hidden"
 					>
 						<div
-							class="absolute inset-0 bg-linear-to-br from-primary/10 to-secondary/10 pointer-events-none"
+							class="absolute inset-0 bg-linear-to-t from-dark-deep/80 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"
 						></div>
-						<img
+						<ResponsiveImage
 							src={product.image}
 							alt={product.title}
 							loading="lazy"
-							class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700"
+							class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+							aspectRatio="auto"
 						/>
 
-						<!-- Condition Badge -->
-						<div class="absolute bottom-4 left-6">
+						<!-- Condition Badge - Minimalist -->
+						<div class="absolute bottom-3 left-4 z-20">
 							<span
-								class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-white shadow-xl"
-								style="background: {getConditionColor(product.condition)}"
+								class="px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-white/90 backdrop-blur-md border border-white/10"
+								style="background: {getConditionColor(product.condition)}cc"
 							>
 								{product.condition}
 							</span>
 						</div>
 					</div>
 
-					<!-- Product Info -->
-					<div class="p-5 sm:p-8">
-						<h3
-							class="text-xl font-bold text-white mb-4 line-clamp-2 min-h-14 group-hover:text-primary-light transition-colors"
-						>
-							{product.title}
-						</h3>
-
-						<div class="mb-6 flex flex-col gap-1">
-							<span class="text-3xl font-black text-white tracking-tight">
-								Rp {formatPrice(product.price)}
-							</span>
-							<span
-								class="text-sm text-slate-400 line-through decoration-rose-500/50 decoration-2"
-							>
-								Rp {formatPrice(product.originalPrice)}
-							</span>
-						</div>
-
+					<!-- Product Info - Premium Layout -->
+					<div class="p-6 relative">
+						<!-- Hover Reveal Actions -->
 						<div
-							class="flex items-center justify-between pt-6 border-t border-white/5 gap-4"
+							class="absolute -top-6 right-6 z-20 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300"
 						>
-							<div class="flex items-center gap-3">
-								<div
-									class="w-10 h-10 rounded-full bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-xl shadow-lg"
-								>
-									👤
-								</div>
-								<div class="flex flex-col">
-									<span
-										class="text-sm font-bold text-white truncate max-w-[100px]"
-										>{product.seller}</span
-									>
-									<div class="flex items-center text-xs text-slate-400 gap-1">
-										<svg
-											class="w-3 h-3 text-secondary"
-											fill="currentColor"
-											viewBox="0 0 24 24"
-											><path
-												d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-											/></svg
-										>
-										<span class="font-bold">{product.rating}</span>
-									</div>
-								</div>
-							</div>
-
-							<div
-								class="flex items-center gap-1.5 text-xs font-bold text-slate-400 uppercase tracking-widest"
+							<button
+								type="button"
+								aria-label="Add to cart"
+								class="bg-emerald-500 text-white p-3 rounded-full shadow-lg hover:bg-emerald-400 hover:scale-110 transition-all"
 							>
 								<svg
-									class="w-4 h-4 text-primary-light"
+									class="w-5 h-5"
 									fill="none"
 									stroke="currentColor"
 									viewBox="0 0 24 24"
 									><path
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										stroke-width="2.5"
-										d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-									/><path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2.5"
-										d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-									/></svg
+										stroke-width="2"
+										d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+									></path></svg
 								>
-								{product.location}
+							</button>
+						</div>
+
+						<h3
+							class="text-lg font-bold text-white mb-2 line-clamp-2 leading-tight min-h-12 group-hover:text-primary-light transition-colors"
+						>
+							{product.title}
+						</h3>
+
+						<div class="mb-5">
+							<div class="text-2xl font-black gradient-text-color tracking-tight">
+								Rp {formatPrice(product.price)}
+							</div>
+							<div class="flex items-center gap-2 mt-1">
+								<span class="text-xs text-slate-500 line-through">
+									Rp {formatPrice(product.originalPrice)}
+								</span>
+								<span
+									class="text-[10px] text-emerald-400 font-medium bg-emerald-500/10 px-1.5 py-0.5 rounded"
+								>
+									Save {Math.round(
+										product.originalPrice - product.price
+									).toLocaleString()}
+								</span>
 							</div>
 						</div>
 
-						<!-- Buy Button Hover -->
-						<button
-							class="mt-8 w-full btn btn-primary py-4 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl shadow-primary/20"
-						>
-							🛒 Tambah ke Keranjang
-						</button>
+						<div class="flex items-center justify-between pt-4 border-t border-white/5">
+							<div class="flex items-center gap-2">
+								<div class="flex flex-col">
+									<span class="text-xs font-medium text-slate-300"
+										>{product.seller}</span
+									>
+									<div class="flex items-center gap-1">
+										<span class="text-[10px] text-yellow-400"
+											>★ {product.rating}</span
+										>
+										<span class="text-[10px] text-slate-600">•</span>
+										<span class="text-[10px] text-slate-500"
+											>{product.location}</span
+										>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			{/each}

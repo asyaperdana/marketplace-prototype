@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import Logo from "../ui/Logo.svelte";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
@@ -77,246 +76,134 @@
 	<!-- Main Content -->
 	<div class="container mx-auto px-4 sm:px-6 relative z-10 h-full">
 		<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-screen py-24 lg:py-32">
-			<!-- Left Content - 7 columns -->
-			<div class="lg:col-span-7 space-y-8" class:animate-in={isLoaded}>
-				<!-- Live Badge -->
+			<!-- Left Content - 8 columns (Wider for impact) -->
+			<div class="lg:col-span-8 space-y-10 relative z-20" class:animate-reveal={isLoaded}>
+				<!-- Live Badge - Refined -->
 				<div
-					class="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass border border-white/10"
+					class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-light border border-white/10"
 				>
-					<div class="relative flex items-center gap-2">
-						<span class="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse"
-						></span>
-						<span class="text-emerald-400 font-bold text-sm"
-							>{activeUsers.toLocaleString()}</span
-						>
-					</div>
-					<div class="w-px h-4 bg-white/20"></div>
-					<span class="text-slate-300 text-sm font-medium">user sedang berbelanja</span>
+					<span
+						class="flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981] animate-pulse"
+					></span>
+					<span class="text-slate-300 text-xs font-medium tracking-wide uppercase"
+						>{activeUsers.toLocaleString()} shoppers live</span
+					>
 				</div>
 
 				<!-- Main Headline -->
-				<div class="space-y-4">
+				<div class="space-y-6">
 					<h1
-						class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-[1.1] sm:leading-[0.95] tracking-tighter"
+						class="text-5xl sm:text-7xl lg:text-8xl xl:text-9xl font-black text-white leading-[0.9] tracking-tighter"
 					>
-						Preloved
-						<span class="block gradient-text">Premium</span>
-						<span class="block text-white/90">Harga Hemat</span>
+						Authentic
+						<span class="block gradient-text">Luxury</span>
+						<span
+							class="block text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-400 mt-2 tracking-normal"
+							>for everyone.</span
+						>
 					</h1>
+					<p
+						class="text-lg lg:text-xl text-slate-400 leading-relaxed max-w-2xl font-light"
+					>
+						Experience the thrill of the hunt. The #1 curated marketplace for premium
+						preloved fashion and tech.
+						<span class="text-white font-medium">Verified authentic.</span>
+					</p>
 				</div>
 
-				<!-- Subtitle -->
-				<p class="text-lg lg:text-xl text-slate-400 leading-relaxed max-w-xl">
-					Marketplace barang branded bekas terpercaya di Indonesia.
-					<span class="text-white font-semibold">Jual lebih cepat</span>,
-					<span class="text-white font-semibold">beli lebih murah</span>.
-				</p>
-
 				<!-- CTA Section -->
-				<div class="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+				<div class="flex flex-col sm:flex-row gap-5 pt-6 w-full sm:w-auto">
 					<a href="#newsletter" class="btn-hero-primary group w-full sm:w-auto">
 						<span class="relative z-10 flex items-center justify-center gap-3">
-							<span class="text-2xl group-hover:scale-110 transition-transform"
-								>🚀</span
+							<span
+								class="text-2xl group-hover:-translate-y-1 transition-transform duration-300"
+								>✨</span
 							>
-							<span class="font-bold text-lg">Mulai Jualan Gratis</span>
+							<span class="font-bold text-lg tracking-wide">Start Selling</span>
 						</span>
 					</a>
 					<a href="#products" class="btn-hero-secondary group w-full sm:w-auto">
 						<span class="flex items-center justify-center gap-3">
-							<span class="text-xl">🔍</span>
-							<span class="font-semibold">Jelajahi 120K+ Produk</span>
+							<span class="font-semibold tracking-wide">Explore Collection</span>
+							<span
+								class="group-hover:translate-x-1 transition-transform duration-300"
+								>→</span
+							>
 						</span>
 					</a>
 				</div>
 
-				<!-- Trust Metrics -->
-				<div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-					<div class="space-y-1">
-						<div class="text-3xl lg:text-4xl font-black text-white">
-							50K<span class="text-primary">+</span>
-						</div>
-						<div class="text-sm text-slate-400 font-medium">Seller Aktif</div>
+				<!-- Trust Markers (Simplified) -->
+				<div
+					class="pt-8 flex items-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500"
+				>
+					<div class="text-sm font-semibold tracking-widest uppercase text-slate-500">
+						Trusted by
 					</div>
-					<div class="space-y-1">
-						<div class="text-3xl lg:text-4xl font-black text-white">
-							Rp2M<span class="text-secondary">+</span>
-						</div>
-						<div class="text-sm text-slate-400 font-medium">Transaksi/Bulan</div>
-					</div>
-					<div class="space-y-1">
-						<div class="flex items-center gap-2">
-							<span class="text-3xl lg:text-4xl font-black text-white">4.9</span>
-							<span class="text-yellow-400 text-2xl">★</span>
-						</div>
-						<div class="text-sm text-slate-400 font-medium">Rating Platform</div>
-					</div>
+					<div class="h-4 w-px bg-white/20"></div>
+					<div class="font-bold text-slate-400">VOGUE</div>
+					<div class="font-bold text-slate-400">HYPEBEAST</div>
+					<div class="font-bold text-slate-400">HIGHSNOBIETY</div>
 				</div>
 			</div>
 
-			<!-- Right Visual - 5 columns -->
-			<div class="lg:col-span-5 relative mt-12 lg:mt-0" class:animate-in-visual={isLoaded}>
-				<!-- Phone Mockup Container -->
-				<div class="relative mx-auto max-w-[300px] sm:max-w-[380px] lg:max-w-[420px]">
-					<!-- Phone Frame -->
-					<div class="phone-mockup">
-						<!-- Status Bar -->
-						<div
-							class="flex items-center justify-between px-6 py-3 text-xs text-white/80"
-						>
-							<span class="font-medium">9:41</span>
-							<div class="flex items-center gap-1">
-								<span>📶</span>
-								<span>🔋</span>
-							</div>
-						</div>
-
-						<!-- App Header -->
-						<div class="px-5 py-4 border-b border-white/10">
-							<div class="flex items-center justify-between">
-								<div class="flex items-center gap-3">
-									<Logo size="sm" />
-									<span class="font-bold text-white text-lg">Okis GS</span>
-								</div>
-								<div class="flex items-center gap-2">
+			<!-- Right Visual - 4 columns (Floating abstract composition) -->
+			<div
+				class="lg:col-span-4 relative mt-12 lg:mt-0 hidden lg:block"
+				class:animate-in-visual={isLoaded}
+			>
+				<div class="relative w-full aspect-3/4 perspective-1000">
+					<!-- Phone Mockup rotated -->
+					<div
+						class="absolute inset-0 z-10 transform rotate-y-12 rotate-z-6 hover:rotate-y-0 hover:rotate-z-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]"
+						style="transform-style: preserve-3d;"
+					>
+						<div class="phone-mockup h-full w-full shadow-neon">
+							<!-- Simplified app UI for aesthetic -->
+							<div class="flex flex-col h-full bg-dark-deep">
+								<div
+									class="flex-1 bg-[url('https://images.unsplash.com/photo-1548123378-bde4eca81d2d?q=80&w=600')] bg-cover bg-center relative"
+								>
 									<div
-										class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm"
-									>
-										🔔
-									</div>
-									<div
-										class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm"
-									>
-										🛒
+										class="absolute inset-0 bg-linear-to-t from-dark-deep via-transparent to-transparent"
+									></div>
+									<div class="absolute bottom-6 left-6 right-6">
+										<div class="glass-card p-4 rounded-2xl">
+											<div class="text-xs text-slate-300 mb-1">
+												Trending Now
+											</div>
+											<div class="font-bold text-white text-lg">
+												Streetwear Collection '25
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-
-						<!-- Search Bar -->
-						<div class="px-5 py-4">
-							<div
-								class="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10"
-							>
-								<span class="text-slate-400">🔍</span>
-								<span class="text-slate-500 text-sm">Cari barang preloved...</span>
-							</div>
-						</div>
-
-						<!-- Category Pills -->
-						<div class="px-5 pb-4 flex gap-2 overflow-hidden">
-							<span
-								class="px-4 py-2 rounded-full bg-linear-to-r from-primary to-secondary text-white text-xs font-bold whitespace-nowrap"
-								>🔥 Flash Sale</span
-							>
-							<span
-								class="px-4 py-2 rounded-full bg-white/10 text-white/80 text-xs font-medium whitespace-nowrap"
-								>👗 Fashion</span
-							>
-							<span
-								class="px-4 py-2 rounded-full bg-white/10 text-white/80 text-xs font-medium whitespace-nowrap"
-								>📱 Gadget</span
-							>
-						</div>
-
-						<!-- Product Grid Preview -->
-						<div class="px-5 pb-6 grid grid-cols-2 gap-3">
-							<div class="product-card-mini">
-								<div
-									class="aspect-square rounded-xl bg-linear-to-br from-rose-500/20 to-pink-500/20 flex items-center justify-center text-4xl mb-2"
-								>
-									👗
-								</div>
-								<div class="text-xs text-white font-medium truncate">
-									Dress Zara Original
-								</div>
-								<div class="text-sm font-bold text-primary-light">Rp 250.000</div>
-								<div class="text-[10px] text-slate-500 line-through">
-									Rp 899.000
-								</div>
-							</div>
-							<div class="product-card-mini">
-								<div
-									class="aspect-square rounded-xl bg-linear-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-4xl mb-2"
-								>
-									📱
-								</div>
-								<div class="text-xs text-white font-medium truncate">
-									iPhone 13 Pro
-								</div>
-								<div class="text-sm font-bold text-primary-light">Rp 9.500.000</div>
-								<div class="text-[10px] text-slate-500 line-through">
-									Rp 16.999.000
-								</div>
-							</div>
-						</div>
-
-						<!-- Bottom Nav -->
-						<div
-							class="flex items-center justify-around py-4 border-t border-white/10 mt-auto"
-						>
-							<div class="flex flex-col items-center gap-1 text-primary">
-								<span class="text-lg">🏠</span>
-								<span class="text-[10px] font-bold">Home</span>
-							</div>
-							<div class="flex flex-col items-center gap-1 text-slate-500">
-								<span class="text-lg">📂</span>
-								<span class="text-[10px]">Kategori</span>
-							</div>
-							<div class="flex flex-col items-center gap-1 text-slate-500">
-								<span class="text-lg">➕</span>
-								<span class="text-[10px]">Jual</span>
-							</div>
-							<div class="flex flex-col items-center gap-1 text-slate-500">
-								<span class="text-lg">💬</span>
-								<span class="text-[10px]">Chat</span>
-							</div>
-							<div class="flex flex-col items-center gap-1 text-slate-500">
-								<span class="text-lg">👤</span>
-								<span class="text-[10px]">Akun</span>
 							</div>
 						</div>
 					</div>
 
-					<!-- Floating Product Cards -->
+					<!-- Floating Elements Parallax -->
 					{#each floatingProducts as product, i (product.label)}
 						<div
-							class="floating-card absolute {product.position}"
-							style="animation-delay: {i * 0.2}s"
+							class="absolute z-20 glass-card p-3 rounded-2xl flex items-center gap-3 shadow-lg animate-float"
+							style="
+								top: {20 + i * 25}%; 
+								right: {-20 + (i % 2) * 60}%; 
+								animation-delay: {i * 1.5}s;
+								transform: translateZ(50px);
+							"
 						>
-							<div class="flex items-center gap-2">
-								<span class="text-2xl">{product.emoji}</span>
-								<div>
-									<div class="text-xs font-bold text-white">
-										{product.label}
-									</div>
-									<div class="flex items-center gap-2">
-										<span class="text-xs font-bold text-primary-light"
-											>{product.price}</span
-										>
-										<span
-											class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold"
-											>{product.discount}</span
-										>
-									</div>
+							<span class="text-2xl">{product.emoji}</span>
+							<div>
+								<div class="text-xs font-bold text-white whitespace-nowrap">
+									{product.label}
+								</div>
+								<div class="text-[10px] font-bold gradient-text-color">
+									{product.price}
 								</div>
 							</div>
 						</div>
 					{/each}
-
-					<!-- Live Notification -->
-					<div
-						class="live-notification absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap"
-					>
-						<div class="flex items-center gap-2 text-sm">
-							<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-							<span class="text-slate-300"
-								>Baru saja: <span class="text-white font-semibold">Sarah</span>
-								membeli
-								<span class="text-primary-light">iPhone 13</span></span
-							>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -340,7 +227,7 @@
 	}
 
 	/* Animations */
-	.animate-in {
+	.animate-reveal {
 		animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 	}
 
@@ -371,139 +258,6 @@
 		}
 	}
 
-	/* Mesh Gradient */
-	.mesh-gradient {
-		position: absolute;
-		inset: 0;
-		background:
-			radial-gradient(ellipse 80% 50% at 20% 40%, rgba(14, 165, 233, 0.15), transparent),
-			radial-gradient(ellipse 60% 50% at 80% 20%, rgba(16, 185, 129, 0.12), transparent),
-			radial-gradient(ellipse 50% 40% at 40% 80%, rgba(6, 182, 212, 0.1), transparent);
-		animation: meshMove 20s ease-in-out infinite;
-	}
-
-	@keyframes meshMove {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.7;
-		}
-	}
-
-	/* Gradient Orbs */
-	.orb {
-		position: absolute;
-		border-radius: 50%;
-		filter: blur(100px);
-		opacity: 0.2;
-	}
-
-	.orb-primary {
-		width: 600px;
-		height: 600px;
-		background: var(--color-primary);
-		top: -15%;
-		right: -10%;
-		animation: orbFloat 15s ease-in-out infinite;
-	}
-
-	.orb-secondary {
-		width: 500px;
-		height: 500px;
-		background: var(--color-secondary);
-		bottom: -10%;
-		left: -10%;
-		animation: orbFloat 18s ease-in-out infinite reverse;
-	}
-
-	.orb-accent {
-		width: 300px;
-		height: 300px;
-		background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-		top: 40%;
-		left: 30%;
-		animation: orbFloat 12s ease-in-out infinite 2s;
-	}
-
-	@keyframes orbFloat {
-		0%,
-		100% {
-			transform: translate(0, 0) scale(1);
-		}
-		33% {
-			transform: translate(30px, -40px) scale(1.05);
-		}
-		66% {
-			transform: translate(-20px, 30px) scale(0.95);
-		}
-	}
-
-	/* Grid Pattern */
-	.grid-pattern {
-		position: absolute;
-		inset: 0;
-		background-image:
-			linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-		background-size: 60px 60px;
-		mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black, transparent);
-	}
-
-	/* Primary CTA Button */
-	.btn-hero-primary {
-		position: relative;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding: 1.25rem 2.5rem;
-		border-radius: 1rem;
-		background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-		color: white;
-		font-weight: 700;
-		overflow: hidden;
-		transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-		box-shadow: 0 10px 40px -10px rgba(14, 165, 233, 0.5);
-	}
-
-	.btn-hero-primary::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
-		opacity: 0;
-		transition: opacity 0.4s;
-	}
-
-	.btn-hero-primary:hover {
-		transform: translateY(-4px);
-		box-shadow: 0 20px 50px -10px rgba(14, 165, 233, 0.6);
-	}
-
-	.btn-hero-primary:hover::before {
-		opacity: 1;
-	}
-
-	/* Secondary CTA Button */
-	.btn-hero-secondary {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding: 1.25rem 2rem;
-		border-radius: 1rem;
-		background: rgba(255, 255, 255, 0.05);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		color: white;
-		transition: all 0.3s;
-	}
-
-	.btn-hero-secondary:hover {
-		background: rgba(255, 255, 255, 0.1);
-		border-color: rgba(255, 255, 255, 0.2);
-		transform: translateY(-2px);
-	}
-
 	/* Phone Mockup */
 	.phone-mockup {
 		background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
@@ -517,74 +271,7 @@
 		backdrop-filter: blur(20px);
 	}
 
-	.product-card-mini {
-		padding: 0.75rem;
-		background: rgba(255, 255, 255, 0.03);
-		border: 1px solid rgba(255, 255, 255, 0.05);
-		border-radius: 1rem;
-	}
-
-	/* Floating Cards */
-	.floating-card {
-		padding: 0.75rem 1rem;
-		background: rgba(15, 23, 42, 0.9);
-		backdrop-filter: blur(20px);
-		border: 1px solid rgba(255, 255, 255, 0.1);
-		border-radius: 1rem;
-		box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-		animation: float 6s ease-in-out infinite;
-		z-index: 20;
-	}
-
-	.floating-card:nth-child(2) {
-		animation-delay: 0.5s;
-	}
-	.floating-card:nth-child(3) {
-		animation-delay: 1s;
-	}
-	.floating-card:nth-child(4) {
-		animation-delay: 1.5s;
-	}
-
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0);
-		}
-		50% {
-			transform: translateY(-12px);
-		}
-	}
-
-	/* Live Notification */
-	.live-notification {
-		padding: 0.75rem 1.25rem;
-		background: rgba(15, 23, 42, 0.95);
-		backdrop-filter: blur(20px);
-		border: 1px solid rgba(16, 185, 129, 0.3);
-		border-radius: 9999px;
-		box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
-		animation:
-			slideInUp 0.5s ease-out 1.5s forwards,
-			pulse 3s ease-in-out 2s infinite;
-		opacity: 0;
-		transform: translateX(-50%) translateY(20px);
-	}
-
-	@keyframes slideInUp {
-		to {
-			opacity: 1;
-			transform: translateX(-50%) translateY(0);
-		}
-	}
-
-	@keyframes pulse {
-		0%,
-		100% {
-			box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
-		}
-		50% {
-			box-shadow: 0 10px 40px -5px rgba(16, 185, 129, 0.5);
-		}
+	.perspective-1000 {
+		perspective: 1000px;
 	}
 </style>
