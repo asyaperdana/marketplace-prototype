@@ -1,33 +1,31 @@
-name: Governance Guard
+name: Repository Governance
 
 on:
     push:
-        branches: ["main"]
+        branches: [main, master]
     pull_request:
-        branches: ["main"]
+        branches: [main, master]
 
 jobs:
-    hygiene-check:
+    enforce-policy:
+        name: Enforce Source-Only Policy
         runs-on: ubuntu-latest
-        name: 🛡️ Repo Hygiene
-
         steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+            - name: Checkout Code
+              uses: actions/checkout@v3
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "20"
-
-            - name: 🛡️ Audit Repository
+            - name: 🛡️ Scan for Forbidden Artifacts
               run: |
-                  chmod +x scripts/verify-repo.sh
-                  npm run repo:check
+                  chmod +x scripts/scan-forbidden-paths.sh
+                  ./scripts/scan-forbidden-paths.sh
 
-            - name: ❌ Violation Report
-              if: failure()
-              run: |
-                  echo "::error::Repository hygiene violation detected!"
-                  echo "Refer to REPO_POLICY.md for rules."
-                  echo "Run 'npm run repo:fix' locally and push again."
+            - name: 📦 Install Dependencies
+              run: npm ci
+
+            - name: 🔍 Lint Code
+              run: npm run lint
+              continue-on-error: true # Warning only for now, can be made strict later
+
+            - name: ✅ Type Check
+              run: npm run check
+              continue-on-error: true # Warning only for now

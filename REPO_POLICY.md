@@ -37,12 +37,12 @@ Only files created manually by developers or required static configuration are a
 
 The policy is enforced efficiently at multiple stages:
 
-| Layer         | specific   | Action               | Mechanism                               |
-| :------------ | :--------- | :------------------- | :-------------------------------------- |
-| **1. Local**  | Git Ignore | Hides artifacts      | `.gitignore`                            |
-| **2. Commit** | Pre-commit | **BLOCKS** bad files | `husky` + `check-staged-files.sh`       |
-| **3. Push**   | Pre-push   | **BLOCKS** bad tree  | `husky` + `verify-repo.sh`              |
-| **4. Remote** | CI/CD      | **FAILS** pipeline   | `governance.yml` + `npm run repo:check` |
+| Layer         | specific   | Action               | Mechanism                                    |
+| :------------ | :--------- | :------------------- | :------------------------------------------- |
+| **1. Local**  | Git Ignore | Hides artifacts      | `.gitignore`                                 |
+| **2. Commit** | Pre-commit | **BLOCKS** bad files | `husky` + `scan-forbidden-paths.sh`          |
+| **3. Push**   | Pre-push   | **BLOCKS** bad tree  | `husky` + `repo:check`                       |
+| **4. Remote** | CI/CD      | **FAILS** pipeline   | `governance.yml` + `scan-forbidden-paths.sh` |
 
 ---
 
@@ -60,23 +60,21 @@ git reset HEAD <file>
 
 ### 🚨 Case 2: Repository Pollution (Already Committed)
 
-**Fix:** Use the auto-repair tool.
+**Fix:** Run the governance check to see what failed.
 
 ```bash
-npm run repo:fix
+npm run rules
 ```
 
-_This command will auto-detect forbidden files, un-track them, and clean your workspace._
+Then manually remove the files or use git commands to clean up.
 
 ### 🚨 Case 3: CI Failure
 
-**Fix:** Run the audit locally to find the issue.
+**Fix:** Run the scanner locally to reproduce.
 
 ```bash
-npm run repo:audit
+npm run repo:check
 ```
-
-_Then follow Case 2._
 
 ---
 
@@ -84,7 +82,7 @@ _Then follow Case 2._
 
 1. **Never** use `git add .` blindly if you have build artifacts generated.
 2. **Never** use `-f` (force) to bypass `.gitignore`.
-3. **Always** rely on `npm run repo:check` if you are unsure about the state of your repo.
+3. **Always** rely on `npm run rules` if you are unsure about the state of your repo.
 
 ---
 
@@ -93,5 +91,4 @@ _Then follow Case 2._
 To update the allowed/forbidden lists, modify:
 
 1. `.gitignore`
-2. `scripts/check-staged-files.sh`
-3. `scripts/verify-repo.sh`
+2. `scripts/scan-forbidden-paths.sh`

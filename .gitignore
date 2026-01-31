@@ -23,6 +23,14 @@ package/
 .next/
 .nuxt/
 .vite/
+worker/
+
+# STRICTLY FORBIDDEN (Regression Prevention)
+# These patterns effectively "lock" the repo against common build artifacts
+/build
+/dist
+/.svelte-kit
+/node_modules
 
 # Generated Assets
 static/assets/generated/
