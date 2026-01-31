@@ -1,0 +1,44 @@
+name: Repo Firewall Validation
+
+on:
+    push:
+        branches: [main, develop, master]
+    pull_request:
+        branches: [main, develop, master]
+
+# Fail fast: Stop invalid builds immediately
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    firewall-check:
+        name: 🛡️ Firewall Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+
+            - name: 🛡️ Audit Repository (Forbidden Patterns)
+              run: |
+                  chmod +x scripts/scan-violations.sh
+                  ./scripts/scan-violations.sh
+
+            - name: 🧹 Verify Clean Environment
+              # Ensures that even if the scan passes, the environment matches expected clean state
+              run: |
+                  if [ -d "node_modules" ]; then
+                    echo "❌ CRITICAL: node_modules found in source!"
+                    exit 1
+                  fi
+                  if [ -d "dist" ]; then
+                    echo "❌ CRITICAL: dist folder found in source!"
+                    exit 1
+                  fi
+
+            - name: 📦 Install Dependencies
+              run: npm ci
+
+            - name: 🏗️ Build Test (Regression Check)
+              # Ensures that "clean" code can actually build (catches missing files)
+              run: npm run build

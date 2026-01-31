@@ -1,13 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "🛡️  Running Repository Governance Checks..."
-
-# 1. Block forbidden paths (artifacts)
-./scripts/scan-forbidden-paths.sh --staged
-if [ $? -ne 0 ]; then
-    echo "❌ Commit rejected: Forbidden build artifacts detected."
-    exit 1
-fi
-
-echo "✅ Governance checks passed."
+# REPO FIREWALL HOOK
+# Blocks commits containing forbidden artifacts.
+./scripts/scan-violations.sh --staged
