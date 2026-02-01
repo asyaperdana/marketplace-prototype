@@ -2,9 +2,21 @@
 	import { onMount } from "svelte";
 	import { resolve } from "$lib/utils";
 	import Logo from "../ui/Logo.svelte";
+	import {
+		isAuthenticated,
+		authStore,
+		signOut,
+		demoSignOut,
+		isDemoMode
+	} from "$lib/services/auth";
+	import { goto } from "$app/navigation";
+	import { toasts } from "$lib/stores";
 
 	let isScrolled = $state(false);
 	let isMobileMenuOpen = $state(false);
+	let isUserMenuOpen = $state(false);
+
+	const user = $derived($authStore.user);
 
 	const navLinks = [
 		{ href: "#hero", label: "Home" },
@@ -20,8 +32,19 @@
 			isScrolled = window.scrollY > 20;
 		};
 
+		const handleClickOutside = (e: MouseEvent) => {
+			const target = e.target as HTMLElement;
+			if (!target.closest(".user-menu-container")) {
+				isUserMenuOpen = false;
+			}
+		};
+
 		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
+		document.addEventListener("click", handleClickOutside);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			document.removeEventListener("click", handleClickOutside);
+		};
 	});
 
 	function toggleMobileMenu() {
@@ -30,6 +53,25 @@
 
 	function closeMobileMenu() {
 		isMobileMenuOpen = false;
+	}
+
+	function toggleUserMenu() {
+		isUserMenuOpen = !isUserMenuOpen;
+	}
+
+	async function handleSignOut() {
+		try {
+			if (isDemoMode()) {
+				demoSignOut();
+			} else {
+				await signOut();
+			}
+			isUserMenuOpen = false;
+			toasts.add({ type: "success", message: "Berhasil keluar!" });
+			goto("/");
+		} catch {
+			toasts.add({ type: "error", message: "Gagal keluar. Coba lagi." });
+		}
 	}
 </script>
 
@@ -62,14 +104,129 @@
 			{/each}
 		</div>
 
-		<!-- CTA Button -->
-		<div class="hidden lg:block">
-			<a
-				href={resolve("#newsletter")}
-				class="btn btn-primary px-8 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
-			>
-				Mulai Jualan
-			</a>
+		<!-- Auth Section -->
+		<div class="hidden lg:flex items-center gap-4">
+			{#if $isAuthenticated}
+				<!-- User Menu -->
+				<div class="user-menu-container relative">
+					<button
+						class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-white/10 transition-all"
+						onclick={toggleUserMenu}
+					>
+						<div
+							class="w-8 h-8 rounded-lg bg-linear-to-br from-teal-400 to-emerald-500 flex items-center justify-center text-white font-bold text-sm"
+						>
+							{user?.user_metadata?.name?.[0] || user?.email?.[0] || "U"}
+						</div>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							class="w-4 h-4 text-slate-400 transition-transform"
+							class:rotate-180={isUserMenuOpen}
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="m19.5 8.25-7.5 7.5-7.5-7.5"
+							/>
+						</svg>
+					</button>
+
+					<!-- Dropdown -->
+					{#if isUserMenuOpen}
+						<div
+							class="absolute right-0 top-full mt-2 w-56 bg-slate-800/95 backdrop-blur-xl border border-white/10 rounded-xl shadow-2xl py-2 animate-in fade-in slide-in-from-top-2"
+						>
+							<div class="px-4 py-3 border-b border-white/10">
+								<p class="text-sm font-medium text-white truncate">
+									{user?.user_metadata?.name || "User"}
+								</p>
+								<p class="text-xs text-slate-400 truncate">{user?.email}</p>
+							</div>
+							<a
+								href="/dashboard"
+								class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-all"
+								onclick={() => (isUserMenuOpen = false)}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-4 h-4"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+									/>
+								</svg>
+								Dashboard
+							</a>
+							<a
+								href="/products"
+								class="flex items-center gap-3 px-4 py-2.5 text-sm text-slate-300 hover:text-white hover:bg-white/5 transition-all"
+								onclick={() => (isUserMenuOpen = false)}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-4 h-4"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+									/>
+								</svg>
+								Produk
+							</a>
+							<div class="h-px bg-white/10 my-1"></div>
+							<button
+								onclick={handleSignOut}
+								class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-all"
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-4 h-4"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+									/>
+								</svg>
+								Keluar
+							</button>
+						</div>
+					{/if}
+				</div>
+			{:else}
+				<!-- Login/Register Buttons -->
+				<a
+					href="/login"
+					class="text-sm font-semibold text-slate-300 hover:text-white transition-all px-4 py-2"
+				>
+					Masuk
+				</a>
+				<a
+					href="/register"
+					class="btn btn-primary px-6 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
+				>
+					Daftar
+				</a>
+			{/if}
 		</div>
 
 		<!-- Mobile Menu Button -->
@@ -119,13 +276,62 @@
 				</a>
 			{/each}
 			<div class="h-px bg-white/10 my-2"></div>
-			<a
-				href={resolve("#newsletter")}
-				class="btn btn-primary w-full py-5 text-xl"
-				onclick={closeMobileMenu}
-			>
-				Mulai Jualan Sekarang
-			</a>
+			{#if $isAuthenticated}
+				<a
+					href="/dashboard"
+					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg"
+					onclick={closeMobileMenu}
+				>
+					Dashboard
+				</a>
+				<button
+					onclick={handleSignOut}
+					class="btn btn-primary w-full py-5 text-xl bg-red-500 hover:bg-red-600"
+				>
+					Keluar
+				</button>
+			{:else}
+				<a
+					href="/login"
+					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg text-center"
+					onclick={closeMobileMenu}
+				>
+					Masuk
+				</a>
+				<a
+					href="/register"
+					class="btn btn-primary w-full py-5 text-xl"
+					onclick={closeMobileMenu}
+				>
+					Daftar Sekarang
+				</a>
+			{/if}
 		</div>
 	</div>
 </nav>
+
+<style>
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes slide-in-from-top-2 {
+		from {
+			transform: translateY(-8px);
+		}
+		to {
+			transform: translateY(0);
+		}
+	}
+
+	.animate-in {
+		animation:
+			fade-in 0.15s ease-out,
+			slide-in-from-top-2 0.15s ease-out;
+	}
+</style>
