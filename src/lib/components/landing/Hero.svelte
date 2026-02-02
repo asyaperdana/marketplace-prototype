@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { FLOATING_PRODUCTS } from "$lib/constants/landing";
+	import { magnetic } from "$lib/actions/magnetic";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
@@ -90,7 +91,11 @@
 
 				<!-- CTA Section -->
 				<div class="flex flex-col sm:flex-row gap-5 pt-6 w-full sm:w-auto">
-					<a href="#newsletter" class="btn-hero-primary group w-full sm:w-auto">
+					<a
+						href="#newsletter"
+						class="btn-hero-primary group w-full sm:w-auto"
+						use:magnetic={{ strength: 0.2, radius: 150 }}
+					>
 						<span class="relative z-10 flex items-center justify-center gap-3">
 							<span
 								class="text-2xl group-hover:-translate-y-1 transition-transform duration-300"
@@ -99,7 +104,11 @@
 							<span class="font-bold text-lg tracking-wide">Start Selling</span>
 						</span>
 					</a>
-					<a href="#products" class="btn-hero-secondary group w-full sm:w-auto">
+					<a
+						href="#products"
+						class="btn-hero-secondary group w-full sm:w-auto"
+						use:magnetic={{ strength: 0.15, radius: 150 }}
+					>
 						<span class="flex items-center justify-center gap-3">
 							<span class="font-semibold tracking-wide">Explore Collection</span>
 							<span
@@ -250,5 +259,60 @@
 
 	.perspective-1000 {
 		perspective: 1000px;
+	}
+
+	/* Premium Hero Buttons */
+	.btn-hero-primary {
+		position: relative;
+		overflow: hidden;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.25rem 2.5rem;
+		background: var(--gradient-primary);
+		color: white;
+		border-radius: 1.25rem;
+		box-shadow: 0 0 30px rgba(14, 165, 233, 0.3);
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.btn-hero-primary::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+		transition: 0.5s;
+	}
+
+	.btn-hero-primary:hover::before {
+		left: 100%;
+	}
+
+	.btn-hero-primary:hover {
+		box-shadow: 0 0 50px rgba(14, 165, 233, 0.5);
+		transform: scale(1.02);
+	}
+
+	.btn-hero-secondary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.25rem 2.5rem;
+		background: rgba(255, 255, 255, 0.03);
+		backdrop-filter: blur(10px);
+		color: white;
+		border-radius: 1.25rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.btn-hero-secondary:hover {
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.2);
+		transform: scale(1.02);
 	}
 </style>

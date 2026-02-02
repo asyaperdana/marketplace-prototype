@@ -114,6 +114,7 @@
 	];
 
 	import { reveal } from "$lib/utils/reveal";
+	import { tilt } from "$lib/actions/tilt";
 	let activeFilter = $state("terbaru");
 	let viewerCount = $state(156);
 	let isVisible = $state(false);
@@ -248,8 +249,14 @@
 					class="glass-card group rounded-4xl overflow-hidden relative"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
-					style="transition-delay: {index * 0.1}s"
+					style="transition-delay: {index * 0.1}s; isolation: isolate;"
+					use:tilt={{ max: 10, perspective: 1000, scale: 1.02 }}
 				>
+					<!-- Shine Effect -->
+					<div
+						class="absolute inset-0 z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+						style="background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); background-size: 200% 100%; animation: shine 3s infinite;"
+					></div>
 					<!-- Discount Badge - Neon Style -->
 					<div class="absolute top-4 left-4 z-20">
 						<div
@@ -411,5 +418,14 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
+	}
+
+	@keyframes shine {
+		0% {
+			background-position: 200% 0;
+		}
+		100% {
+			background-position: -200% 0;
+		}
 	}
 </style>
