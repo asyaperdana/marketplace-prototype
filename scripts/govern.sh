@@ -9,7 +9,7 @@ echo "🏛️  Starting Repository Governance Audit..."
 
 # 1. Check for Forbidden Files
 echo "----------------------------------------"
-if ./scripts/scan-forbidden-paths.sh; then
+if ./scripts/maintenance/scan-forbidden-paths.sh; then
     echo "✅ File Structure: CLEAN"
 else
     echo "❌ File Structure: DIRTY"

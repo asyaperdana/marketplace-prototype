@@ -34,7 +34,7 @@ cat > .husky/pre-commit << 'EOF'
 
 # REPO FIREWALL HOOK
 # Blocks commits containing forbidden artifacts.
-./scripts/scan-violations.sh --staged
+./scripts/maintenance/scan-violations.sh --staged
 EOF
 
 chmod +x .husky/pre-commit
@@ -42,7 +42,7 @@ echo "   ✅ Pre-commit hook installed."
 
 # 3. Verify Environment
 echo "--- Step 3: Verifying Environment ---"
-if ./scripts/scan-violations.sh; then
+if ./scripts/maintenance/scan-violations.sh; then
     echo -e "${GREEN}✅ Setup Complete! Your repository is protected.${NC}"
 else
     echo "⚠️  Setup finished, but violations were found. Please fix them."

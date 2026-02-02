@@ -91,4 +91,4 @@ npm run repo:check
 To update the allowed/forbidden lists, modify:
 
 1. `.gitignore`
-2. `scripts/scan-forbidden-paths.sh`
+2. `scripts/maintenance/scan-forbidden-paths.sh`

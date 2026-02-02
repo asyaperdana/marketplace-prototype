@@ -38,11 +38,11 @@ The repository must contain **source code only**. All generated artifacts, depen
 
 1. **Read the error:** The terminal will list specific forbidden files.
 2. **Unstage files:** `git rm --cached <file>`
-3. **Clean workspace:** `./scripts/clean-artifacts.sh`
+3. **Clean workspace:** `./scripts/maintenance/clean-artifacts.sh`
 
 ### If CI fails:
 
-1. Run local audit: `./scripts/scan-violations.sh`
+1. Run local audit: `./scripts/maintenance/scan-violations.sh`
 2. Fix the issues and push again.
 
 ## 4. Setup for New Developers

@@ -21,8 +21,8 @@ jobs:
 
             - name: 🛡️ Audit Repository (Forbidden Patterns)
               run: |
-                  chmod +x scripts/scan-violations.sh
-                  ./scripts/scan-violations.sh
+                  chmod +x scripts/maintenance/scan-violations.sh
+                  ./scripts/maintenance/scan-violations.sh
 
             - name: 🧹 Verify Clean Environment
               # Ensures that even if the scan passes, the environment matches expected clean state

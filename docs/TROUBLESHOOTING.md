@@ -18,7 +18,7 @@
     ```
 2.  **Verify:**
     ```bash
-    ./scripts/scan-violations.sh --staged
+    ./scripts/maintenance/scan-violations.sh --staged
     ```
 
 ## ❌ "Permission Denied" on Scripts
@@ -40,7 +40,7 @@ chmod +x scripts/*.sh
 1.  Pull latest changes.
 2.  Run strict cleaning:
     ```bash
-    ./scripts/clean-artifacts.sh
+    ./scripts/maintenance/clean-artifacts.sh
     ```
 3.  Commit the removal and push.
 

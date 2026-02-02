@@ -16,8 +16,8 @@ jobs:
 
             - name: 🛡️ Scan for Forbidden Artifacts
               run: |
-                  chmod +x scripts/scan-forbidden-paths.sh
-                  ./scripts/scan-forbidden-paths.sh
+                  chmod +x scripts/maintenance/scan-forbidden-paths.sh
+                  ./scripts/maintenance/scan-forbidden-paths.sh
 
             - name: 📦 Install Dependencies
               run: npm ci
