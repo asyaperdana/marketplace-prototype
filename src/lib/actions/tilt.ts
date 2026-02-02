@@ -35,23 +35,23 @@ export function tilt(node: HTMLElement, settings = { max: 15, perspective: 1000,
 
 	function handleMouseEnter() {
 		updateDimensions();
-		node.style.transition = 'transform 0.1s ease-out';
+		node.style.transition = "transform 0.1s ease-out";
 	}
 
 	function handleMouseLeave() {
-		node.style.transition = 'transform 0.5s ease-out';
+		node.style.transition = "transform 0.5s ease-out";
 		node.style.transform = `perspective(${settings.perspective}px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
 	}
 
-	node.addEventListener('mouseenter', handleMouseEnter);
-	node.addEventListener('mousemove', handleMouseMove);
-	node.addEventListener('mouseleave', handleMouseLeave);
+	node.addEventListener("mouseenter", handleMouseEnter);
+	node.addEventListener("mousemove", handleMouseMove);
+	node.addEventListener("mouseleave", handleMouseLeave);
 
 	return {
 		destroy() {
-			node.removeEventListener('mouseenter', handleMouseEnter);
-			node.removeEventListener('mousemove', handleMouseMove);
-			node.removeEventListener('mouseleave', handleMouseLeave);
+			node.removeEventListener("mouseenter", handleMouseEnter);
+			node.removeEventListener("mousemove", handleMouseMove);
+			node.removeEventListener("mouseleave", handleMouseLeave);
 		}
 	};
 }
