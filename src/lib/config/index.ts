@@ -19,7 +19,6 @@ export const config = {
 		timeout: 30000
 	},
 
-
 	// Pagination
 	pagination: {
 		defaultLimit: 20,
