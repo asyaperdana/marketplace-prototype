@@ -1,20 +1,16 @@
 <script lang="ts">
 	import "../app.css";
 	import { Navbar, Footer, MobileBottomNav, ScrollProgress } from "$lib/components/layout";
-	import {
-		Hero,
-		SocialProof,
-		Stats,
-		ValueProps,
-		HowItWorks,
-		Categories,
-		FeaturedProducts,
-		TrustSecurity,
-		FeatureComparison,
-		Testimonials,
-		FAQ,
-		Newsletter
-	} from "$lib/components/landing";
+	import { Hero, SocialProof, Stats, ValueProps, HowItWorks } from "$lib/components/landing";
+
+	// Lazy load below-the-fold components
+	const CategoriesPromise = import("$lib/components/landing/Categories.svelte");
+	const FeaturedProductsPromise = import("$lib/components/landing/FeaturedProducts.svelte");
+	const TrustSecurityPromise = import("$lib/components/landing/TrustSecurity.svelte");
+	const FeatureComparisonPromise = import("$lib/components/landing/FeatureComparison.svelte");
+	const TestimonialsPromise = import("$lib/components/landing/Testimonials.svelte");
+	const FAQPromise = import("$lib/components/landing/FAQ.svelte");
+	const NewsletterPromise = import("$lib/components/landing/Newsletter.svelte");
 </script>
 
 <svelte:head>
@@ -49,13 +45,34 @@
 	<Stats />
 	<ValueProps />
 	<HowItWorks />
-	<Categories />
-	<FeaturedProducts />
-	<TrustSecurity />
-	<FeatureComparison />
-	<Testimonials />
-	<FAQ />
-	<Newsletter />
+
+	{#await CategoriesPromise then { default: Categories }}
+		<Categories />
+	{/await}
+
+	{#await FeaturedProductsPromise then { default: FeaturedProducts }}
+		<FeaturedProducts />
+	{/await}
+
+	{#await TrustSecurityPromise then { default: TrustSecurity }}
+		<TrustSecurity />
+	{/await}
+
+	{#await FeatureComparisonPromise then { default: FeatureComparison }}
+		<FeatureComparison />
+	{/await}
+
+	{#await TestimonialsPromise then { default: Testimonials }}
+		<Testimonials />
+	{/await}
+
+	{#await FAQPromise then { default: FAQ }}
+		<FAQ />
+	{/await}
+
+	{#await NewsletterPromise then { default: Newsletter }}
+		<Newsletter />
+	{/await}
 </main>
 <Footer />
 <MobileBottomNav />
