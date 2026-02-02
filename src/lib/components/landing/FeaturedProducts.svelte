@@ -2,25 +2,7 @@
 	import { onMount } from "svelte";
 	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
 
-	interface Product {
-		id: number;
-		image: string;
-		title: string;
-		price: number;
-		originalPrice: number;
-		condition: "Baru" | "Seperti Baru" | "Bekas";
-		seller: string;
-		location: string;
-		rating: number;
-		stock?: number;
-		viewers?: number;
-	}
-
-	interface FilterTab {
-		id: string;
-		label: string;
-		icon: string;
-	}
+	import type { Product, FilterTab } from "$lib/types/landing";
 
 	const filterTabs: FilterTab[] = [
 		{ id: "terbaru", label: "Terbaru", icon: "✨" },
@@ -131,10 +113,10 @@
 		}
 	];
 
+	import { reveal } from "$lib/utils/reveal";
 	let activeFilter = $state("terbaru");
 	let viewerCount = $state(156);
 	let isVisible = $state(false);
-	let sectionRef: HTMLElement;
 
 	function setActiveFilter(filterId: string) {
 		activeFilter = filterId;
@@ -160,21 +142,6 @@
 	}
 
 	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						isVisible = true;
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-
-		if (sectionRef) {
-			observer.observe(sectionRef);
-		}
-
 		// Simulate live viewer count
 		const viewerInterval = setInterval(() => {
 			viewerCount += Math.floor(Math.random() * 5) - 2;
@@ -183,13 +150,17 @@
 		}, 3000);
 
 		return () => {
-			observer.disconnect();
 			clearInterval(viewerInterval);
 		};
 	});
 </script>
 
-<section id="products" class="py-16 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
+<section
+	id="products"
+	class="py-16 relative overflow-hidden bg-dark-deep"
+	use:reveal
+	onreveal={() => (isVisible = true)}
+>
 	<!-- Background Decoration -->
 	<div class="absolute inset-0 z-0">
 		<div class="bg-noise opacity-30 pointer-events-none"></div>

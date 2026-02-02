@@ -18,8 +18,8 @@
 		"test:unit": "vitest run",
 		"test:watch": "vitest",
 		"clean": "rm -rf .svelte-kit build dist",
-		"repo:clean": "./scripts/clean-repo.sh && npm run clean",
-		"repo:check": "./scripts/scan-forbidden-paths.sh",
+		"repo:clean": "./scripts/maintenance/clean-repo.sh && npm run clean",
+		"repo:check": "./scripts/maintenance/scan-forbidden-paths.sh",
 		"rules": "./scripts/govern.sh",
 		"validate": "npm run format:check && npm run lint && npm run check && npm run test:unit"
 	},

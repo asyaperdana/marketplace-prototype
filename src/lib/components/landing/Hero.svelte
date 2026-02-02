@@ -1,39 +1,9 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { FLOATING_PRODUCTS } from "$lib/constants/landing";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
-
-	const floatingProducts = [
-		{
-			emoji: "👗",
-			label: "Dress Zara",
-			price: "Rp 250K",
-			discount: "-72%",
-			position: "top-16 -left-8"
-		},
-		{
-			emoji: "📱",
-			label: "iPhone 13",
-			price: "Rp 9.5jt",
-			discount: "-44%",
-			position: "top-8 -right-4"
-		},
-		{
-			emoji: "👟",
-			label: "Air Jordan",
-			price: "Rp 1.2jt",
-			discount: "-52%",
-			position: "bottom-32 -left-12"
-		},
-		{
-			emoji: "💻",
-			label: "MacBook",
-			price: "Rp 8.5jt",
-			discount: "-43%",
-			position: "bottom-16 -right-8"
-		}
-	];
 
 	onMount(() => {
 		setTimeout(() => {
@@ -58,8 +28,8 @@
 
 		<!-- Hero Brand Visual -->
 		<img
-			src="/assets/generated/hero/hero-main.png"
-			alt=""
+			src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200"
+			alt="Premium Fashion Marketplace"
 			loading="eager"
 			class="absolute bottom-0 right-0 w-[60%] lg:w-[45%] h-auto opacity-20 lg:opacity-30 pointer-events-none object-contain object-bottom-right"
 		/>
@@ -183,7 +153,7 @@
 					</div>
 
 					<!-- Floating Elements Parallax -->
-					{#each floatingProducts as product, i (product.label)}
+					{#each FLOATING_PRODUCTS as product, i (product.label)}
 						<div
 							class="absolute z-20 glass-card p-3 rounded-2xl flex items-center gap-3 shadow-lg animate-float"
 							style="

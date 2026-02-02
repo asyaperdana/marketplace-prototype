@@ -1,14 +1,5 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-
-	interface Category {
-		icon: string;
-		name: string;
-		count: string;
-		class: string;
-		delay: number;
-		image?: string;
-	}
+	import type { Category } from "$lib/types/landing";
 
 	const categories: Category[] = [
 		{
@@ -77,30 +68,16 @@
 		}
 	];
 
+	import { reveal } from "$lib/utils/reveal";
 	let isVisible = $state(false);
-	let sectionRef: HTMLElement;
-
-	onMount(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						isVisible = true;
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-
-		if (sectionRef) {
-			observer.observe(sectionRef);
-		}
-
-		return () => observer.disconnect();
-	});
 </script>
 
-<section id="categories" class="py-20 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
+<section
+	id="categories"
+	class="py-20 relative overflow-hidden bg-dark-deep"
+	use:reveal
+	onreveal={() => (isVisible = true)}
+>
 	<!-- Background Decoration -->
 	<div class="absolute inset-0 z-0">
 		<div class="bg-noise opacity-30 pointer-events-none"></div>

@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # REPO FIREWALL HOOK
 # Blocks commits containing forbidden artifacts.
-./scripts/scan-violations.sh --staged
+./scripts/maintenance/scan-violations.sh --staged

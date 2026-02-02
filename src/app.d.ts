@@ -9,6 +9,13 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	namespace svelteHTML {
+		interface HTMLAttributes {
+			onreveal?: (event: CustomEvent) => void;
+			onhide?: (event: CustomEvent) => void;
+		}
+	}
 }
 
 export {};
