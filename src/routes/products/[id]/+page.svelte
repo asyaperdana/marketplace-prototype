@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { cart } from "$lib/stores";
 	import { formatCurrency, getConditionLabel, formatRelativeTime, resolve } from "$lib/utils";
-	import Button from "$lib/components/ui/Button.svelte";
 	import { toasts } from "$lib/stores";
 	import type { PageData } from "./$types";
 
