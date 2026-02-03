@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { resolve } from "$lib/utils";
 
 	type UserType = "seller" | "buyer";
 
@@ -249,7 +250,7 @@
 					>
 				</a>
 			{:else}
-				<a href="#products" class="btn btn-primary px-12 py-5 text-xl group">
+				<a href={resolve("/products")} class="btn btn-primary px-12 py-5 text-xl group">
 					<span class="group-hover:scale-125 transition-transform">🎯</span>
 					Jelajahi Produk Pilihan
 					<svg

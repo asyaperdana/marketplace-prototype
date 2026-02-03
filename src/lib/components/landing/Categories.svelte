@@ -69,6 +69,7 @@
 	];
 
 	import { reveal } from "$lib/utils/reveal";
+	import { resolve } from "$lib/utils";
 	let isVisible = $state(false);
 </script>
 
@@ -187,7 +188,7 @@
 			style="transition-delay: 0.8s"
 		>
 			<a
-				href="#products"
+				href={resolve("/products")}
 				class="btn btn-secondary px-10 py-4 text-lg font-bold hover:scale-105 active:scale-95 group"
 			>
 				<span>Lihat Semua Koleksi</span>

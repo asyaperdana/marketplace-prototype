@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
+	import { resolve } from "$lib/utils";
 
 	import type { Product, FilterTab } from "$lib/types/landing";
 
@@ -391,7 +392,10 @@
 			class:translate-y-10={!isVisible}
 			style="transition-delay: 0.8s"
 		>
-			<a href="#newsletter" class="btn btn-secondary px-12 py-5 text-xl font-bold group">
+			<a
+				href={resolve("/products")}
+				class="btn btn-secondary px-12 py-5 text-xl font-bold group"
+			>
 				Jelajahi Semua Produk
 				<svg
 					class="w-6 h-6 group-hover:translate-x-1 transition-transform"

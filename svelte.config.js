@@ -16,8 +16,8 @@ const config = {
 			base: dev ? "" : process.env.BASE_PATH || ""
 		},
 		prerender: {
-			crawl: false,
-			entries: ["/"]
+			crawl: true,
+			entries: ["*"]
 		}
 	}
 };
