@@ -192,9 +192,7 @@ export const mockProducts: Product[] = [
 			"Gitar akustik sejuta umat, Yamaha F310 Original. Suara nyaring, senar baru ganti D'Addario 0.10. Body mulus, neck lurus, fret aman. Cocok buat pemula belajar gitar. Bonus softcase tebal.",
 		price: 850000,
 		originalPrice: 1300000,
-		images: [
-			"https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&q=80"
-		],
+		images: ["https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&q=80"],
 		category: "hobbies",
 		condition: "good",
 		status: "available",
