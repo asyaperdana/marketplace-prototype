@@ -105,7 +105,7 @@
 						</span>
 					</a>
 					<a
-						href="#products"
+						href="/products"
 						class="btn-hero-secondary group w-full sm:w-auto"
 						use:magnetic={{ strength: 0.15, radius: 150 }}
 					>

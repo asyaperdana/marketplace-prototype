@@ -7,12 +7,12 @@
 	let isMobileMenuOpen = $state(false);
 
 	const navLinks = [
-		{ href: "#hero", label: "Home" },
-		{ href: "#stats", label: "Statistik" },
-		{ href: "#how-it-works", label: "Cara Kerja" },
-		{ href: "#categories", label: "Kategori" },
-		{ href: "#products", label: "Produk" },
-		{ href: "#testimonials", label: "Testimoni" }
+		{ href: "/", label: "Home" },
+		{ href: "/#stats", label: "Statistik" },
+		{ href: "/#how-it-works", label: "Cara Kerja" },
+		{ href: "/#categories", label: "Kategori" },
+		{ href: "/products", label: "Produk" },
+		{ href: "/#testimonials", label: "Testimoni" }
 	];
 
 	onMount(() => {
