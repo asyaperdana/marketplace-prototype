@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 	import { FLOATING_PRODUCTS } from "$lib/constants/landing";
 	import { magnetic } from "$lib/actions/magnetic";
+	import { resolve } from "$lib/utils";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
@@ -92,7 +93,7 @@
 				<!-- CTA Section -->
 				<div class="flex flex-col sm:flex-row gap-5 pt-6 w-full sm:w-auto">
 					<a
-						href="#newsletter"
+						href={resolve("#newsletter")}
 						class="btn-hero-primary group w-full sm:w-auto"
 						use:magnetic={{ strength: 0.2, radius: 150 }}
 					>
@@ -105,7 +106,7 @@
 						</span>
 					</a>
 					<a
-						href="/products"
+						href={resolve("/products")}
 						class="btn-hero-secondary group w-full sm:w-auto"
 						use:magnetic={{ strength: 0.15, radius: 150 }}
 					>
