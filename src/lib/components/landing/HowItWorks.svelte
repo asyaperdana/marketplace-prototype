@@ -140,9 +140,9 @@
 			class:duration-1000={true}
 			style="transition-delay: 0.1s"
 		>
-			<div class="inline-flex glass-light p-2 rounded-[2rem] border border-white/10 relative">
+			<div class="inline-flex glass-light p-2 rounded-4xl border border-white/10 relative">
 				<button
-					class="relative z-10 px-10 py-4 rounded-[1.5rem] flex items-center gap-3 font-bold text-lg transition-all duration-500 {activeTab ===
+					class="relative z-10 px-10 py-4 rounded-3xl flex items-center gap-3 font-bold text-lg transition-all duration-500 {activeTab ===
 					'seller'
 						? 'text-white'
 						: 'text-slate-400 hover:text-white'}"
@@ -151,7 +151,7 @@
 					<span class="text-2xl">🏪</span> Untuk Seller
 				</button>
 				<button
-					class="relative z-10 px-10 py-4 rounded-[1.5rem] flex items-center gap-3 font-bold text-lg transition-all duration-500 {activeTab ===
+					class="relative z-10 px-10 py-4 rounded-3xl flex items-center gap-3 font-bold text-lg transition-all duration-500 {activeTab ===
 					'buyer'
 						? 'text-white'
 						: 'text-slate-400 hover:text-white'}"
@@ -162,7 +162,7 @@
 
 				<!-- Background slider -->
 				<div
-					class="absolute top-2 bottom-2 rounded-[1.5rem] bg-gradient-to-r from-primary to-secondary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-xl shadow-primary/30"
+					class="absolute top-2 bottom-2 rounded-3xl bg-linear-to-r from-primary to-secondary transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-xl shadow-primary/30"
 					style="left: {activeTab === 'seller'
 						? '0.5rem'
 						: 'calc(50% + 0.1rem)'}; width: calc(50% - 0.6rem)"
@@ -181,7 +181,7 @@
 				>
 					<!-- Step Number Indicator -->
 					<div
-						class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-black text-white text-lg shadow-xl shadow-primary/40 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500"
+						class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center font-black text-white text-lg shadow-xl shadow-primary/40 transform -rotate-3 group-hover:rotate-0 transition-transform duration-500"
 					>
 						{step.number}
 					</div>
