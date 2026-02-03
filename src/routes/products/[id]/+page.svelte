@@ -6,11 +6,9 @@
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
-
-	// Use $derived to make product reactive if data changes (e.g. navigation)
 	let product = $derived(data.product);
-
 	let quantity = $state(1);
+	let selectedImageIndex = $state(0);
 
 	function addToCart() {
 		cart.addItem(product, quantity);
@@ -34,121 +32,236 @@
 	<title>{product.title} | Okis Garage Sale</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 lg:py-12">
-	<!-- Breadcrumb (Simple) -->
-	<nav class="mb-6 text-sm text-slate-500">
-		<a href={resolve("/")} class="hover:text-teal-600">Home</a> /
-		<a href={resolve("/products")} class="hover:text-teal-600">Explore</a> /
-		<span class="text-slate-900 font-medium">{product.title}</span>
-	</nav>
-
-	<div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
-		<!-- Image Gallery -->
-		<div>
-			<div
-				class="aspect-square rounded-3xl overflow-hidden bg-slate-100 shadow-sm border border-slate-100"
-			>
-				<img
-					src={product.images[0] || "/images/placeholder.png"}
-					alt={product.title}
-					class="w-full h-full object-cover"
-				/>
-			</div>
-			<!-- Thumbnails (Future impl) -->
-			{#if product.images.length > 1}
-				<div class="flex gap-4 mt-4 overflow-x-auto pb-2">
-					{#each product.images as img, i (i)}
-						<button
-							class="w-20 h-20 rounded-xl overflow-hidden border-2 border-transparent focus:border-teal-500 shrink-0"
-						>
-							<img src={img} alt="Thumbnail" class="w-full h-full object-cover" />
-						</button>
-					{/each}
-				</div>
-			{/if}
+<div class="min-h-screen bg-dark-deep">
+	<!-- Top Navigation Bar -->
+	<div
+		class="relative overflow-hidden bg-linear-to-r from-dark-deep via-dark to-dark-lighter border-b border-white/5"
+	>
+		<div class="absolute inset-0 z-0 pointer-events-none">
+			<div class="bg-noise opacity-20"></div>
 		</div>
-
-		<!-- Product Info -->
-		<div class="space-y-8">
-			<div>
-				<div class="flex items-center gap-3 mb-4">
-					<span
-						class="px-3 py-1 bg-teal-50 text-teal-700 text-xs font-bold rounded-full uppercase tracking-wide"
-					>
-						{getConditionLabel(product.condition)}
-					</span>
-					<span class="text-slate-400 text-sm">
-						Diposting {formatRelativeTime(product.createdAt)}
-					</span>
-				</div>
-
-				<h1 class="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight">
-					{product.title}
-				</h1>
-
-				<div class="mt-6 flex items-baseline gap-4">
-					<span class="text-4xl font-bold text-teal-600">
-						{formatCurrency(product.price)}
-					</span>
-					{#if product.originalPrice && product.originalPrice > product.price}
-						<span class="text-xl text-slate-400 line-through">
-							{formatCurrency(product.originalPrice)}
-						</span>
-					{/if}
-				</div>
-			</div>
-
-			<!-- Seller Info -->
-			<div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
-				<div
-					class="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center text-xl"
+		<div class="container mx-auto px-6 py-4 relative z-10">
+			<nav class="flex flex-wrap items-center gap-3 text-sm">
+				<a
+					href={resolve("/")}
+					class="inline-flex items-center gap-2 px-4 py-2 glass-light rounded-xl border border-white/10 text-slate-300 hover:text-white hover:border-primary/50 transition-all duration-300 group"
 				>
-					👤
+					<svg
+						class="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M15 19l-7-7 7-7"
+						/>
+					</svg>
+					<span class="font-medium">Home</span>
+				</a>
+				<span class="text-slate-600">/</span>
+				<a
+					href={resolve("/products")}
+					class="text-slate-400 hover:text-primary-light transition-colors font-medium"
+				>
+					Explore
+				</a>
+				<span class="text-slate-600">/</span>
+				<span class="text-white font-semibold truncate max-w-xs">{product.title}</span>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container mx-auto px-6 py-10 lg:py-16">
+		<div class="grid lg:grid-cols-2 gap-10 lg:gap-16">
+			<!-- Image Gallery -->
+			<div class="space-y-4">
+				<!-- Main Image -->
+				<div
+					class="relative aspect-square rounded-4xl overflow-hidden glass border border-white/10 group"
+				>
+					<img
+						src={product.images[selectedImageIndex] || "/images/placeholder.png"}
+						alt={product.title}
+						class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+					/>
+					<!-- Discount Badge -->
+					{#if product.originalPrice && product.originalPrice > product.price}
+						{@const discount = Math.round(
+							(1 - product.price / product.originalPrice) * 100
+						)}
+						<div class="absolute top-6 left-6">
+							<div
+								class="px-4 py-2 rounded-xl bg-rose-500/90 backdrop-blur-sm text-white text-sm font-black border border-rose-400/30 shadow-lg shadow-rose-500/30"
+							>
+								-{discount}% OFF
+							</div>
+						</div>
+					{/if}
+					<!-- Condition Badge -->
+					<div class="absolute bottom-6 left-6">
+						<span
+							class="px-4 py-2 rounded-xl bg-primary/80 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider border border-primary/30"
+						>
+							{getConditionLabel(product.condition)}
+						</span>
+					</div>
 				</div>
+
+				<!-- Thumbnails -->
+				{#if product.images.length > 1}
+					<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+						{#each product.images as img, i (i)}
+							<button
+								onclick={() => (selectedImageIndex = i)}
+								class="w-20 h-20 rounded-xl overflow-hidden border-2 shrink-0 transition-all duration-300 {selectedImageIndex ===
+								i
+									? 'border-primary shadow-lg shadow-primary/30 scale-105'
+									: 'border-white/10 opacity-60 hover:opacity-100'}"
+							>
+								<img
+									src={img}
+									alt="Thumbnail {i + 1}"
+									class="w-full h-full object-cover"
+								/>
+							</button>
+						{/each}
+					</div>
+				{/if}
+			</div>
+
+			<!-- Product Info -->
+			<div class="space-y-8">
+				<!-- Header -->
 				<div>
-					<div class="font-bold text-slate-900">Penjual #{product.sellerId}</div>
-					<div class="text-sm text-slate-500">📍 {product.location}</div>
+					<div class="flex items-center gap-3 mb-4">
+						<span class="text-sm text-slate-500">
+							Diposting {formatRelativeTime(product.createdAt)}
+						</span>
+					</div>
+
+					<h1
+						class="text-3xl lg:text-5xl font-black text-white leading-tight tracking-tight"
+					>
+						{product.title}
+					</h1>
+
+					<div class="mt-6 flex items-baseline gap-4">
+						<span class="text-4xl lg:text-5xl font-black gradient-text">
+							{formatCurrency(product.price)}
+						</span>
+						{#if product.originalPrice && product.originalPrice > product.price}
+							<span class="text-xl text-slate-500 line-through">
+								{formatCurrency(product.originalPrice)}
+							</span>
+						{/if}
+					</div>
 				</div>
-			</div>
 
-			<!-- Divider -->
-			<hr class="border-slate-100" />
-
-			<!-- Description -->
-			<div>
-				<h3 class="font-bold text-slate-900 text-lg mb-3">Deskripsi Barang</h3>
-				<p class="text-slate-600 leading-relaxed whitespace-pre-wrap">
-					{product.description}
-				</p>
-			</div>
-
-			<!-- Actions -->
-			<div class="pt-6">
-				<div class="flex items-center gap-6 mb-6">
-					<span class="text-sm font-medium text-slate-700">Jumlah</span>
-					<div class="flex items-center border border-slate-200 rounded-lg bg-white">
-						<button
-							onclick={decrement}
-							class="w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-l-lg"
-							disabled={quantity <= 1}
+				<!-- Seller Info -->
+				<div class="glass rounded-3xl p-6 border border-white/10">
+					<div class="flex items-center gap-4">
+						<div
+							class="w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-2xl shadow-lg shadow-primary/30"
 						>
-							-
-						</button>
-						<span class="w-12 text-center font-bold text-slate-900">{quantity}</span>
+							👤
+						</div>
+						<div class="flex-1">
+							<div class="font-bold text-white text-lg">
+								Penjual #{product.sellerId}
+							</div>
+							<div class="flex items-center gap-2 text-slate-400 text-sm">
+								<span>📍 {product.location}</span>
+								<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+								<span class="text-emerald-400">Online</span>
+							</div>
+						</div>
 						<button
-							onclick={increment}
-							class="w-10 h-10 flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-r-lg"
+							class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-sm font-medium hover:bg-white/10 transition-colors"
 						>
-							+
+							💬 Chat
 						</button>
 					</div>
 				</div>
 
-				<div class="flex gap-4">
-					<Button variant="primary" size="lg" fullWidth onclick={addToCart}>
-						🛒 Tambah ke Keranjang
-					</Button>
-					<Button variant="outline" size="lg">🤍 Wishlist</Button>
+				<!-- Description -->
+				<div class="glass rounded-3xl p-6 border border-white/10">
+					<h3 class="font-bold text-white text-lg mb-4 flex items-center gap-2">
+						<span>📝</span> Deskripsi Barang
+					</h3>
+					<p class="text-slate-300 leading-relaxed whitespace-pre-wrap">
+						{product.description}
+					</p>
+				</div>
+
+				<!-- Actions -->
+				<div class="glass rounded-3xl p-6 border border-white/10 space-y-6">
+					<!-- Quantity Selector -->
+					<div class="flex items-center justify-between">
+						<span class="text-white font-medium">Jumlah</span>
+						<div
+							class="flex items-center gap-1 bg-dark-lighter rounded-xl p-1 border border-white/10"
+						>
+							<button
+								onclick={decrement}
+								disabled={quantity <= 1}
+								class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed text-xl font-bold"
+							>
+								−
+							</button>
+							<span class="w-14 text-center font-black text-white text-lg"
+								>{quantity}</span
+							>
+							<button
+								onclick={increment}
+								class="w-10 h-10 flex items-center justify-center rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-all text-xl font-bold"
+							>
+								+
+							</button>
+						</div>
+					</div>
+
+					<!-- Total Price -->
+					<div class="flex items-center justify-between py-4 border-t border-white/10">
+						<span class="text-slate-400">Total</span>
+						<span class="text-2xl font-black gradient-text">
+							{formatCurrency(product.price * quantity)}
+						</span>
+					</div>
+
+					<!-- Action Buttons -->
+					<div class="flex gap-4">
+						<button
+							onclick={addToCart}
+							class="flex-1 py-4 px-8 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-primary/30 flex items-center justify-center gap-3"
+						>
+							<span class="text-xl">🛒</span>
+							Tambah ke Keranjang
+						</button>
+						<button
+							class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl hover:bg-rose-500/20 hover:border-rose-500/30 hover:text-rose-400 transition-all"
+						>
+							🤍
+						</button>
+					</div>
+				</div>
+
+				<!-- Trust Badges -->
+				<div class="flex flex-wrap gap-4 pt-4">
+					<div class="flex items-center gap-2 text-sm text-slate-400">
+						<span class="text-emerald-400">✓</span>
+						Pembayaran Aman
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-400">
+						<span class="text-emerald-400">✓</span>
+						Garansi Keaslian
+					</div>
+					<div class="flex items-center gap-2 text-sm text-slate-400">
+						<span class="text-emerald-400">✓</span>
+						Gratis Ongkir*
+					</div>
 				</div>
 			</div>
 		</div>
