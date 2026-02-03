@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cart } from "$lib/stores";
-	import { formatCurrency, getConditionLabel, formatRelativeTime } from "$lib/utils";
+	import { formatCurrency, getConditionLabel, formatRelativeTime, resolve } from "$lib/utils";
 	import Button from "$lib/components/ui/Button.svelte";
 	import { toasts } from "$lib/stores";
 	import type { PageData } from "./$types";
@@ -37,8 +37,8 @@
 <div class="container mx-auto px-4 py-8 lg:py-12">
 	<!-- Breadcrumb (Simple) -->
 	<nav class="mb-6 text-sm text-slate-500">
-		<a href="/" class="hover:text-teal-600">Home</a> /
-		<a href="/products" class="hover:text-teal-600">Explore</a> /
+		<a href={resolve("/")} class="hover:text-teal-600">Home</a> /
+		<a href={resolve("/products")} class="hover:text-teal-600">Explore</a> /
 		<span class="text-slate-900 font-medium">{product.title}</span>
 	</nav>
 
