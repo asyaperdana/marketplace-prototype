@@ -71,7 +71,7 @@
 	<div class="absolute inset-0 z-0">
 		<div class="bg-noise opacity-30"></div>
 		<div
-			class="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-gradient-to-tr from-primary/10 to-secondary/10 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+			class="absolute top-1/2 left-1/2 w-[1000px] h-[1000px] bg-linear-to-tr from-primary/10 to-secondary/10 rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
 		></div>
 	</div>
 
@@ -95,7 +95,7 @@
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 			{#each valueProps as prop, index (prop.title)}
 				<div
-					class="glass rounded-[2rem] p-10 border border-white/5 hover:border-primary/40 relative overflow-hidden group transition-all duration-700 hover:-translate-y-3"
+					class="glass rounded-4xl p-10 border border-white/5 hover:border-primary/40 relative overflow-hidden group transition-all duration-700 hover:-translate-y-3"
 					class:opacity-0={!isVisible}
 					class:translate-y-10={!isVisible}
 					style="transition-delay: {index * 0.15}s"
@@ -106,7 +106,7 @@
 					></div>
 
 					<div
-						class="w-20 h-20 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl group-hover:shadow-primary/30"
+						class="w-20 h-20 rounded-2xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl group-hover:shadow-primary/30"
 					>
 						<span>{prop.icon}</span>
 					</div>
