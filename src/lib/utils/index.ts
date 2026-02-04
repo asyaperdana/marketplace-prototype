@@ -169,6 +169,8 @@ export function resolve(path: string): string {
 	if (path.startsWith("http") || path.startsWith("mailto:") || path.startsWith("tel:"))
 		return path;
 	if (path.startsWith("#")) return `${base}/${path}`;
-	const cleanPath = path.startsWith("/") ? path : `/${path}`;
-	return `${base}${cleanPath}`;
+	const [pathname, suffix = ""] = path.split(/([?#].*)/);
+	const cleanPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
+	const withSlash = cleanPath.endsWith("/") ? cleanPath : `${cleanPath}/`;
+	return `${base}${withSlash}${suffix}`;
 }

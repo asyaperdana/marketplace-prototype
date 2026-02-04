@@ -32,18 +32,38 @@ class ApiService {
 
 			clearTimeout(timeoutId);
 
-			const data = await response.json();
+			const contentType = response.headers.get("content-type") ?? "";
+			let data: unknown = null;
+
+			if (response.status !== 204) {
+				if (contentType.includes("application/json")) {
+					try {
+						data = await response.json();
+					} catch {
+						data = null;
+					}
+				} else {
+					const text = await response.text();
+					data = text || null;
+				}
+			}
 
 			if (!response.ok) {
+				const errorMessage =
+					typeof data === "object" && data !== null && "message" in data
+						? String((data as { message?: unknown }).message ?? "")
+						: typeof data === "string"
+							? data
+							: "";
 				return {
 					success: false,
-					error: data.message || `HTTP error ${response.status}`
+					error: errorMessage || `HTTP error ${response.status}`
 				};
 			}
 
 			return {
 				success: true,
-				data
+				data: data as T
 			};
 		} catch (error) {
 			clearTimeout(timeoutId);

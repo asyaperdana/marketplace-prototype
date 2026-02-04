@@ -1,5 +1,4 @@
 <script lang="ts">
-	import "../app.css";
 	import { Navbar, Footer, MobileBottomNav, ScrollProgress } from "$lib/components/layout";
 	import {
 		Hero,

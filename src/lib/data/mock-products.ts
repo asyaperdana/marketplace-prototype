@@ -1,7 +1,22 @@
 import type { Product } from "$lib/types";
 
+type ProductSeed = Omit<Product, "status" | "createdAt" | "updatedAt"> & {
+	createdAt: string;
+	updatedAt?: string;
+	status?: Product["status"];
+};
+
+const toDate = (value: string) => new Date(value);
+
+const createProduct = (data: ProductSeed): Product => ({
+	...data,
+	status: data.status ?? "available",
+	createdAt: toDate(data.createdAt),
+	updatedAt: toDate(data.updatedAt ?? data.createdAt)
+});
+
 export const mockProducts: Product[] = [
-	{
+	createProduct({
 		id: "prod_001",
 		title: "MacBook Pro M1 2020",
 		description:
@@ -14,13 +29,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "electronics",
 		condition: "like_new",
-		status: "available",
 		sellerId: "user_001",
 		location: "Jakarta Selatan",
-		createdAt: new Date("2024-03-01"),
-		updatedAt: new Date("2024-03-01")
-	},
-	{
+		createdAt: "2024-03-01"
+	}),
+	createProduct({
 		id: "prod_002",
 		title: "iPhone 13 128GB Midnight",
 		description:
@@ -33,13 +46,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "electronics",
 		condition: "good",
-		status: "available",
 		sellerId: "user_002",
 		location: "Bandung",
-		createdAt: new Date("2024-03-02"),
-		updatedAt: new Date("2024-03-02")
-	},
-	{
+		createdAt: "2024-03-02"
+	}),
+	createProduct({
 		id: "prod_003",
 		title: "Sony WH-1000XM4 Noise Cancelling",
 		description:
@@ -52,13 +63,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "electronics",
 		condition: "like_new",
-		status: "available",
 		sellerId: "user_003",
 		location: "Surabaya",
-		createdAt: new Date("2024-03-03"),
-		updatedAt: new Date("2024-03-03")
-	},
-	{
+		createdAt: "2024-03-03"
+	}),
+	createProduct({
 		id: "prod_004",
 		title: "Kamera Analog Canon AE-1",
 		description:
@@ -70,13 +79,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "hobbies",
 		condition: "good",
-		status: "available",
 		sellerId: "user_004",
 		location: "Yogyakarta",
-		createdAt: new Date("2024-03-04"),
-		updatedAt: new Date("2024-03-04")
-	},
-	{
+		createdAt: "2024-03-04"
+	}),
+	createProduct({
 		id: "prod_005",
 		title: "IKEA POÄNG Armchair",
 		description:
@@ -89,13 +96,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "home",
 		condition: "good",
-		status: "available",
 		sellerId: "user_001",
 		location: "Jakarta Selatan",
-		createdAt: new Date("2024-03-05"),
-		updatedAt: new Date("2024-03-05")
-	},
-	{
+		createdAt: "2024-03-05"
+	}),
+	createProduct({
 		id: "prod_006",
 		title: "Sepeda Lipat Brompton M6L",
 		description:
@@ -108,13 +113,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "vehicles",
 		condition: "like_new",
-		status: "available",
 		sellerId: "user_005",
 		location: "Tangerang Selatan",
-		createdAt: new Date("2024-03-06"),
-		updatedAt: new Date("2024-03-06")
-	},
-	{
+		createdAt: "2024-03-06"
+	}),
+	createProduct({
 		id: "prod_007",
 		title: "Nike Air Jordan 1 High Chicago",
 		description:
@@ -123,13 +126,11 @@ export const mockProducts: Product[] = [
 		images: ["https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&q=80"],
 		category: "fashion",
 		condition: "new",
-		status: "available",
 		sellerId: "user_006",
 		location: "Jakarta Barat",
-		createdAt: new Date("2024-03-07"),
-		updatedAt: new Date("2024-03-07")
-	},
-	{
+		createdAt: "2024-03-07"
+	}),
+	createProduct({
 		id: "prod_008",
 		title: "Novel Harry Potter Complete Set",
 		description:
@@ -141,13 +142,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "books",
 		condition: "good",
-		status: "available",
 		sellerId: "user_007",
 		location: "Depok",
-		createdAt: new Date("2024-03-08"),
-		updatedAt: new Date("2024-03-08")
-	},
-	{
+		createdAt: "2024-03-08"
+	}),
+	createProduct({
 		id: "prod_009",
 		title: "Stroller Bugaboo Bee 5",
 		description:
@@ -160,13 +159,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "baby",
 		condition: "good",
-		status: "available",
 		sellerId: "user_008",
 		location: "Jakarta Utara",
-		createdAt: new Date("2024-03-09"),
-		updatedAt: new Date("2024-03-09")
-	},
-	{
+		createdAt: "2024-03-09"
+	}),
+	createProduct({
 		id: "prod_010",
 		title: "Skincare La Mer Crème de la Mer 60ml",
 		description:
@@ -179,13 +176,11 @@ export const mockProducts: Product[] = [
 		],
 		category: "beauty",
 		condition: "new",
-		status: "available",
 		sellerId: "user_009",
 		location: "Bali",
-		createdAt: new Date("2024-03-10"),
-		updatedAt: new Date("2024-03-10")
-	},
-	{
+		createdAt: "2024-03-10"
+	}),
+	createProduct({
 		id: "prod_011",
 		title: "Gitar Akustik Yamaha F310",
 		description:
@@ -195,13 +190,11 @@ export const mockProducts: Product[] = [
 		images: ["https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&q=80"],
 		category: "hobbies",
 		condition: "good",
-		status: "available",
 		sellerId: "user_010",
 		location: "Malang",
-		createdAt: new Date("2024-03-11"),
-		updatedAt: new Date("2024-03-11")
-	},
-	{
+		createdAt: "2024-03-11"
+	}),
+	createProduct({
 		id: "prod_012",
 		title: "Tanaman Monstera King Besar",
 		description:
@@ -213,10 +206,8 @@ export const mockProducts: Product[] = [
 		],
 		category: "home",
 		condition: "good",
-		status: "available",
 		sellerId: "user_011",
 		location: "Bogor",
-		createdAt: new Date("2024-03-12"),
-		updatedAt: new Date("2024-03-12")
-	}
+		createdAt: "2024-03-12"
+	})
 ];

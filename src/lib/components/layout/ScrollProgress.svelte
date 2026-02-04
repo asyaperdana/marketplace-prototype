@@ -7,9 +7,14 @@
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
 			const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+			if (docHeight <= 0) {
+				progress = 0;
+				return;
+			}
 			progress = Math.min((scrollTop / docHeight) * 100, 100);
 		};
 
+		handleScroll();
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	});

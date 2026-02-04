@@ -59,7 +59,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-package-lock.json # NOTE: If using pnpm/yarn, un-comment this policy
+# package-lock.json # NOTE: If using pnpm/yarn, un-comment this policy
 # .npmrc # Keep if public, ignore if contains auth tokens
 
 # ------------------------------------------------------------------------------
