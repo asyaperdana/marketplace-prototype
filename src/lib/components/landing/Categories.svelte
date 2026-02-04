@@ -123,6 +123,7 @@
 							src={category.image}
 							alt={category.name}
 							loading="lazy"
+							decoding="async"
 							class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700"
 						/>
 					{/if}

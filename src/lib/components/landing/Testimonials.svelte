@@ -56,7 +56,7 @@
 	let currentIndex = $state(0);
 	let isVisible = $state(false);
 	let sectionRef: HTMLElement;
-	let autoPlayInterval: ReturnType<typeof setInterval>;
+	let autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
 	function nextSlide() {
 		currentIndex = (currentIndex + 1) % testimonials.length;
@@ -70,12 +70,26 @@
 		currentIndex = index;
 	}
 
+	function startAutoPlay() {
+		if (autoPlayInterval) return;
+		autoPlayInterval = setInterval(nextSlide, 5000);
+	}
+
+	function stopAutoPlay() {
+		if (!autoPlayInterval) return;
+		clearInterval(autoPlayInterval);
+		autoPlayInterval = null;
+	}
+
 	onMount(() => {
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						isVisible = true;
+						startAutoPlay();
+					} else {
+						stopAutoPlay();
 					}
 				});
 			},
@@ -86,11 +100,9 @@
 			observer.observe(sectionRef);
 		}
 
-		autoPlayInterval = setInterval(nextSlide, 5000);
-
 		return () => {
 			observer.disconnect();
-			clearInterval(autoPlayInterval);
+			stopAutoPlay();
 		};
 	});
 </script>
@@ -171,6 +183,7 @@
 										src={testimonial.avatar}
 										alt={testimonial.name}
 										loading="lazy"
+										decoding="async"
 										class="w-20 h-20 rounded-full object-cover border-2 border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500"
 									/>
 									<div class="text-center">

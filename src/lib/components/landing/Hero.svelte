@@ -30,15 +30,16 @@
 
 		<!-- Hero Brand Visual -->
 		<img
-			src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200"
+			src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=70&w=1200"
 			srcset="
-				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600 600w,
-				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200 1200w,
-				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1600 1600w
+				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=70&w=600 600w,
+				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=70&w=1200 1200w,
+				https://images.unsplash.com/photo-1483985988355-763728e1935b?q=70&w=1600 1600w
 			"
 			sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 45vw"
 			alt="Premium Fashion Marketplace"
 			loading="eager"
+			decoding="async"
 			fetchpriority="high"
 			class="absolute bottom-0 right-0 w-[60%] lg:w-[45%] h-auto opacity-20 lg:opacity-30 pointer-events-none object-contain object-bottom-right"
 		/>
@@ -149,7 +150,7 @@
 							<!-- Simplified app UI for aesthetic -->
 							<div class="flex flex-col h-full bg-dark-deep">
 								<div
-									class="flex-1 bg-[url('https://images.unsplash.com/photo-1548123378-bde4eca81d2d?q=80&w=600')] bg-cover bg-center relative"
+									class="flex-1 bg-[url('https://images.unsplash.com/photo-1548123378-bde4eca81d2d?q=70&w=500')] bg-cover bg-center relative"
 								>
 									<div
 										class="absolute inset-0 bg-linear-to-t from-dark-deep via-transparent to-transparent"

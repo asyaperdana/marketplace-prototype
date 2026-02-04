@@ -85,6 +85,7 @@
 						src={product.images[selectedImageIndex] || "/images/placeholder.png"}
 						alt={product.title}
 						class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+						decoding="async"
 					/>
 					<!-- Discount Badge -->
 					{#if product.originalPrice && product.originalPrice > product.price}
@@ -124,6 +125,8 @@
 									src={img}
 									alt="Thumbnail {i + 1}"
 									class="w-full h-full object-cover"
+									loading="lazy"
+									decoding="async"
 								/>
 							</button>
 						{/each}

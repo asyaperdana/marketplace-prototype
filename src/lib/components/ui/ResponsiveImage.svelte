@@ -6,6 +6,7 @@
 		class?: string;
 		sizes?: string;
 		loading?: "lazy" | "eager";
+		decoding?: "async" | "auto" | "sync";
 		objectFit?: "cover" | "contain" | "fill" | "none";
 	}
 
@@ -16,6 +17,7 @@
 		class: className = "",
 		sizes = "100vw",
 		loading = "lazy",
+		decoding = "async",
 		objectFit = "cover"
 	}: Props = $props();
 
@@ -38,6 +40,7 @@
 			{alt}
 			{sizes}
 			{loading}
+			{decoding}
 			onload={handleLoad}
 			onerror={handleError}
 			class="responsive-image"

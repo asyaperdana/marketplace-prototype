@@ -25,6 +25,7 @@
 			isVisible = currentScrollY > 500;
 		};
 
+		handleScroll();
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
 	});

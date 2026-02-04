@@ -3,6 +3,17 @@
  * The element will subtly follow the mouse cursor within a specified strength and radius.
  */
 export function magnetic(node: HTMLElement, settings = { strength: 0.3, radius: 100 }) {
+	const supportsMagnetic =
+		typeof window !== "undefined" &&
+		window.matchMedia("(pointer: fine)").matches &&
+		!window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+	if (!supportsMagnetic) {
+		return {
+			destroy() {}
+		};
+	}
+
 	let width = 0;
 	let height = 0;
 	let centerX = 0;
