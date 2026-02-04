@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let email = $state("");
 	let isSubmitting = $state(false);
@@ -144,7 +145,7 @@
 						<div
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-2xl group-hover/item:scale-110 group-hover/item:rotate-6 transition-all"
 						>
-							🎁
+							<Icon name="package" size={22} ariaLabel="Promo" />
 						</div>
 						<span class="font-bold tracking-tight">Promo Spesial</span>
 					</div>
@@ -152,7 +153,7 @@
 						<div
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-2xl group-hover/item:scale-110 group-hover/item:rotate-6 transition-all"
 						>
-							🚀
+							<Icon name="rocket" size={22} ariaLabel="Info produk" />
 						</div>
 						<span class="font-bold tracking-tight">Info Produk</span>
 					</div>
@@ -160,7 +161,7 @@
 						<div
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-2xl group-hover/item:scale-110 group-hover/item:rotate-6 transition-all"
 						>
-							💡
+							<Icon name="bulb" size={22} ariaLabel="Tips" />
 						</div>
 						<span class="font-bold tracking-tight">Market Tips</span>
 					</div>

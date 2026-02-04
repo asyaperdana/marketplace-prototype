@@ -3,6 +3,7 @@
 	import { FLOATING_PRODUCTS } from "$lib/constants/landing";
 	import { magnetic } from "$lib/actions/magnetic";
 	import { resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let isLoaded = $state(false);
 	let activeUsers = $state(1847);
@@ -99,10 +100,12 @@
 						use:magnetic={{ strength: 0.2, radius: 150 }}
 					>
 						<span class="relative z-10 flex items-center justify-center gap-3">
-							<span
-								class="text-2xl group-hover:-translate-y-1 transition-transform duration-300"
-								>✨</span
-							>
+							<Icon
+								name="sparkles"
+								size={22}
+								class="text-white/90 group-hover:-translate-y-1 transition-transform duration-300"
+								ariaLabel="Highlight"
+							/>
 							<span class="font-bold text-lg tracking-wide">Start Selling</span>
 						</span>
 					</a>
@@ -181,7 +184,9 @@
 								transform: translateZ(50px);
 							"
 						>
-							<span class="text-2xl">{product.emoji}</span>
+							<span class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-light">
+								<Icon name={product.icon} size={20} ariaLabel={product.label} />
+							</span>
 							<div>
 								<div class="text-xs font-bold text-white whitespace-nowrap">
 									{product.label}

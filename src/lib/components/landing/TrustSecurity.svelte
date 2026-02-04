@@ -1,54 +1,61 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	interface ProtectionFeature {
-		icon: string;
+		icon: IconName;
 		title: string;
 		description: string;
 	}
 
+	interface PaymentMethod {
+		name: string;
+		icon: IconName;
+	}
+
 	const protectionFeatures: ProtectionFeature[] = [
 		{
-			icon: "🔐",
+			icon: "lock",
 			title: "Sistem Escrow",
 			description: "Dana pembeli aman hingga barang diterima. Tidak ada risiko penipuan."
 		},
 		{
-			icon: "✅",
+			icon: "check",
 			title: "Verifikasi Seller",
 			description: "Setiap seller melewati proses verifikasi identitas ketat."
 		},
 		{
-			icon: "💰",
+			icon: "cash",
 			title: "Garansi Uang Kembali",
 			description: "Refund 100% jika barang tidak sesuai deskripsi."
 		},
 		{
-			icon: "🛡️",
+			icon: "shield",
 			title: "Buyer Protection",
 			description: "Perlindungan penuh untuk setiap transaksi di platform."
 		},
 		{
-			icon: "💬",
+			icon: "chat",
 			title: "Support 24/7",
 			description: "Tim customer service siap membantu kapan saja."
 		},
 		{
-			icon: "📋",
+			icon: "note",
 			title: "Dispute Resolution",
 			description: "Mediasi profesional untuk menyelesaikan masalah."
 		}
 	];
 
-	const paymentMethods = [
-		{ name: "QRIS", icon: "📱" },
-		{ name: "Virtual Account", icon: "🏦" },
-		{ name: "Credit Card", icon: "💳" },
-		{ name: "DANA", icon: "💙" },
-		{ name: "OVO", icon: "💜" },
-		{ name: "GoPay", icon: "💚" },
-		{ name: "ShopeePay", icon: "🧡" },
-		{ name: "Transfer Bank", icon: "🏧" }
+	const paymentMethods: PaymentMethod[] = [
+		{ name: "QRIS", icon: "qr" },
+		{ name: "Virtual Account", icon: "bank" },
+		{ name: "Credit Card", icon: "card" },
+		{ name: "DANA", icon: "wallet" },
+		{ name: "OVO", icon: "wallet" },
+		{ name: "GoPay", icon: "wallet" },
+		{ name: "ShopeePay", icon: "wallet" },
+		{ name: "Transfer Bank", icon: "bank" }
 	];
 
 	const shippingPartners = [
@@ -139,7 +146,7 @@
 					<div
 						class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-primary/20"
 					>
-						🛒
+						<Icon name="cart" size={28} ariaLabel="Checkout" />
 					</div>
 					<span class="font-bold text-white mb-1">1. Checkout</span>
 					<span class="text-xs text-slate-400">Buyer bayar produk</span>
@@ -158,7 +165,7 @@
 					<div
 						class="w-20 h-20 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary/10 border border-secondary/30 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-secondary/20"
 					>
-						🔐
+						<Icon name="lock" size={28} ariaLabel="Dana ditahan" />
 					</div>
 					<span class="font-bold text-white mb-1">2. Dana Ditahan</span>
 					<span class="text-xs text-slate-400">Okis GS simpan aman</span>
@@ -177,7 +184,7 @@
 					<div
 						class="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-emerald-500/20"
 					>
-						💸
+						<Icon name="wallet" size={28} ariaLabel="Dana diteruskan" />
 					</div>
 					<span class="font-bold text-white mb-1">3. Dana Diteruskan</span>
 					<span class="text-xs text-slate-400">Setelah buyer konfirmasi</span>
@@ -200,7 +207,7 @@
 					<div
 						class="text-5xl mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500"
 					>
-						{feature.icon}
+						<Icon name={feature.icon} size={32} ariaLabel={feature.title} />
 					</div>
 					<h4
 						class="text-xl font-bold text-white mb-3 group-hover:text-primary-light transition-colors"
@@ -224,15 +231,18 @@
 				style="transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.3s"
 			>
 				<h4 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
-					<span class="text-2xl">💳</span> Metode Pembayaran
+					<Icon name="card" size={20} ariaLabel="Metode pembayaran" />
+					<span>Metode Pembayaran</span>
 				</h4>
 				<div class="grid grid-cols-4 gap-3">
 					{#each paymentMethods as method (method.name)}
 						<div
 							class="glass-light rounded-xl p-3 text-center hover:border-primary/30 border border-transparent transition-all group"
 						>
-							<div class="text-2xl mb-1 group-hover:scale-110 transition-transform">
-								{method.icon}
+							<div
+								class="w-10 h-10 mx-auto mb-1 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-light group-hover:scale-110 transition-transform"
+							>
+								<Icon name={method.icon} size={18} ariaLabel={method.name} />
 							</div>
 							<div class="text-xs text-slate-400 font-medium">
 								{method.name}
@@ -250,7 +260,8 @@
 				style="transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.4s"
 			>
 				<h4 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
-					<span class="text-2xl">🚚</span> Partner Pengiriman
+					<Icon name="truck" size={20} ariaLabel="Partner pengiriman" />
+					<span>Partner Pengiriman</span>
 				</h4>
 				<div class="flex flex-wrap gap-3">
 					{#each shippingPartners as partner (partner)}

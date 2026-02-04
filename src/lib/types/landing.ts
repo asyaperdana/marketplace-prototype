@@ -1,3 +1,5 @@
+import type { IconName } from "$lib/types/icons";
+
 export interface Product {
 	id: number;
 	image: string;
@@ -15,11 +17,11 @@ export interface Product {
 export interface FilterTab {
 	id: string;
 	label: string;
-	icon: string;
+	icon: IconName;
 }
 
 export interface Category {
-	icon: string;
+	icon: IconName;
 	name: string;
 	count: string;
 	class: string;
@@ -28,7 +30,7 @@ export interface Category {
 }
 
 export interface FloatingItem {
-	emoji: string;
+	icon: IconName;
 	label: string;
 	price: string;
 	discount: string;

@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	interface NavItem {
-		icon: string;
+		icon: IconName;
 		label: string;
 		href: string;
 	}
 
 	const navItems: NavItem[] = [
-		{ icon: "🏠", label: "Home", href: "#hero" },
-		{ icon: "📂", label: "Kategori", href: "#categories" },
-		{ icon: "🔍", label: "Cari", href: "#products" },
-		{ icon: "❤️", label: "Favorit", href: "#" },
-		{ icon: "👤", label: "Akun", href: "#" }
+		{ icon: "home", label: "Home", href: "#hero" },
+		{ icon: "grid", label: "Kategori", href: "#categories" },
+		{ icon: "search", label: "Cari", href: "#products" },
+		{ icon: "heart", label: "Favorit", href: "#" },
+		{ icon: "user", label: "Akun", href: "#" }
 	];
 
 	let isVisible = $state(false);
@@ -48,16 +50,19 @@
 					href={resolve("#newsletter")}
 					class="relative -top-4 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-primary/40 hover:scale-110 active:scale-95 transition-transform duration-300 border-4 border-dark-deep"
 				>
-					➕
+					<Icon name="plus" size={22} ariaLabel="Tambah" />
 				</a>
 			{:else}
 				<a
 					href={resolve(item.href)}
 					class="flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/5 active:scale-95 group"
 				>
-					<span class="text-xl group-hover:scale-110 transition-transform"
-						>{item.icon}</span
-					>
+					<Icon
+						name={item.icon}
+						size={18}
+						ariaLabel={item.label}
+						class="text-slate-200 group-hover:scale-110 transition-transform"
+					/>
 					<span
 						class="text-[10px] font-bold text-slate-400 group-hover:text-white uppercase tracking-wider"
 						>{item.label}</span
@@ -80,7 +85,7 @@
         href="#newsletter"
         class="btn btn-primary px-8 py-4 shadow-2xl shadow-primary/40 hover:shadow-primary/60 group"
     >
-        <span class="group-hover:rotate-12 transition-transform">🛍️</span>
+        <Icon name="bag" size={18} ariaLabel="Mulai jualan" class="group-hover:rotate-12 transition-transform" />
         Mulai Jualan
         <svg
             class="w-5 h-5 group-hover:translate-x-1 transition-transform"

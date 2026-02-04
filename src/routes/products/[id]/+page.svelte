@@ -2,6 +2,7 @@
 	import { cart } from "$lib/stores";
 	import { formatCurrency, getConditionLabel, formatRelativeTime, resolve } from "$lib/utils";
 	import { toasts } from "$lib/stores";
+	import Icon from "$lib/components/ui/Icon.svelte";
 	import type { PageData } from "./$types";
 
 	let { data }: { data: PageData } = $props();
@@ -168,14 +169,17 @@
 						<div
 							class="w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center text-2xl shadow-lg shadow-primary/30"
 						>
-							👤
+							<Icon name="user" size={22} ariaLabel="Penjual" />
 						</div>
 						<div class="flex-1">
 							<div class="font-bold text-white text-lg">
 								Penjual #{product.sellerId}
 							</div>
 							<div class="flex items-center gap-2 text-slate-400 text-sm">
-								<span>📍 {product.location}</span>
+								<span class="inline-flex items-center gap-2">
+									<Icon name="pin" size={14} ariaLabel="Lokasi" />
+									{product.location}
+								</span>
 								<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
 								<span class="text-emerald-400">Online</span>
 							</div>
@@ -183,7 +187,10 @@
 						<button
 							class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-sm font-medium hover:bg-white/10 transition-colors"
 						>
-							💬 Chat
+							<span class="inline-flex items-center gap-2">
+								<Icon name="chat" size={14} ariaLabel="Chat" />
+								Chat
+							</span>
 						</button>
 					</div>
 				</div>
@@ -191,7 +198,8 @@
 				<!-- Description -->
 				<div class="glass rounded-3xl p-6 border border-white/10">
 					<h3 class="font-bold text-white text-lg mb-4 flex items-center gap-2">
-						<span>📝</span> Deskripsi Barang
+						<Icon name="note" size={16} ariaLabel="Deskripsi" />
+						<span>Deskripsi Barang</span>
 					</h3>
 					<p class="text-slate-300 leading-relaxed whitespace-pre-wrap">
 						{product.description}
@@ -239,13 +247,13 @@
 							onclick={addToCart}
 							class="flex-1 py-4 px-8 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-primary/30 flex items-center justify-center gap-3"
 						>
-							<span class="text-xl">🛒</span>
+							<Icon name="cart" size={18} ariaLabel="Tambah ke keranjang" />
 							Tambah ke Keranjang
 						</button>
 						<button
 							class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl hover:bg-rose-500/20 hover:border-rose-500/30 hover:text-rose-400 transition-all"
 						>
-							🤍
+							<Icon name="heart" size={18} ariaLabel="Favorit" />
 						</button>
 					</div>
 				</div>
@@ -253,15 +261,15 @@
 				<!-- Trust Badges -->
 				<div class="flex flex-wrap gap-4 pt-4">
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<span class="text-emerald-400">✓</span>
+						<Icon name="check" size={14} ariaLabel="Aman" class="text-emerald-400" />
 						Pembayaran Aman
 					</div>
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<span class="text-emerald-400">✓</span>
+						<Icon name="check" size={14} ariaLabel="Asli" class="text-emerald-400" />
 						Garansi Keaslian
 					</div>
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<span class="text-emerald-400">✓</span>
+						<Icon name="check" size={14} ariaLabel="Gratis ongkir" class="text-emerald-400" />
 						Gratis Ongkir*
 					</div>
 				</div>

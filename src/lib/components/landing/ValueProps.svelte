@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	interface ValueProp {
-		icon: string;
+		icon: IconName;
 		title: string;
 		description: string;
 		color: string;
@@ -10,28 +12,28 @@
 
 	const valueProps: ValueProp[] = [
 		{
-			icon: "🔒",
+			icon: "lock",
 			title: "Transaksi Aman",
 			description:
 				"Pembayaran dijamin aman dengan sistem escrow dan verifikasi seller yang ketat.",
 			color: "var(--color-primary)"
 		},
 		{
-			icon: "💰",
+			icon: "cash",
 			title: "Harga Terjangkau",
 			description:
 				"Temukan barang berkualitas dengan harga hingga 70% lebih murah dari harga baru.",
 			color: "var(--color-secondary)"
 		},
 		{
-			icon: "🚀",
+			icon: "rocket",
 			title: "Proses Cepat",
 			description:
 				"Upload produk dalam 5 menit, proses checkout instan, pengiriman same-day.",
 			color: "var(--color-accent)"
 		},
 		{
-			icon: "🌱",
+			icon: "leaf",
 			title: "Ramah Lingkungan",
 			description:
 				"Berkontribusi pada sustainability dengan mengurangi limbah fashion dan elektronik.",
@@ -108,7 +110,7 @@
 					<div
 						class="w-20 h-20 rounded-2xl bg-linear-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-4xl mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-xl group-hover:shadow-primary/30"
 					>
-						<span>{prop.icon}</span>
+						<Icon name={prop.icon} size={28} ariaLabel={prop.title} />
 					</div>
 
 					<h3

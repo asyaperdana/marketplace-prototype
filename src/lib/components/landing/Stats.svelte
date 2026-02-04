@@ -1,18 +1,20 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	interface Stat {
 		value: number;
 		suffix: string;
 		label: string;
-		icon: string;
+		icon: IconName;
 	}
 
 	const stats: Stat[] = [
-		{ value: 50000, suffix: "+", label: "Pengguna Aktif", icon: "👥" },
-		{ value: 120000, suffix: "+", label: "Produk Terdaftar", icon: "📦" },
-		{ value: 85000, suffix: "+", label: "Transaksi Sukses", icon: "✅" },
-		{ value: 4.9, suffix: "", label: "Rating Pengguna", icon: "⭐" }
+		{ value: 50000, suffix: "+", label: "Pengguna Aktif", icon: "users" },
+		{ value: 120000, suffix: "+", label: "Produk Terdaftar", icon: "package" },
+		{ value: 85000, suffix: "+", label: "Transaksi Sukses", icon: "check" },
+		{ value: 4.9, suffix: "", label: "Rating Pengguna", icon: "star" }
 	];
 
 	let displayValues = $state<number[]>(stats.map(() => 0));
@@ -90,7 +92,7 @@
 					<div
 						class="absolute -top-6 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl bg-linear-to-br from-dark-lighter to-dark border border-white/10 flex items-center justify-center text-3xl shadow-lg group-hover:-translate-y-2 transition-transform duration-300"
 					>
-						{stat.icon}
+						<Icon name={stat.icon} size={24} ariaLabel={stat.label} />
 					</div>
 
 					<div class="mt-8 space-y-2">

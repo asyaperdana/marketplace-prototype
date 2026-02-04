@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { resolve } from "$lib/utils";
 	import Logo from "../ui/Logo.svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 	const currentYear = new Date().getFullYear();
 
 	const footerLinks = {
@@ -23,11 +25,11 @@
 		]
 	};
 
-	const socialLinks = [
-		{ icon: "📘", label: "Facebook", href: "#" },
-		{ icon: "📸", label: "Instagram", href: "#" },
-		{ icon: "🐦", label: "Twitter", href: "#" },
-		{ icon: "📺", label: "YouTube", href: "#" }
+	const socialLinks: { icon: IconName; label: string; href: string }[] = [
+		{ icon: "facebook", label: "Facebook", href: "#" },
+		{ icon: "instagram", label: "Instagram", href: "#" },
+		{ icon: "twitter", label: "Twitter", href: "#" },
+		{ icon: "youtube", label: "YouTube", href: "#" }
 	];
 </script>
 
@@ -67,7 +69,7 @@
 							class="w-12 h-12 rounded-xl glass-light flex items-center justify-center text-slate-300 hover:bg-primary hover:text-white transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/30"
 							aria-label={social.label}
 						>
-							<span class="text-xl">{social.icon}</span>
+							<Icon name={social.icon} size={18} ariaLabel={social.label} />
 						</a>
 					{/each}
 				</div>
@@ -139,7 +141,11 @@
 
 			<div class="flex items-center gap-6">
 				<div class="flex items-center gap-2 text-slate-400 font-bold text-sm">
-					Made with <span class="text-rose-500 animate-pulse text-lg">❤</span> in Indonesia
+					Made with
+					<span class="text-rose-500 animate-pulse">
+						<Icon name="heart" size={14} ariaLabel="Love" />
+					</span>
+					in Indonesia
 				</div>
 				<div class="h-6 w-px bg-white/10 hidden md:block"></div>
 				<div class="flex gap-4">

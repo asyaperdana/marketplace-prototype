@@ -1,26 +1,41 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	interface Transaction {
 		id: number;
 		user: string;
-		avatar: string;
+		initials: string;
 		action: "beli" | "jual";
 		product: string;
-		productEmoji: string;
+		productIcon: IconName;
 		price: string;
 		time: string;
 		location: string;
+	}
+
+	interface LiveStat {
+		label: string;
+		value: number;
+		suffix: string;
+		icon: IconName;
+		color: string;
+	}
+
+	interface TrustLogo {
+		name: string;
+		icon: IconName;
 	}
 
 	const recentTransactions: Transaction[] = [
 		{
 			id: 1,
 			user: "Sarah W.",
-			avatar: "👩",
+			initials: "SW",
 			action: "beli",
 			product: "iPhone 13 Pro",
-			productEmoji: "📱",
+			productIcon: "phone",
 			price: "Rp 9.5jt",
 			time: "Baru saja",
 			location: "Jakarta"
@@ -28,10 +43,10 @@
 		{
 			id: 2,
 			user: "Budi S.",
-			avatar: "👨",
+			initials: "BS",
 			action: "jual",
 			product: "MacBook Air M1",
-			productEmoji: "💻",
+			productIcon: "laptop",
 			price: "Rp 8.5jt",
 			time: "2 menit lalu",
 			location: "Bandung"
@@ -39,10 +54,10 @@
 		{
 			id: 3,
 			user: "Anisa P.",
-			avatar: "👩‍🦱",
+			initials: "AP",
 			action: "beli",
 			product: "Nike Air Jordan",
-			productEmoji: "👟",
+			productIcon: "shoe",
 			price: "Rp 1.2jt",
 			time: "5 menit lalu",
 			location: "Surabaya"
@@ -50,10 +65,10 @@
 		{
 			id: 4,
 			user: "Rizky M.",
-			avatar: "👨‍🦰",
+			initials: "RM",
 			action: "jual",
 			product: "PS5 + 3 Games",
-			productEmoji: "🎮",
+			productIcon: "gamepad",
 			price: "Rp 6.5jt",
 			time: "8 menit lalu",
 			location: "Yogyakarta"
@@ -61,56 +76,56 @@
 		{
 			id: 5,
 			user: "Dewi L.",
-			avatar: "👩‍💼",
+			initials: "DL",
 			action: "beli",
 			product: "Coach Tote Bag",
-			productEmoji: "👜",
+			productIcon: "bag",
 			price: "Rp 1.8jt",
 			time: "12 menit lalu",
 			location: "Medan"
 		}
 	];
 
-	const liveStats = [
+	const liveStats: LiveStat[] = [
 		{
 			label: "Transaksi Hari Ini",
 			value: 8524,
 			suffix: "+",
-			icon: "⚡",
+			icon: "bolt",
 			color: "from-primary to-cyan-400"
 		},
 		{
 			label: "Sedang Online",
 			value: 1847,
 			suffix: "",
-			icon: "🟢",
+			icon: "users",
 			color: "from-emerald-400 to-green-500"
 		},
 		{
 			label: "Produk Terjual/Jam",
 			value: 342,
 			suffix: "",
-			icon: "🛒",
+			icon: "cart",
 			color: "from-secondary to-emerald-400"
 		},
 		{
 			label: "Rating Hari Ini",
 			value: 4.9,
 			suffix: "★",
-			icon: "⭐",
+			icon: "star",
 			color: "from-amber-400 to-orange-500"
 		}
 	];
 
-	const trustLogos = [
-		{ name: "QRIS", icon: "📱" },
-		{ name: "DANA", icon: "💙" },
-		{ name: "OVO", icon: "💜" },
-		{ name: "GoPay", icon: "💚" },
-		{ name: "JNE", icon: "📦" },
-		{ name: "J&T", icon: "🚚" },
-		{ name: "SiCepat", icon: "⚡" },
-		{ name: "SSL", icon: "🔒" }
+	const trustLogos: TrustLogo[] = [
+		{ name: "QRIS", icon: "qr" },
+		{ name: "DANA", icon: "wallet" },
+		{ name: "OVO", icon: "wallet" },
+		{ name: "GoPay", icon: "wallet" },
+		{ name: "JNE", icon: "package" },
+		{ name: "J&T", icon: "truck" },
+		{ name: "SiCepat", icon: "bolt" },
+		{ name: "SSL", icon: "lock" }
 	];
 
 	let currentTransaction = $state(0);
@@ -226,7 +241,7 @@
 			{#each liveStats as stat, i (stat.label)}
 				<div class="stat-card group p-4 sm:p-6">
 					<div class="stat-icon bg-gradient-to-br {stat.color}">
-						<span class="text-2xl">{stat.icon}</span>
+						<Icon name={stat.icon} size={20} ariaLabel={stat.label} />
 					</div>
 					<div class="mt-3 sm:mt-4">
 						<div class="flex items-baseline gap-1">
@@ -276,7 +291,7 @@
 						<div
 							class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
 						>
-							<span class="text-lg">🔔</span>
+							<Icon name="bell" size={18} ariaLabel="Notifikasi" />
 						</div>
 						<div>
 							<h3 class="font-bold text-white">Aktivitas Terkini</h3>
@@ -296,9 +311,9 @@
 						<div class="transaction-item" class:active={i === currentTransaction}>
 							<div class="flex items-center gap-4">
 								<div
-									class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-2xl shrink-0"
+									class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-xs font-bold tracking-widest text-white shrink-0"
 								>
-									{tx.avatar}
+									{tx.initials}
 								</div>
 								<div class="flex-1 min-w-0">
 									<div class="flex items-center gap-2 flex-wrap">
@@ -306,7 +321,9 @@
 										<span class="text-slate-400">
 											{tx.action === "beli" ? "membeli" : "menjual"}
 										</span>
-										<span class="text-xl">{tx.productEmoji}</span>
+										<span class="text-primary-light">
+											<Icon name={tx.productIcon} size={18} ariaLabel={tx.product} />
+										</span>
 										<span class="font-semibold text-white truncate"
 											>{tx.product}</span
 										>
@@ -346,7 +363,7 @@
 						<div
 							class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center"
 						>
-							<span class="text-lg">🛡️</span>
+							<Icon name="shield" size={18} ariaLabel="Keamanan" />
 						</div>
 						<div>
 							<h3 class="font-bold text-white">100% Aman</h3>
@@ -356,7 +373,7 @@
 					<div class="grid grid-cols-4 gap-3">
 						{#each trustLogos as logo (logo.name)}
 							<div class="trust-logo">
-								<span class="text-xl mb-1">{logo.icon}</span>
+								<Icon name={logo.icon} size={18} ariaLabel={logo.name} />
 								<span class="text-[10px] text-slate-400 font-medium"
 									>{logo.name}</span
 								>
@@ -375,7 +392,7 @@
 							<div
 								class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
 							>
-								<span class="text-3xl">💯</span>
+								<Icon name="check" size={28} ariaLabel="Garansi" />
 							</div>
 							<div>
 								<h3 class="text-xl font-black text-white">Garansi</h3>

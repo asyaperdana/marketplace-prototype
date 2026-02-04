@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { Category } from "$lib/types/landing";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	const categories: Category[] = [
 		{
-			icon: "👗",
+			icon: "shirt",
 			name: "Fashion Wanita",
 			count: "25K+ produk",
 			class: "md:col-span-2 md:row-span-2",
@@ -11,7 +12,7 @@
 			image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "📱",
+			icon: "phone",
 			name: "Elektronik",
 			count: "15K+ produk",
 			class: "md:col-span-2",
@@ -19,7 +20,7 @@
 			image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "👔",
+			icon: "shirt",
 			name: "Fashion Pria",
 			count: "18K+ produk",
 			class: "",
@@ -27,7 +28,7 @@
 			image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "🏠",
+			icon: "home",
 			name: "Peralatan Rumah",
 			count: "12K+ produk",
 			class: "",
@@ -35,7 +36,7 @@
 			image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "🎮",
+			icon: "gamepad",
 			name: "Games & Toys",
 			count: "7K+ produk",
 			class: "md:col-span-2",
@@ -43,7 +44,7 @@
 			image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "📚",
+			icon: "book",
 			name: "Buku & Hobi",
 			count: "10K+ produk",
 			class: "",
@@ -51,7 +52,7 @@
 			image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "👶",
+			icon: "baby",
 			name: "Perlengkapan Bayi",
 			count: "8K+ produk",
 			class: "",
@@ -59,7 +60,7 @@
 			image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&h=600&fit=crop&q=80"
 		},
 		{
-			icon: "💄",
+			icon: "sparkles",
 			name: "Kecantikan",
 			count: "9K+ produk",
 			class: "md:col-span-2",
@@ -138,12 +139,11 @@
 					<div
 						class="relative z-10 transition-transform duration-500 group-hover:-translate-y-2"
 					>
-						{#if !category.image}
-							<span
-								class="text-4xl sm:text-5xl mb-4 sm:mb-6 block filter drop-shadow-2xl transform group-hover:scale-125 group-hover:-rotate-6 transition-all duration-500 origin-left"
-								>{category.icon}</span
-							>
-						{/if}
+						<span
+							class="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center text-primary-light shadow-lg shadow-black/30 transform group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500 origin-left"
+						>
+							<Icon name={category.icon} size={22} ariaLabel={category.name} />
+						</span>
 						<h3
 							class="text-2xl font-black text-white mb-2 group-hover:text-primary-light transition-colors drop-shadow-lg"
 						>

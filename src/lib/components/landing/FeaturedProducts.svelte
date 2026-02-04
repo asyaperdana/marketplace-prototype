@@ -2,13 +2,14 @@
 	import { onMount } from "svelte";
 	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
 	import { resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	import type { Product, FilterTab } from "$lib/types/landing";
 
 	const filterTabs: FilterTab[] = [
-		{ id: "terbaru", label: "Terbaru", icon: "✨" },
-		{ id: "terlaris", label: "Terlaris", icon: "🔥" },
-		{ id: "deals", label: "Best Deals", icon: "💎" }
+		{ id: "terbaru", label: "Terbaru", icon: "sparkles" },
+		{ id: "terlaris", label: "Terlaris", icon: "flame" },
+		{ id: "deals", label: "Best Deals", icon: "diamond" }
 	];
 
 	const products: Product[] = [
@@ -209,7 +210,7 @@
 							: 'text-slate-400 hover:text-white'}"
 						onclick={() => setActiveFilter(tab.id)}
 					>
-						<span class="text-lg">{tab.icon}</span>
+						<Icon name={tab.icon} size={18} ariaLabel={tab.label} />
 						<span class="hidden sm:inline">{tab.label}</span>
 					</button>
 				{/each}
@@ -237,7 +238,7 @@
 				>
 			</div>
 			<div class="hidden sm:flex items-center gap-2 text-slate-400">
-				<span>🔥</span>
+				<Icon name="flame" size={16} ariaLabel="Trend" />
 				<span class="font-medium"
 					><span class="text-white font-bold">23</span> terjual dalam 1 jam terakhir</span
 				>

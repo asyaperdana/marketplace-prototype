@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	interface ComparisonRow {
 		feature: string;
@@ -121,7 +122,7 @@
 					<div
 						class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-xl mb-2 shadow-lg shadow-primary/30"
 					>
-						🛍️
+						<Icon name="bag" size={20} ariaLabel="Okis GS" />
 					</div>
 					<div class="font-black text-white">Okis GS</div>
 				</div>
@@ -129,7 +130,7 @@
 					<div
 						class="w-12 h-12 mx-auto rounded-xl bg-white/5 flex items-center justify-center text-xl mb-2"
 					>
-						🏪
+						<Icon name="store" size={18} ariaLabel="Platform A" />
 					</div>
 					<div class="font-bold text-slate-400">Platform A</div>
 				</div>
@@ -137,7 +138,7 @@
 					<div
 						class="w-12 h-12 mx-auto rounded-xl bg-white/5 flex items-center justify-center text-xl mb-2"
 					>
-						🏬
+						<Icon name="building" size={18} ariaLabel="Platform B" />
 					</div>
 					<div class="font-bold text-slate-400">Platform B</div>
 				</div>
@@ -289,7 +290,12 @@
 			style="transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.3s"
 		>
 			<a href="#newsletter" class="btn btn-primary px-12 py-5 text-xl group">
-				<span class="group-hover:rotate-12 transition-transform">🚀</span>
+				<Icon
+					name="rocket"
+					size={20}
+					ariaLabel="Mulai sekarang"
+					class="group-hover:rotate-12 transition-transform"
+				/>
 				Mulai Sekarang - Gratis!
 				<svg
 					class="w-6 h-6 group-hover:translate-x-1 transition-transform"

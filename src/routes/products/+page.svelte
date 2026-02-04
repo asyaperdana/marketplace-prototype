@@ -3,6 +3,7 @@
 	import { mockProducts } from "$lib/data/mock-products";
 	import ProductCard from "$lib/components/product/ProductCard.svelte";
 	import { cn, resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let searchQuery = $state("");
 	let selectedCategory = $state<string>("all");
@@ -97,7 +98,7 @@
 						<div
 							class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
 						>
-							<span class="text-slate-500">🔍</span>
+							<Icon name="search" size={16} class="text-slate-500" ariaLabel="Cari" />
 						</div>
 						<input
 							type="text"
@@ -111,9 +112,9 @@
 						bind:value={sortBy}
 						class="px-4 py-4 rounded-2xl bg-dark-lighter/80 border border-white/10 text-white cursor-pointer focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all backdrop-blur-sm"
 					>
-						<option value="newest">✨ Terbaru</option>
-						<option value="price_low">💰 Harga Terendah</option>
-						<option value="price_high">💎 Harga Tertinggi</option>
+						<option value="newest">Terbaru</option>
+						<option value="price_low">Harga Terendah</option>
+						<option value="price_high">Harga Tertinggi</option>
 					</select>
 				</div>
 			</div>
@@ -127,7 +128,8 @@
 				<!-- Category Filter -->
 				<div class="glass rounded-3xl p-6 border border-white/5">
 					<h3 class="font-bold text-white text-lg mb-6 flex items-center gap-2">
-						<span>📂</span> Kategori
+						<Icon name="grid" size={18} ariaLabel="Kategori" />
+						<span>Kategori</span>
 					</h3>
 					<div
 						class="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 scrollbar-hide"
@@ -141,7 +143,7 @@
 							)}
 							onclick={() => handleCategoryClick("all")}
 						>
-							<span class="text-lg">🏷️</span>
+							<Icon name="tag" size={18} ariaLabel="Semua kategori" />
 							<span>Semua</span>
 						</button>
 
@@ -155,7 +157,7 @@
 								)}
 								onclick={() => handleCategoryClick(cat.id)}
 							>
-								<span class="text-lg">{cat.icon}</span>
+								<Icon name={cat.icon} size={18} ariaLabel={cat.name} />
 								<span>{cat.name}</span>
 							</button>
 						{/each}
@@ -170,7 +172,7 @@
 						<div
 							class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center"
 						>
-							<span class="text-xl">💡</span>
+							<Icon name="bulb" size={18} ariaLabel="Tips" />
 						</div>
 						<h4 class="font-bold text-white">Tips Belanja</h4>
 					</div>
@@ -231,7 +233,7 @@
 						<div
 							class="w-32 h-32 rounded-full bg-dark-lighter flex items-center justify-center mb-8 text-6xl"
 						>
-							🔍
+							<Icon name="search" size={22} ariaLabel="Tidak ada hasil" />
 						</div>
 						<h3 class="text-2xl font-black text-white mb-3">Produk tidak ditemukan</h3>
 						<p class="text-slate-400 max-w-md mb-8">
@@ -243,9 +245,10 @@
 								selectedCategory = "all";
 								searchQuery = "";
 							}}
-							class="px-8 py-4 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/30"
+							class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/30"
 						>
-							🔄 Reset Semua Filter
+							<Icon name="refresh" size={18} ariaLabel="Reset filter" />
+							<span>Reset Semua Filter</span>
 						</button>
 					</div>
 				{/if}

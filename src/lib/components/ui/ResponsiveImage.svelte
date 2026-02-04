@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Icon from "./Icon.svelte";
+
 	interface Props {
 		src: string;
 		alt: string;
@@ -52,7 +54,7 @@
 		{/if}
 	{:else}
 		<div class="error-placeholder">
-			<span class="error-icon">🖼️</span>
+			<Icon name="image" class="error-icon" size={32} ariaLabel="Image unavailable" />
 		</div>
 	{/if}
 </div>

@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { IconName } from "$lib/types/icons";
 
 	type UserType = "seller" | "buyer";
 
 	interface Step {
 		number: number;
-		icon: string;
+		icon: IconName;
 		title: string;
 		description: string;
 	}
@@ -14,25 +16,25 @@
 	const sellerSteps: Step[] = [
 		{
 			number: 1,
-			icon: "📸",
+			icon: "camera",
 			title: "Upload Foto Produk",
 			description: "Foto barang dari berbagai angle dengan pencahayaan yang baik."
 		},
 		{
 			number: 2,
-			icon: "📝",
+			icon: "note",
 			title: "Isi Detail Produk",
 			description: "Tambahkan deskripsi, kondisi, harga, dan kategori produk."
 		},
 		{
 			number: 3,
-			icon: "📢",
+			icon: "megaphone",
 			title: "Publish & Promosi",
 			description: "Produk akan tampil di feed dan bisa dipromosikan."
 		},
 		{
 			number: 4,
-			icon: "💸",
+			icon: "wallet",
 			title: "Terima Pembayaran",
 			description: "Dana masuk ke saldo setelah pembeli konfirmasi terima."
 		}
@@ -41,25 +43,25 @@
 	const buyerSteps: Step[] = [
 		{
 			number: 1,
-			icon: "🔍",
+			icon: "search",
 			title: "Cari Barang Impian",
 			description: "Browse atau search produk sesuai kategori yang kamu mau."
 		},
 		{
 			number: 2,
-			icon: "💬",
+			icon: "chat",
 			title: "Chat dengan Seller",
 			description: "Tanya detail, negosiasi harga, dan pastikan kondisi barang."
 		},
 		{
 			number: 3,
-			icon: "💳",
+			icon: "card",
 			title: "Checkout & Bayar",
 			description: "Pilih metode pembayaran yang paling nyaman untukmu."
 		},
 		{
 			number: 4,
-			icon: "📦",
+			icon: "package",
 			title: "Terima Barang",
 			description: "Tunggu pengiriman dan konfirmasi jika barang sudah sampai."
 		}
@@ -148,7 +150,7 @@
 						: 'text-slate-400 hover:text-white'}"
 					onclick={() => setActiveTab("seller")}
 				>
-					<span class="text-2xl">🏪</span> Untuk Seller
+					<Icon name="store" size={20} ariaLabel="Seller" /> Untuk Seller
 				</button>
 				<button
 					class="relative z-10 px-10 py-4 rounded-3xl flex items-center gap-3 font-bold text-lg transition-all duration-500 {activeTab ===
@@ -157,7 +159,7 @@
 						: 'text-slate-400 hover:text-white'}"
 					onclick={() => setActiveTab("buyer")}
 				>
-					<span class="text-2xl">🛒</span> Untuk Buyer
+					<Icon name="cart" size={20} ariaLabel="Buyer" /> Untuk Buyer
 				</button>
 
 				<!-- Background slider -->
@@ -189,7 +191,7 @@
 					<div
 						class="text-6xl mb-8 transform group-hover:scale-125 transition-all duration-500 filter drop-shadow-2xl"
 					>
-						{step.icon}
+						<Icon name={step.icon} size={36} ariaLabel={step.title} />
 					</div>
 
 					<h3
@@ -234,7 +236,12 @@
 		>
 			{#if activeTab === "seller"}
 				<a href="#newsletter" class="btn btn-primary px-12 py-5 text-xl group">
-					<span class="group-hover:rotate-12 transition-transform">🚀</span>
+					<Icon
+						name="rocket"
+						size={20}
+						ariaLabel="Mulai jualan"
+						class="group-hover:rotate-12 transition-transform"
+					/>
 					Mulai Jualan Sekarang
 					<svg
 						class="w-6 h-6 group-hover:translate-x-1 transition-transform"
@@ -251,7 +258,12 @@
 				</a>
 			{:else}
 				<a href={resolve("/products")} class="btn btn-primary px-12 py-5 text-xl group">
-					<span class="group-hover:scale-125 transition-transform">🎯</span>
+					<Icon
+						name="target"
+						size={20}
+						ariaLabel="Jelajahi produk"
+						class="group-hover:scale-125 transition-transform"
+					/>
 					Jelajahi Produk Pilihan
 					<svg
 						class="w-6 h-6 group-hover:translate-x-1 transition-transform"

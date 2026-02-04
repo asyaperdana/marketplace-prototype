@@ -45,16 +45,16 @@ export const config = {
 
 	// Categories
 	categories: [
-		{ id: "electronics", name: "Elektronik", icon: "📱", slug: "elektronik" },
-		{ id: "fashion", name: "Fashion", icon: "👗", slug: "fashion" },
-		{ id: "home", name: "Rumah Tangga", icon: "🏠", slug: "rumah-tangga" },
-		{ id: "sports", name: "Olahraga", icon: "⚽", slug: "olahraga" },
-		{ id: "hobbies", name: "Hobi & Koleksi", icon: "🎮", slug: "hobi-koleksi" },
-		{ id: "vehicles", name: "Kendaraan", icon: "🚗", slug: "kendaraan" },
-		{ id: "books", name: "Buku & Alat Tulis", icon: "📚", slug: "buku-alat-tulis" },
-		{ id: "baby", name: "Perlengkapan Bayi", icon: "🍼", slug: "perlengkapan-bayi" },
-		{ id: "beauty", name: "Kecantikan", icon: "💄", slug: "kecantikan" },
-		{ id: "others", name: "Lainnya", icon: "📦", slug: "lainnya" }
+		{ id: "electronics", name: "Elektronik", icon: "phone", slug: "elektronik" },
+		{ id: "fashion", name: "Fashion", icon: "shirt", slug: "fashion" },
+		{ id: "home", name: "Rumah Tangga", icon: "home", slug: "rumah-tangga" },
+		{ id: "sports", name: "Olahraga", icon: "bolt", slug: "olahraga" },
+		{ id: "hobbies", name: "Hobi & Koleksi", icon: "gamepad", slug: "hobi-koleksi" },
+		{ id: "vehicles", name: "Kendaraan", icon: "car", slug: "kendaraan" },
+		{ id: "books", name: "Buku & Alat Tulis", icon: "book", slug: "buku-alat-tulis" },
+		{ id: "baby", name: "Perlengkapan Bayi", icon: "baby", slug: "perlengkapan-bayi" },
+		{ id: "beauty", name: "Kecantikan", icon: "sparkles", slug: "kecantikan" },
+		{ id: "others", name: "Lainnya", icon: "package", slug: "lainnya" }
 	],
 
 	// Product Conditions

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { resolve } from "$lib/utils";
+	import Icon from "$lib/components/ui/Icon.svelte";
 	import type { Product } from "$lib/types";
 	import {
 		formatCurrency,
@@ -81,7 +82,8 @@
 
 		<div class="mt-3 flex items-center justify-between text-xs text-slate-500">
 			<span class="flex items-center gap-1">
-				📍 {product.location}
+				<Icon name="pin" size={12} ariaLabel="Lokasi" />
+				{product.location}
 			</span>
 			<span>{formatRelativeTime(product.createdAt)}</span>
 		</div>
