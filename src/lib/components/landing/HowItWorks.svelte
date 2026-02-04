@@ -240,7 +240,7 @@
 						name="rocket"
 						size={20}
 						ariaLabel="Mulai jualan"
-						class="group-hover:rotate-12 transition-transform"
+						className="group-hover:rotate-12 transition-transform"
 					/>
 					Mulai Jualan Sekarang
 					<svg
@@ -262,7 +262,7 @@
 						name="target"
 						size={20}
 						ariaLabel="Jelajahi produk"
-						class="group-hover:scale-125 transition-transform"
+						className="group-hover:scale-125 transition-transform"
 					/>
 					Jelajahi Produk Pilihan
 					<svg

@@ -98,7 +98,7 @@
 						<div
 							class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
 						>
-							<Icon name="search" size={16} class="text-slate-500" ariaLabel="Cari" />
+							<Icon name="search" size={16} className="text-slate-500" ariaLabel="Cari" />
 						</div>
 						<input
 							type="text"

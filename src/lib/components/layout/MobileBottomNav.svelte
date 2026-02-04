@@ -85,7 +85,12 @@
         href="#newsletter"
         class="btn btn-primary px-8 py-4 shadow-2xl shadow-primary/40 hover:shadow-primary/60 group"
     >
-        <Icon name="bag" size={18} ariaLabel="Mulai jualan" class="group-hover:rotate-12 transition-transform" />
+        <Icon
+            name="bag"
+            size={18}
+            ariaLabel="Mulai jualan"
+            className="group-hover:rotate-12 transition-transform"
+        />
         Mulai Jualan
         <svg
             class="w-5 h-5 group-hover:translate-x-1 transition-transform"

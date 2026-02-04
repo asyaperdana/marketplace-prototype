@@ -54,7 +54,7 @@
 		{/if}
 	{:else}
 		<div class="error-placeholder">
-			<Icon name="image" class="error-icon" size={32} ariaLabel="Image unavailable" />
+			<Icon name="image" className="error-icon" size={32} ariaLabel="Image unavailable" />
 		</div>
 	{/if}
 </div>

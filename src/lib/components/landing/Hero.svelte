@@ -103,7 +103,7 @@
 							<Icon
 								name="sparkles"
 								size={22}
-								class="text-white/90 group-hover:-translate-y-1 transition-transform duration-300"
+								className="text-white/90 group-hover:-translate-y-1 transition-transform duration-300"
 								ariaLabel="Highlight"
 							/>
 							<span class="font-bold text-lg tracking-wide">Start Selling</span>
@@ -178,8 +178,8 @@
 						<div
 							class="absolute z-20 glass-card p-3 rounded-2xl flex items-center gap-3 shadow-lg animate-float"
 							style="
-								top: {20 + i * 25}%; 
-								right: {-20 + (i % 2) * 60}%; 
+								top: {20 + i * 25}%;
+								right: {-20 + (i % 2) * 60}%;
 								animation-delay: {i * 1.5}s;
 								transform: translateZ(50px);
 							"

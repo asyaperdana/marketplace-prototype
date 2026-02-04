@@ -3,7 +3,7 @@
 
 	export let name: IconName;
 	export let size = 24;
-	export let class: className = "";
+	export let className = "";
 	export let strokeWidth = 1.8;
 	export let ariaLabel: string | undefined = undefined;
 </script>

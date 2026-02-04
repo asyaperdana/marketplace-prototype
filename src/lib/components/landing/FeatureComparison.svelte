@@ -294,7 +294,7 @@
 					name="rocket"
 					size={20}
 					ariaLabel="Mulai sekarang"
-					class="group-hover:rotate-12 transition-transform"
+					className="group-hover:rotate-12 transition-transform"
 				/>
 				Mulai Sekarang - Gratis!
 				<svg
