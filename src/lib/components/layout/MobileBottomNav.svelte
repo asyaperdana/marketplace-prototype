@@ -48,7 +48,7 @@
 				<!-- Center CTA Button -->
 				<a
 					href={resolve("#newsletter")}
-					class="relative -top-4 w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-primary/40 hover:scale-110 active:scale-95 transition-transform duration-300 border-4 border-dark-deep"
+					class="relative -top-4 w-16 h-16 bg-linear-to-br from-primary to-secondary rounded-2xl flex items-center justify-center text-2xl shadow-xl shadow-primary/40 hover:scale-110 active:scale-95 transition-transform duration-300 border-4 border-dark-deep"
 				>
 					<Icon name="plus" size={22} ariaLabel="Tambah" />
 				</a>
