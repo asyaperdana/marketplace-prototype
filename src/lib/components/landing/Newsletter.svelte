@@ -57,7 +57,7 @@
 		>
 			<!-- Animated Inner Glow -->
 			<div
-				class="absolute -inset-2 bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700"
+				class="absolute -inset-2 bg-linear-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-[3rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700"
 			></div>
 
 			<div class="relative z-10">
