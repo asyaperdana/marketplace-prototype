@@ -189,7 +189,7 @@
 		>
 			{#each liveStats as stat, i (stat.label)}
 				<div class="stat-card group p-4 sm:p-6">
-					<div class="stat-icon bg-gradient-to-br {stat.color}">
+					<div class="stat-icon bg-linear-to-br {stat.color}">
 						<Icon name={stat.icon} size={20} ariaLabel={stat.label} />
 					</div>
 					<div class="mt-3 sm:mt-4">
@@ -237,7 +237,7 @@
 				<div class="flex items-center justify-between mb-6">
 					<div class="flex items-center gap-3">
 						<div
-							class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+							class="w-10 h-10 rounded-xl bg-linear-to-br from-primary to-secondary flex items-center justify-center"
 						>
 							<Icon name="bell" size={18} ariaLabel="Notifikasi" />
 						</div>
@@ -337,12 +337,12 @@
 				<!-- Guarantee Card -->
 				<div class="guarantee-card">
 					<div
-						class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl"
+						class="absolute inset-0 bg-linear-to-br from-primary/20 to-secondary/20 rounded-2xl"
 					></div>
 					<div class="relative z-10">
 						<div class="flex items-center gap-4 mb-4">
 							<div
-								class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center"
+								class="w-16 h-16 rounded-2xl bg-linear-to-br from-primary to-secondary flex items-center justify-center"
 							>
 								<Icon name="check" size={28} ariaLabel="Garansi" />
 							</div>
