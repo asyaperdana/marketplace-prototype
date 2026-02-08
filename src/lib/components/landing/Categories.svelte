@@ -75,7 +75,6 @@
 </script>
 
 <section
-	id="categories"
 	class="py-20 relative overflow-hidden bg-dark-deep"
 	use:reveal
 	onreveal={() => (isVisible = true)}

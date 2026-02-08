@@ -104,11 +104,7 @@
 	const steps = $derived(activeTab === "seller" ? sellerSteps : buyerSteps);
 </script>
 
-<section
-	id="how-it-works"
-	class="py-20 relative overflow-hidden bg-dark-deep"
-	bind:this={sectionRef}
->
+<section class="py-20 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
 	<!-- Background Decoration -->
 	<!-- Background Decoration Removed for Performance -->
 

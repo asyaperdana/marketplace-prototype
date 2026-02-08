@@ -47,7 +47,7 @@
 	<Hero />
 	<SocialProof />
 
-	<LazySection>
+	<LazySection id="stats">
 		<Stats />
 	</LazySection>
 
@@ -55,11 +55,11 @@
 		<ValueProps />
 	</LazySection>
 
-	<LazySection>
+	<LazySection id="how-it-works">
 		<HowItWorks />
 	</LazySection>
 
-	<LazySection>
+	<LazySection id="categories">
 		<Categories />
 	</LazySection>
 
@@ -75,7 +75,7 @@
 		<FeatureComparison />
 	</LazySection>
 
-	<LazySection>
+	<LazySection id="testimonials">
 		<Testimonials />
 	</LazySection>
 
@@ -83,7 +83,7 @@
 		<FAQ />
 	</LazySection>
 
-	<LazySection>
+	<LazySection id="newsletter">
 		<Newsletter />
 	</LazySection>
 </main>

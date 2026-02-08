@@ -44,7 +44,7 @@
 	}
 </script>
 
-<section id="stats" class="py-20 relative overflow-hidden" bind:this={sectionRef}>
+<section class="py-20 relative overflow-hidden" bind:this={sectionRef}>
 	<div class="container mx-auto px-6 relative z-10">
 		<div class="flex flex-wrap justify-center gap-6 lg:gap-10">
 			{#each stats as stat, index (stat.label)}

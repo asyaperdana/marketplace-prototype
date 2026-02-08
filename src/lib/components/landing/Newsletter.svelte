@@ -35,7 +35,7 @@
 	});
 </script>
 
-<section id="newsletter" class="py-20 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
+<section class="py-20 relative overflow-hidden bg-dark-deep" bind:this={sectionRef}>
 	<!-- Premium Background Decoration -->
 	<div class="absolute inset-0 z-0">
 		<div class="bg-noise opacity-30"></div>
