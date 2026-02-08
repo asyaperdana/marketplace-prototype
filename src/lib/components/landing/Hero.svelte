@@ -1,25 +1,17 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { FLOATING_PRODUCTS } from "$lib/constants/landing";
-	import { magnetic } from "$lib/actions/magnetic";
 	import { resolve } from "$lib/utils";
 	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let isLoaded = $state(false);
-	let activeUsers = $state(1847);
+	let activeUsers = $state(1847); // Static value for performance
 
 	onMount(() => {
 		setTimeout(() => {
 			isLoaded = true;
 		}, 100);
-
-		// Simulate live users
-		const interval = setInterval(() => {
-			activeUsers += Math.floor(Math.random() * 5) - 2;
-			if (activeUsers < 1800) activeUsers = 1820;
-		}, 3000);
-
-		return () => clearInterval(interval);
+		// Live user simulation removed for performance
 	});
 </script>
 
@@ -92,18 +84,16 @@
 					</p>
 				</div>
 
-				<!-- CTA Section -->
 				<div class="flex flex-col sm:flex-row gap-5 pt-6 w-full sm:w-auto">
 					<a
 						href={resolve("#newsletter")}
 						class="btn-hero-primary group w-full sm:w-auto"
-						use:magnetic={{ strength: 0.2, radius: 150 }}
 					>
 						<span class="relative z-10 flex items-center justify-center gap-3">
 							<Icon
 								name="sparkles"
 								size={22}
-								className="text-white/90 group-hover:-translate-y-1 transition-transform duration-300"
+								className="text-white/90"
 								ariaLabel="Highlight"
 							/>
 							<span class="font-bold text-lg tracking-wide">Start Selling</span>
@@ -112,14 +102,10 @@
 					<a
 						href={resolve("/products")}
 						class="btn-hero-secondary group w-full sm:w-auto"
-						use:magnetic={{ strength: 0.15, radius: 150 }}
 					>
 						<span class="flex items-center justify-center gap-3">
 							<span class="font-semibold tracking-wide">Explore Collection</span>
-							<span
-								class="group-hover:translate-x-1 transition-transform duration-300"
-								>→</span
-							>
+							<span>→</span>
 						</span>
 					</a>
 				</div>
@@ -182,9 +168,12 @@
 								right: {-20 + (i % 2) * 60}%;
 								animation-delay: {i * 1.5}s;
 								transform: translateZ(50px);
+                                will-change: transform;
 							"
 						>
-							<span class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-light">
+							<span
+								class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary-light"
+							>
 								<Icon name={product.icon} size={20} ariaLabel={product.label} />
 							</span>
 							<div>
@@ -219,20 +208,20 @@
 		align-items: center;
 	}
 
-	/* Animations */
+	/* Simplified animations */
 	.animate-reveal {
-		animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+		animation: slideUp 0.5s ease-out forwards;
 	}
 
 	.animate-in-visual {
-		animation: scaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+		animation: fadeIn 0.6s ease-out 0.2s forwards;
 		opacity: 0;
 	}
 
 	@keyframes slideUp {
 		from {
 			opacity: 0;
-			transform: translateY(40px);
+			transform: translateY(20px);
 		}
 		to {
 			opacity: 1;
@@ -240,38 +229,30 @@
 		}
 	}
 
-	@keyframes scaleIn {
+	@keyframes fadeIn {
 		from {
 			opacity: 0;
-			transform: scale(0.9) translateY(20px);
 		}
 		to {
 			opacity: 1;
-			transform: scale(1) translateY(0);
 		}
 	}
 
-	/* Phone Mockup */
+	/* Phone Mockup - Simplified */
 	.phone-mockup {
-		background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+		background: rgba(30, 41, 59, 0.95);
 		border: 1px solid rgba(255, 255, 255, 0.1);
 		border-radius: 2.5rem;
-		box-shadow:
-			0 50px 100px -20px rgba(0, 0, 0, 0.5),
-			0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-			0 0 80px -20px rgba(14, 165, 233, 0.3);
+		box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4);
 		overflow: hidden;
-		backdrop-filter: blur(20px);
 	}
 
 	.perspective-1000 {
 		perspective: 1000px;
 	}
 
-	/* Premium Hero Buttons */
+	/* Simple Hero Buttons */
 	.btn-hero-primary {
-		position: relative;
-		overflow: hidden;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -279,29 +260,16 @@
 		background: var(--gradient-primary);
 		color: white;
 		border-radius: 1.25rem;
-		box-shadow: 0 0 30px rgba(14, 165, 233, 0.3);
-		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		box-shadow: 0 10px 25px rgba(14, 165, 233, 0.25);
+		transition:
+			transform 0.2s ease-out,
+			box-shadow 0.2s ease-out;
 		border: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
-	.btn-hero-primary::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-		transition: 0.5s;
-	}
-
-	.btn-hero-primary:hover::before {
-		left: 100%;
-	}
-
 	.btn-hero-primary:hover {
-		box-shadow: 0 0 50px rgba(14, 165, 233, 0.5);
-		transform: scale(1.02);
+		box-shadow: 0 15px 35px rgba(14, 165, 233, 0.35);
+		transform: translateY(-2px);
 	}
 
 	.btn-hero-secondary {
@@ -309,17 +277,17 @@
 		align-items: center;
 		justify-content: center;
 		padding: 1.25rem 2.5rem;
-		background: rgba(255, 255, 255, 0.03);
-		backdrop-filter: blur(10px);
+		background: rgba(30, 41, 59, 0.8);
 		color: white;
 		border-radius: 1.25rem;
 		border: 1px solid rgba(255, 255, 255, 0.1);
-		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		transition:
+			transform 0.2s ease-out,
+			background 0.2s ease-out;
 	}
 
 	.btn-hero-secondary:hover {
 		background: rgba(255, 255, 255, 0.08);
-		border-color: rgba(255, 255, 255, 0.2);
-		transform: scale(1.02);
+		transform: translateY(-2px);
 	}
 </style>

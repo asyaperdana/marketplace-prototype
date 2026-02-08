@@ -116,7 +116,6 @@
 	];
 
 	import { reveal } from "$lib/utils/reveal";
-	import { tilt } from "$lib/actions/tilt";
 	let activeFilter = $state("terbaru");
 	let viewerCount = $state(156);
 	let isVisible = $state(false);
@@ -144,18 +143,8 @@
 		}
 	}
 
-	onMount(() => {
-		// Simulate live viewer count
-		const viewerInterval = setInterval(() => {
-			viewerCount += Math.floor(Math.random() * 5) - 2;
-			if (viewerCount < 140) viewerCount = 145;
-			if (viewerCount > 180) viewerCount = 175;
-		}, 3000);
-
-		return () => {
-			clearInterval(viewerInterval);
-		};
-	});
+	// Static viewer count - no interval for performance
+	// Live simulation removed to reduce CPU usage
 </script>
 
 <section
@@ -164,16 +153,7 @@
 	use:reveal
 	onreveal={() => (isVisible = true)}
 >
-	<!-- Background Decoration -->
-	<div class="absolute inset-0 z-0">
-		<div class="bg-noise opacity-30 pointer-events-none"></div>
-		<div
-			class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -translate-x-1/2"
-		></div>
-		<div
-			class="absolute top-1/2 right-0 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[120px] translate-x-1/2"
-		></div>
-	</div>
+	<!-- Background removed for performance -->
 
 	<div class="container mx-auto px-6 relative z-10">
 		<div
@@ -248,17 +228,14 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 			{#each products as product, index (product.id)}
 				<div
-					class="glass-card group rounded-4xl overflow-hidden relative"
+					class="glass-card group rounded-3xl overflow-hidden relative"
 					class:opacity-0={!isVisible}
-					class:translate-y-10={!isVisible}
-					style="transition-delay: {index * 0.1}s; isolation: isolate;"
-					use:tilt={{ max: 10, perspective: 1000, scale: 1.02 }}
+					class:translate-y-4={!isVisible}
+					style="transition: opacity 0.3s ease-out, transform 0.3s ease-out; transition-delay: {Math.min(
+						index * 0.05,
+						0.2
+					)}s;"
 				>
-					<!-- Shine Effect -->
-					<div
-						class="absolute inset-0 z-30 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-						style="background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); background-size: 200% 100%; animation: shine 3s infinite;"
-					></div>
 					<!-- Discount Badge - Neon Style -->
 					<div class="absolute top-4 left-4 z-20">
 						<div
@@ -417,20 +394,10 @@
 </section>
 
 <style>
-	/* Gradient text is already defined in app.css, but we can refine it if needed */
 	.gradient-text {
 		background: var(--gradient-primary);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-	}
-
-	@keyframes shine {
-		0% {
-			background-position: 200% 0;
-		}
-		100% {
-			background-position: -200% 0;
-		}
 	}
 </style>

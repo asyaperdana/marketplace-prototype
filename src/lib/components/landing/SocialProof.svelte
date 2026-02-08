@@ -129,29 +129,9 @@
 	];
 
 	let currentTransaction = $state(0);
-	let animatedStats = $state(liveStats.map(() => 0));
+	let animatedStats = $state(liveStats.map((s) => s.value)); // Direct values
 	let isVisible = $state(false);
 	let sectionRef: HTMLElement;
-
-	function animateValue(start: number, end: number, duration: number, index: number) {
-		const startTime = performance.now();
-		const isDecimal = end % 1 !== 0;
-
-		function update(currentTime: number) {
-			const elapsed = currentTime - startTime;
-			const progress = Math.min(elapsed / duration, 1);
-			const easeOut = 1 - Math.pow(1 - progress, 3);
-
-			animatedStats[index] = isDecimal
-				? Math.round((start + (end - start) * easeOut) * 10) / 10
-				: Math.round(start + (end - start) * easeOut);
-
-			if (progress < 1) {
-				requestAnimationFrame(update);
-			}
-		}
-		requestAnimationFrame(update);
-	}
 
 	onMount(() => {
 		const observer = new IntersectionObserver(
@@ -159,62 +139,32 @@
 				entries.forEach((entry) => {
 					if (entry.isIntersecting && !isVisible) {
 						isVisible = true;
-						// Animate counters
-						liveStats.forEach((stat, i) => {
-							setTimeout(() => {
-								animateValue(0, stat.value, 2000, i);
-							}, i * 100);
-						});
 					}
 				});
 			},
-			{ threshold: 0.2 }
+			{ threshold: 0.1 } // Lower threshold
 		);
 
 		if (sectionRef) observer.observe(sectionRef);
 
-		// Rotate transactions
-		const transactionInterval = setInterval(() => {
-			currentTransaction = (currentTransaction + 1) % recentTransactions.length;
-		}, 4000);
-
-		// Simulate live updates
-		const statsInterval = setInterval(() => {
-			if (isVisible) {
-				animatedStats[0] += Math.floor(Math.random() * 3);
-				animatedStats[1] += Math.floor(Math.random() * 5) - 2;
-				if (animatedStats[1] < 1800) animatedStats[1] = 1820;
-			}
-		}, 5000);
-
 		return () => {
 			observer.disconnect();
-			clearInterval(transactionInterval);
-			clearInterval(statsInterval);
 		};
 	});
 </script>
 
 <section id="social-proof" class="relative py-16 lg:py-20 overflow-hidden" bind:this={sectionRef}>
 	<!-- Background -->
-	<div class="absolute inset-0 bg-gradient-to-b from-dark-deep via-dark to-dark-deep"></div>
-	<div class="absolute inset-0 bg-noise opacity-30"></div>
-
-	<!-- Accent Glow -->
-	<div
-		class="absolute top-0 left-1/4 w-[600px] h-[300px] bg-primary/10 rounded-full blur-[100px] -translate-y-1/2"
-	></div>
-	<div
-		class="absolute bottom-0 right-1/4 w-[600px] h-[300px] bg-secondary/10 rounded-full blur-[100px] translate-y-1/2"
-	></div>
+	<div class="absolute inset-0 bg-dark-deep"></div>
+	<!-- Heavy effects removed -->
 
 	<div class="container mx-auto px-6 relative z-10">
 		<!-- Header -->
 		<div
 			class="text-center mb-12"
 			class:opacity-0={!isVisible}
-			class:translate-y-8={!isVisible}
-			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
+			class:translate-y-4={!isVisible}
+			style="transition: opacity 0.5s ease-out, transform 0.5s ease-out"
 		>
 			<div
 				class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 mb-4 sm:mb-6"
@@ -231,12 +181,11 @@
 			</p>
 		</div>
 
-		<!-- Live Stats Grid -->
 		<div
 			class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-12"
 			class:opacity-0={!isVisible}
-			class:translate-y-8={!isVisible}
-			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.1s"
+			class:translate-y-4={!isVisible}
+			style="transition: opacity 0.5s ease-out, transform 0.5s ease-out; transition-delay: 0.1s"
 		>
 			{#each liveStats as stat, i (stat.label)}
 				<div class="stat-card group p-4 sm:p-6">
@@ -277,12 +226,11 @@
 			{/each}
 		</div>
 
-		<!-- Transaction Feed + Trust Section -->
 		<div
 			class="grid lg:grid-cols-5 gap-6"
 			class:opacity-0={!isVisible}
-			class:translate-y-8={!isVisible}
-			style="transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); transition-delay: 0.2s"
+			class:translate-y-4={!isVisible}
+			style="transition: opacity 0.5s ease-out, transform 0.5s ease-out; transition-delay: 0.2s"
 		>
 			<!-- Live Transaction Feed - 3 cols -->
 			<div class="lg:col-span-3 transaction-feed">
@@ -322,7 +270,11 @@
 											{tx.action === "beli" ? "membeli" : "menjual"}
 										</span>
 										<span class="text-primary-light">
-											<Icon name={tx.productIcon} size={18} ariaLabel={tx.product} />
+											<Icon
+												name={tx.productIcon}
+												size={18}
+												ariaLabel={tx.product}
+											/>
 										</span>
 										<span class="font-semibold text-white truncate"
 											>{tx.product}</span

@@ -110,12 +110,7 @@
 	bind:this={sectionRef}
 >
 	<!-- Background Decoration -->
-	<div class="absolute inset-0 z-0">
-		<div class="bg-noise opacity-30"></div>
-		<div
-			class="absolute top-1/2 left-1/3 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] pointer-events-none"
-		></div>
-	</div>
+	<!-- Background Decoration Removed for Performance -->
 
 	<div class="container mx-auto px-6 relative z-10">
 		<div

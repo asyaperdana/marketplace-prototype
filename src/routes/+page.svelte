@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Navbar, Footer, MobileBottomNav, ScrollProgress } from "$lib/components/layout";
+	import LazySection from "$lib/components/ui/LazySection.svelte";
 	import {
 		Hero,
 		SocialProof,
@@ -45,17 +46,46 @@
 <main>
 	<Hero />
 	<SocialProof />
-	<Stats />
-	<ValueProps />
-	<HowItWorks />
 
-	<Categories />
-	<FeaturedProducts />
-	<TrustSecurity />
-	<FeatureComparison />
-	<Testimonials />
-	<FAQ />
-	<Newsletter />
+	<LazySection>
+		<Stats />
+	</LazySection>
+
+	<LazySection>
+		<ValueProps />
+	</LazySection>
+
+	<LazySection>
+		<HowItWorks />
+	</LazySection>
+
+	<LazySection>
+		<Categories />
+	</LazySection>
+
+	<LazySection>
+		<FeaturedProducts />
+	</LazySection>
+
+	<LazySection>
+		<TrustSecurity />
+	</LazySection>
+
+	<LazySection>
+		<FeatureComparison />
+	</LazySection>
+
+	<LazySection>
+		<Testimonials />
+	</LazySection>
+
+	<LazySection>
+		<FAQ />
+	</LazySection>
+
+	<LazySection>
+		<Newsletter />
+	</LazySection>
 </main>
 <Footer />
 <MobileBottomNav />
