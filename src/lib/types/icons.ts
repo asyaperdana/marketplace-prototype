@@ -49,4 +49,6 @@ export type IconName =
 	| "instagram"
 	| "facebook"
 	| "twitter"
-	| "youtube";
+	| "youtube"
+	| "x"
+	| "alert";

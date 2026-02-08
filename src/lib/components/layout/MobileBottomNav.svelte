@@ -61,7 +61,7 @@
 						name={item.icon}
 						size={18}
 						ariaLabel={item.label}
-						class="text-slate-200 group-hover:scale-110 transition-transform"
+						className="text-slate-200 group-hover:scale-110 transition-transform"
 					/>
 					<span
 						class="text-[10px] font-bold text-slate-400 group-hover:text-white uppercase tracking-wider"

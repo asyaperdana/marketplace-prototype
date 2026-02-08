@@ -261,15 +261,30 @@
 				<!-- Trust Badges -->
 				<div class="flex flex-wrap gap-4 pt-4">
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<Icon name="check" size={14} ariaLabel="Aman" className="text-emerald-400" />
+						<Icon
+							name="check"
+							size={14}
+							ariaLabel="Aman"
+							className="text-emerald-400"
+						/>
 						Pembayaran Aman
 					</div>
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<Icon name="check" size={14} ariaLabel="Asli" className="text-emerald-400" />
+						<Icon
+							name="check"
+							size={14}
+							ariaLabel="Asli"
+							className="text-emerald-400"
+						/>
 						Garansi Keaslian
 					</div>
 					<div class="flex items-center gap-2 text-sm text-slate-400">
-						<Icon name="check" size={14} ariaLabel="Gratis ongkir" className="text-emerald-400" />
+						<Icon
+							name="check"
+							size={14}
+							ariaLabel="Gratis ongkir"
+							className="text-emerald-400"
+						/>
 						Gratis Ongkir*
 					</div>
 				</div>

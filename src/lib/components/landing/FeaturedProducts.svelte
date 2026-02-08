@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
 	import { resolve } from "$lib/utils";
 	import Icon from "$lib/components/ui/Icon.svelte";

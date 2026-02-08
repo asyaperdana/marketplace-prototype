@@ -3,12 +3,14 @@
 	import { fly, fade } from "svelte/transition";
 	import Icon from "./Icon.svelte";
 
-	const iconMap = {
+	import type { IconName } from "$lib/types/icons";
+
+	const iconMap: Record<string, IconName> = {
 		success: "check",
 		error: "x",
 		warning: "alert",
 		info: "bulb"
-	} as const;
+	};
 
 	const colorMap = {
 		success: "from-emerald-500/90 to-emerald-600/90 border-emerald-400/30",

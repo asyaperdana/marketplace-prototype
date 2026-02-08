@@ -126,7 +126,8 @@ body {
 
 /* Float animation - only runs on desktop */
 @keyframes floatInfinite {
-	0%, 100% {
+	0%,
+	100% {
 		transform: translateY(0px);
 	}
 	50% {
@@ -172,7 +173,9 @@ body {
 	background: rgba(30, 41, 59, 0.8);
 	border: 1px solid rgba(255, 255, 255, 0.05);
 	box-shadow: var(--shadow-lg);
-	transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+	transition:
+		transform 0.2s ease-out,
+		box-shadow 0.2s ease-out;
 }
 
 .glass-card:hover {
@@ -231,7 +234,9 @@ body {
 	padding: 1rem 2rem;
 	font-weight: 700;
 	border-radius: 1.25rem;
-	transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+	transition:
+		transform 0.2s ease-out,
+		box-shadow 0.2s ease-out;
 	cursor: pointer;
 	border: none;
 	text-decoration: none;
@@ -334,4 +339,3 @@ section {
 		display: none !important;
 	}
 }
-
