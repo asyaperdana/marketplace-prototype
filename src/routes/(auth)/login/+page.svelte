@@ -65,7 +65,7 @@
 			<div class="flex items-center justify-between ml-1">
 				<label for="password" class="text-sm font-medium text-slate-300">Password</label>
 				<a
-					href={resolve("/auth/forgot-password")}
+					href={resolve("/forgot-password")}
 					class="text-xs text-primary hover:text-primary-light transition-colors"
 					>Lupa Password?</a
 				>
@@ -115,7 +115,7 @@
 		<p class="text-slate-400">
 			Belum punya akun?
 			<a
-				href={resolve("/auth/register")}
+				href={resolve("/register")}
 				class="text-primary font-bold hover:text-primary-light transition-colors ml-1"
 				>Daftar disini</a
 			>

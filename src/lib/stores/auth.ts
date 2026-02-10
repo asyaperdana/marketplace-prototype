@@ -105,7 +105,7 @@ export async function signInWithProvider(provider: "google" | "github") {
 	const { data, error } = await supabase.auth.signInWithOAuth({
 		provider,
 		options: {
-			redirectTo: `${window.location.origin}/auth/callback/`
+			redirectTo: `${window.location.origin}/callback/`
 		}
 	});
 
@@ -141,7 +141,7 @@ export async function resetPassword(email: string) {
 	authError.set(null);
 
 	const { error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `${window.location.origin}/auth/reset-password/`
+		redirectTo: `${window.location.origin}/reset-password/`
 	});
 
 	if (error) {

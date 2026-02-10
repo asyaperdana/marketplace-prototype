@@ -88,13 +88,13 @@
 				</div>
 			{:else}
 				<a
-					href={resolve("/auth/login")}
+					href={resolve("/login")}
 					class="text-sm font-bold text-slate-300 hover:text-white transition-colors"
 				>
 					Masuk
 				</a>
 				<a
-					href={resolve("/auth/register")}
+					href={resolve("/register")}
 					class="btn btn-primary px-6 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
 				>
 					Daftar
@@ -165,14 +165,13 @@
 				</button>
 			{:else}
 				<a
-					href={resolve("/auth/login")}
-					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg text-center"
-					onclick={closeMobileMenu}
+					href={resolve("/login")}
+					class="text-sm font-bold text-slate-300 hover:text-white transition-colors"
 				>
 					Masuk
 				</a>
 				<a
-					href={resolve("/auth/register")}
+					href={resolve("/register")}
 					class="btn btn-primary w-full py-5 text-xl"
 					onclick={closeMobileMenu}
 				>

@@ -18,13 +18,13 @@
 		// Simple client-side protection
 		// In a real app, use hooks.server.ts for better protection
 		if (!$authLoading && !$isLoggedIn) {
-			goto(resolve("/auth/login"));
+			goto(resolve("/login"));
 		}
 	});
 
 	$effect(() => {
 		if (!$authLoading && !$isLoggedIn) {
-			goto(resolve("/auth/login"));
+			goto(resolve("/login"));
 		}
 	});
 

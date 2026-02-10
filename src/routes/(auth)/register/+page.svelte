@@ -172,7 +172,7 @@
 		<p class="text-slate-400">
 			Sudah punya akun?
 			<a
-				href={resolve("/auth/login")}
+				href={resolve("/login")}
 				class="text-primary font-bold hover:text-primary-light transition-colors ml-1"
 				>Masuk disini</a
 			>
