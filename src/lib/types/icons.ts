@@ -51,4 +51,6 @@ export type IconName =
 	| "twitter"
 	| "youtube"
 	| "x"
-	| "alert";
+	| "alert"
+	| "settings"
+	| "box";

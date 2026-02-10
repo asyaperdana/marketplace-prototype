@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import { resolve } from "$lib/utils";
+	import { isLoggedIn, signOut } from "$lib/stores/auth";
 	import Logo from "../ui/Logo.svelte";
 
 	let isScrolled = $state(false);
@@ -31,6 +32,11 @@
 
 	function closeMobileMenu() {
 		isMobileMenuOpen = false;
+	}
+
+	async function handleLogout() {
+		await signOut();
+		closeMobileMenu();
 	}
 </script>
 
@@ -64,13 +70,36 @@
 		</div>
 
 		<!-- CTA Button -->
-		<div class="hidden lg:block">
-			<a
-				href={resolve("#newsletter")}
-				class="btn btn-primary px-8 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
-			>
-				Mulai Jualan
-			</a>
+		<div class="hidden lg:flex items-center gap-4">
+			{#if $isLoggedIn}
+				<div class="flex items-center gap-4">
+					<a
+						href={resolve("/dashboard")}
+						class="text-sm font-bold text-white hover:text-primary transition-colors"
+					>
+						Dashboard
+					</a>
+					<button
+						onclick={handleLogout}
+						class="btn btn-secondary px-6 py-2 shadow-lg shadow-white/5 bg-white/10 hover:bg-white/20 border border-white/10"
+					>
+						Keluar
+					</button>
+				</div>
+			{:else}
+				<a
+					href={resolve("/auth/login")}
+					class="text-sm font-bold text-slate-300 hover:text-white transition-colors"
+				>
+					Masuk
+				</a>
+				<a
+					href={resolve("/auth/register")}
+					class="btn btn-primary px-6 py-2.5 shadow-lg shadow-primary/20 hover:shadow-primary/40"
+				>
+					Daftar
+				</a>
+			{/if}
 		</div>
 
 		<!-- Mobile Menu Button -->
@@ -120,13 +149,36 @@
 				</a>
 			{/each}
 			<div class="h-px bg-white/10 my-2"></div>
-			<a
-				href={resolve("#newsletter")}
-				class="btn btn-primary w-full py-5 text-xl"
-				onclick={closeMobileMenu}
-			>
-				Mulai Jualan Sekarang
-			</a>
+			{#if $isLoggedIn}
+				<a
+					href={resolve("/dashboard")}
+					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg"
+					onclick={closeMobileMenu}
+				>
+					Dashboard
+				</a>
+				<button
+					class="btn btn-secondary w-full py-5 text-xl bg-white/10 border border-white/10 text-white"
+					onclick={handleLogout}
+				>
+					Keluar
+				</button>
+			{:else}
+				<a
+					href={resolve("/auth/login")}
+					class="px-6 py-4 rounded-2xl text-slate-300 hover:text-white hover:bg-white/10 transition-all font-bold text-lg text-center"
+					onclick={closeMobileMenu}
+				>
+					Masuk
+				</a>
+				<a
+					href={resolve("/auth/register")}
+					class="btn btn-primary w-full py-5 text-xl"
+					onclick={closeMobileMenu}
+				>
+					Daftar Sekarang
+				</a>
+			{/if}
 		</div>
 	</div>
 </nav>
