@@ -11,6 +11,8 @@
 	let isLoading = $state(false);
 	let formError = $state<string | null>(null);
 
+	let success = $state(false);
+
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
 		formError = null;
@@ -35,7 +37,16 @@
 		isLoading = false;
 
 		if (result.success) {
-			goto(resolve("/dashboard"));
+			// Check if we have an active session (auto-login)
+			if (result.data?.session) {
+				goto(resolve("/dashboard"));
+			} else {
+				// Email confirmation required
+				success = true;
+			}
+		} else if (result.error) {
+			// Handle specific errors like 'User already registered'
+			formError = result.error;
 		}
 	}
 </script>
@@ -50,132 +61,151 @@
 		<p class="text-slate-400">Buat akun untuk mulai jual beli barang preloved.</p>
 	</div>
 
-	{#if $authError || formError}
-		<div
-			class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-3"
-		>
-			<Icon name="alert-circle" size={18} class="mt-0.5 shrink-0" />
-			<span>{$authError || formError}</span>
+	{#if success}
+		<div class="text-center py-6">
+			<div
+				class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4"
+			>
+				<Icon name="check-circle" size={32} class="text-green-400" />
+			</div>
+			<h2 class="text-2xl font-bold text-white mb-2">Akun Berhasil Dibuat!</h2>
+			<p class="text-slate-400 mb-6">
+				Silahkan cek email kamu (<span class="text-white font-medium">{email}</span>) untuk
+				verifikasi akun sebelum login.
+			</p>
+			<a href={resolve("/login")} class="btn btn-primary px-8 py-3"> Ke Halaman Login </a>
+		</div>
+	{:else}
+		{#if $authError || formError}
+			<div
+				class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-3"
+			>
+				<Icon name="alert-circle" size={18} class="mt-0.5 shrink-0" />
+				<span>{$authError || formError}</span>
+			</div>
+		{/if}
+
+		<form onsubmit={handleSubmit} class="space-y-4">
+			<!-- Form fields -->
+			<div class="space-y-2">
+				<label for="name" class="text-sm font-medium text-slate-300 ml-1"
+					>Nama Lengkap</label
+				>
+				<div class="relative group">
+					<div
+						class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
+					>
+						<Icon name="user" size={18} />
+					</div>
+					<input
+						type="text"
+						id="name"
+						bind:value={name}
+						required
+						placeholder="Jhon Doe"
+						class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
+					/>
+				</div>
+			</div>
+
+			<div class="space-y-2">
+				<label for="email" class="text-sm font-medium text-slate-300 ml-1">Email</label>
+				<div class="relative group">
+					<div
+						class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
+					>
+						<Icon name="mail" size={18} />
+					</div>
+					<input
+						type="email"
+						id="email"
+						bind:value={email}
+						required
+						placeholder="nama@email.com"
+						class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
+					/>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<div class="space-y-2">
+					<label for="password" class="text-sm font-medium text-slate-300 ml-1"
+						>Password</label
+					>
+					<div class="relative group">
+						<div
+							class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
+						>
+							<Icon name="lock" size={18} />
+						</div>
+						<input
+							type="password"
+							id="password"
+							bind:value={password}
+							required
+							placeholder="••••••••"
+							class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
+						/>
+					</div>
+				</div>
+
+				<div class="space-y-2">
+					<label for="confirmPassword" class="text-sm font-medium text-slate-300 ml-1"
+						>Konfirmasi</label
+					>
+					<div class="relative group">
+						<div
+							class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
+						>
+							<Icon name="check-circle" size={18} />
+						</div>
+						<input
+							type="password"
+							id="confirmPassword"
+							bind:value={confirmPassword}
+							required
+							placeholder="••••••••"
+							class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div class="pt-2">
+				<button
+					type="submit"
+					disabled={isLoading || $authLoading}
+					class={cn(
+						"w-full py-4 rounded-xl font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 relative overflow-hidden group",
+						isLoading || $authLoading
+							? "bg-slate-700 cursor-not-allowed opacity-70"
+							: "bg-linear-to-r from-primary to-secondary hover:scale-[1.02] hover:shadow-primary/40"
+					)}
+				>
+					<span class="relative z-10 flex items-center justify-center gap-2">
+						{#if isLoading || $authLoading}
+							<div
+								class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
+							></div>
+							<span>Membuat Akun...</span>
+						{:else}
+							<span>Daftar Sekarang</span>
+							<Icon name="rocket" size={18} />
+						{/if}
+					</span>
+				</button>
+			</div>
+		</form>
+
+		<div class="mt-8 pt-8 border-t border-white/5 text-center">
+			<p class="text-slate-400">
+				Sudah punya akun?
+				<a
+					href={resolve("/login")}
+					class="text-primary font-bold hover:text-primary-light transition-colors ml-1"
+					>Masuk disini</a
+				>
+			</p>
 		</div>
 	{/if}
-
-	<form onsubmit={handleSubmit} class="space-y-4">
-		<div class="space-y-2">
-			<label for="name" class="text-sm font-medium text-slate-300 ml-1">Nama Lengkap</label>
-			<div class="relative group">
-				<div
-					class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
-				>
-					<Icon name="user" size={18} />
-				</div>
-				<input
-					type="text"
-					id="name"
-					bind:value={name}
-					required
-					placeholder="Jhon Doe"
-					class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
-				/>
-			</div>
-		</div>
-
-		<div class="space-y-2">
-			<label for="email" class="text-sm font-medium text-slate-300 ml-1">Email</label>
-			<div class="relative group">
-				<div
-					class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
-				>
-					<Icon name="mail" size={18} />
-				</div>
-				<input
-					type="email"
-					id="email"
-					bind:value={email}
-					required
-					placeholder="nama@email.com"
-					class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
-				/>
-			</div>
-		</div>
-
-		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-			<div class="space-y-2">
-				<label for="password" class="text-sm font-medium text-slate-300 ml-1"
-					>Password</label
-				>
-				<div class="relative group">
-					<div
-						class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
-					>
-						<Icon name="lock" size={18} />
-					</div>
-					<input
-						type="password"
-						id="password"
-						bind:value={password}
-						required
-						placeholder="••••••••"
-						class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
-					/>
-				</div>
-			</div>
-
-			<div class="space-y-2">
-				<label for="confirmPassword" class="text-sm font-medium text-slate-300 ml-1"
-					>Konfirmasi</label
-				>
-				<div class="relative group">
-					<div
-						class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500 group-focus-within:text-primary transition-colors"
-					>
-						<Icon name="check-circle" size={18} />
-					</div>
-					<input
-						type="password"
-						id="confirmPassword"
-						bind:value={confirmPassword}
-						required
-						placeholder="••••••••"
-						class="w-full pl-11 pr-4 py-3.5 rounded-xl bg-dark-lighter/50 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-hidden transition-all"
-					/>
-				</div>
-			</div>
-		</div>
-
-		<div class="pt-2">
-			<button
-				type="submit"
-				disabled={isLoading || $authLoading}
-				class={cn(
-					"w-full py-4 rounded-xl font-bold text-white shadow-lg shadow-primary/25 transition-all duration-300 relative overflow-hidden group",
-					isLoading || $authLoading
-						? "bg-slate-700 cursor-not-allowed opacity-70"
-						: "bg-linear-to-r from-primary to-secondary hover:scale-[1.02] hover:shadow-primary/40"
-				)}
-			>
-				<span class="relative z-10 flex items-center justify-center gap-2">
-					{#if isLoading || $authLoading}
-						<div
-							class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
-						></div>
-						<span>Membuat Akun...</span>
-					{:else}
-						<span>Daftar Sekarang</span>
-						<Icon name="rocket" size={18} />
-					{/if}
-				</span>
-			</button>
-		</div>
-	</form>
-
-	<div class="mt-8 pt-8 border-t border-white/5 text-center">
-		<p class="text-slate-400">
-			Sudah punya akun?
-			<a
-				href={resolve("/login")}
-				class="text-primary font-bold hover:text-primary-light transition-colors ml-1"
-				>Masuk disini</a
-			>
-		</p>
-	</div>
 </div>
