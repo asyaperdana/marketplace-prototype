@@ -66,7 +66,7 @@
 			<div
 				class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4"
 			>
-				<Icon name="check-circle" size={32} class="text-green-400" />
+				<Icon name="check-circle" size={32} className="text-green-400" />
 			</div>
 			<h2 class="text-2xl font-bold text-white mb-2">Akun Berhasil Dibuat!</h2>
 			<p class="text-slate-400 mb-6">
@@ -80,7 +80,7 @@
 			<div
 				class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-3"
 			>
-				<Icon name="alert-circle" size={18} class="mt-0.5 shrink-0" />
+				<Icon name="alert-circle" size={18} className="mt-0.5 shrink-0" />
 				<span>{$authError || formError}</span>
 			</div>
 		{/if}

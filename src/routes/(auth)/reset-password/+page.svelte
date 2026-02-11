@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import { resolve, cn } from "$lib/utils";
-	import { getSupabase } from "$lib/services/supabase";
-	import { authError } from "$lib/stores/auth";
+	import { updatePassword } from "$lib/stores/auth";
 	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let password = $state("");
@@ -18,18 +17,13 @@
 		}
 
 		isLoading = true;
-		const supabase = getSupabase();
+		const result = await updatePassword(password);
 
-		if (supabase) {
-			const { error } = await supabase.auth.updateUser({ password });
-			if (error) {
-				message = error.message;
-			} else {
-				message = "Password berhasil diubah!";
-				setTimeout(() => goto(resolve("/dashboard")), 2000);
-			}
+		if (result.success) {
+			message = "Password berhasil diubah!";
+			setTimeout(() => goto(resolve("/dashboard")), 2000);
 		} else {
-			message = "Supabase belum dikonfigurasi.";
+			message = result.error ?? "Terjadi kesalahan";
 		}
 
 		isLoading = false;
@@ -55,7 +49,7 @@
 			<Icon
 				name={message.includes("berhasil") ? "check-circle" : "alert-circle"}
 				size={18}
-				class="mt-0.5 shrink-0"
+				className="mt-0.5 shrink-0"
 			/>
 			<span>{message}</span>
 		</div>

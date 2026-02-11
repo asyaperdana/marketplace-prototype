@@ -68,9 +68,9 @@
 					<div
 						class="w-full h-full rounded-full bg-dark-deep flex items-center justify-center overflow-hidden"
 					>
-						{#if $authUser?.user_metadata?.avatar_url}
+						{#if $authUser?.avatarUrl}
 							<img
-								src={$authUser.user_metadata.avatar_url}
+								src={$authUser.avatarUrl}
 								alt="Profile"
 								class="w-full h-full object-cover"
 							/>
@@ -81,7 +81,7 @@
 				</div>
 				<div>
 					<h1 class="text-2xl font-bold text-white">
-						Halo, {$authUser?.user_metadata?.name || $authUser?.email || "User"}! 👋
+						Halo, {$authUser?.name || $authUser?.email || "User"}! 👋
 					</h1>
 					<p class="text-slate-400">Selamat datang di dashboard kamu.</p>
 				</div>

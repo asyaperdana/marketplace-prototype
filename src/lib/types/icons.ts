@@ -53,4 +53,9 @@ export type IconName =
 	| "x"
 	| "alert"
 	| "settings"
-	| "box";
+	| "box"
+	| "check-circle"
+	| "alert-circle"
+	| "mail"
+	| "arrow-right"
+	| "arrow-left";

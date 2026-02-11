@@ -1,133 +1,76 @@
 // =============================================
-// Okis Garage Sale - Auth Store (Supabase)
+// Okis Garage Sale - Auth Store
 // =============================================
+// Svelte stores for authentication state.
+// Delegates all auth operations to the auth repository.
+// [SUPABASE-RECONNECT] No changes needed here — swap the
+// repository implementation in provider.ts instead.
 
 import { writable, derived } from "svelte/store";
-import { getSupabase, isSupabaseReady } from "$lib/services/supabase";
-import type { User as SupabaseUser, Session } from "@supabase/supabase-js";
+import { authRepository } from "$lib/repositories/provider";
+import type { AuthUser } from "$lib/repositories/repository";
 
 // ----- Auth State -----
-export const session = writable<Session | null>(null);
-export const authUser = writable<SupabaseUser | null>(null);
+export const authUser = writable<AuthUser | null>(null);
 export const authLoading = writable<boolean>(true);
 export const authError = writable<string | null>(null);
 
-export const isLoggedIn = derived(session, ($session) => $session !== null);
+export const isLoggedIn = derived(authUser, ($authUser) => $authUser !== null);
 
 // ----- Initialize Auth Listener -----
 export function initAuth(): () => void {
-	if (!isSupabaseReady()) {
-		authLoading.set(false);
-		return () => {};
-	}
-
-	const supabase = getSupabase()!;
-
-	// Get initial session
-	supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
-		session.set(currentSession);
-		authUser.set(currentSession?.user ?? null);
+	const unsubscribe = authRepository.onAuthStateChange((user) => {
+		authUser.set(user);
 		authLoading.set(false);
 	});
 
-	// Listen for auth changes (login, logout, token refresh)
-	const {
-		data: { subscription }
-	} = supabase.auth.onAuthStateChange((_event, newSession) => {
-		session.set(newSession);
-		authUser.set(newSession?.user ?? null);
-		authLoading.set(false);
-	});
-
-	return () => {
-		subscription.unsubscribe();
-	};
+	return unsubscribe;
 }
 
 // ----- Auth Actions -----
 
 /** Sign up with email and password */
 export async function signUp(email: string, password: string, name: string) {
-	const supabase = getSupabase();
-	if (!supabase) return { success: false, error: "Supabase not configured" };
-
 	authError.set(null);
 	authLoading.set(true);
 
-	const { data, error } = await supabase.auth.signUp({
-		email,
-		password,
-		options: {
-			data: { name }
-		}
-	});
+	const result = await authRepository.signUp(email, password, name);
 
-	if (error) {
-		authError.set(error.message);
+	if (!result.success) {
+		authError.set(result.error ?? "Terjadi kesalahan");
 		authLoading.set(false);
-		return { success: false, error: error.message };
+		return { success: false, error: result.error };
 	}
 
 	authLoading.set(false);
-	return { success: true, data };
+	return { success: true, data: result.data };
 }
 
 /** Sign in with email and password */
 export async function signIn(email: string, password: string) {
-	const supabase = getSupabase();
-	if (!supabase) return { success: false, error: "Supabase not configured" };
-
 	authError.set(null);
 	authLoading.set(true);
 
-	const { data, error } = await supabase.auth.signInWithPassword({
-		email,
-		password
-	});
+	const result = await authRepository.signIn(email, password);
 
-	if (error) {
-		authError.set(error.message);
+	if (!result.success) {
+		authError.set(result.error ?? "Terjadi kesalahan");
 		authLoading.set(false);
-		return { success: false, error: error.message };
+		return { success: false, error: result.error };
 	}
 
 	authLoading.set(false);
-	return { success: true, data };
-}
-
-/** Sign in with OAuth provider (Google, GitHub, etc.) */
-export async function signInWithProvider(provider: "google" | "github") {
-	const supabase = getSupabase();
-	if (!supabase) return { success: false, error: "Supabase not configured" };
-
-	authError.set(null);
-
-	const { data, error } = await supabase.auth.signInWithOAuth({
-		provider,
-		options: {
-			redirectTo: `${window.location.origin}/callback/`
-		}
-	});
-
-	if (error) {
-		authError.set(error.message);
-		return { success: false, error: error.message };
-	}
-
-	return { success: true, data };
+	return { success: true, data: result.data };
 }
 
 /** Sign out */
 export async function signOut() {
-	const supabase = getSupabase();
-	if (!supabase) return { success: false, error: "Supabase not configured" };
-
 	authError.set(null);
-	const { error } = await supabase.auth.signOut();
+	const result = await authRepository.signOut();
 
-	if (error) {
-		authError.set(error.message);
-		return { success: false, error: error.message };
+	if (!result.success) {
+		authError.set(result.error ?? "Terjadi kesalahan");
+		return { success: false, error: result.error };
 	}
 
 	return { success: true };
@@ -135,18 +78,27 @@ export async function signOut() {
 
 /** Reset password */
 export async function resetPassword(email: string) {
-	const supabase = getSupabase();
-	if (!supabase) return { success: false, error: "Supabase not configured" };
-
 	authError.set(null);
 
-	const { error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `${window.location.origin}/reset-password/`
-	});
+	const result = await authRepository.resetPassword(email);
 
-	if (error) {
-		authError.set(error.message);
-		return { success: false, error: error.message };
+	if (!result.success) {
+		authError.set(result.error ?? "Terjadi kesalahan");
+		return { success: false, error: result.error };
+	}
+
+	return { success: true };
+}
+
+/** Update password (requires active session) */
+export async function updatePassword(newPassword: string) {
+	authError.set(null);
+
+	const result = await authRepository.updatePassword(newPassword);
+
+	if (!result.success) {
+		authError.set(result.error ?? "Terjadi kesalahan");
+		return { success: false, error: result.error };
 	}
 
 	return { success: true };

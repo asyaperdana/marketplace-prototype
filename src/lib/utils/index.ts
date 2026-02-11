@@ -3,6 +3,15 @@
 import { base } from "$app/paths";
 
 /**
+ * Simulate network delay for mock operations
+ * @param ms Duration in milliseconds (default: rand 300-800ms)
+ */
+export function delay(ms?: number): Promise<void> {
+	const duration = ms ?? Math.floor(Math.random() * 500) + 300;
+	return new Promise((resolve) => setTimeout(resolve, duration));
+}
+
+/**
  * Format number to Indonesian Rupiah currency
  */
 export function formatCurrency(amount: number): string {

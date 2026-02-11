@@ -36,7 +36,7 @@
 		<div
 			class="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-3"
 		>
-			<Icon name="alert-circle" size={18} class="mt-0.5 shrink-0" />
+			<Icon name="alert-circle" size={18} className="mt-0.5 shrink-0" />
 			<span>{$authError}</span>
 		</div>
 	{/if}

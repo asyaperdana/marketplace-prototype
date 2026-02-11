@@ -209,5 +209,132 @@ export const mockProducts: Product[] = [
 		sellerId: "user_011",
 		location: "Bogor",
 		createdAt: "2024-03-12"
+	}),
+	createProduct({
+		id: "prod_013",
+		title: "Samsung Galaxy S22 Ultra",
+		description:
+			"Samsung S22 Ultra 5G 256GB Burgundy. Ex Garansi SEIN. Mulus 99% like new, plastik bezel masih nempel. S-Pen lancar jaya. Kamera zoom 100x mantap. Fullset original.",
+		price: 11500000,
+		originalPrice: 17999000,
+		images: [
+			"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80"
+		],
+		category: "electronics",
+		condition: "like_new",
+		sellerId: "user_002",
+		location: "Surabaya",
+		createdAt: "2024-03-13"
+	}),
+	createProduct({
+		id: "prod_014",
+		title: "Keyboard Mechanical Keychron K2",
+		description:
+			"Keychron K2 V2 Wireless Mechanical Keyboard. Gateron Brown Switch. RGB Backlight. Aluminum frame. Hot-swappable. Baterai awet, bluetooth lancar. Keycaps PBT double shot.",
+		price: 1200000,
+		originalPrice: 1600000,
+		images: [
+			"https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&q=80"
+		],
+		category: "electronics",
+		condition: "good",
+		sellerId: "user_003",
+		location: "Bandung",
+		createdAt: "2024-03-14"
+	}),
+	createProduct({
+		id: "prod_015",
+		title: "Levi's 501 Original Jeans",
+		description:
+			"Celana Jeans Levi's 501 Original 100%. Button fly. Size W32 L32. Warna biru dongker (Dark Stonewash). Baru sekali pakai, dijual karena kekecilan (salah size). Masih ada tag.",
+		price: 650000,
+		originalPrice: 999000,
+		images: [
+			"https://images.unsplash.com/photo-1542272617-08f08375810c?w=800&q=80"
+		],
+		category: "fashion",
+		condition: "like_new",
+		sellerId: "user_004",
+		location: "Jakarta",
+		createdAt: "2024-03-15"
+	}),
+	createProduct({
+		id: "prod_016",
+		title: "Tas Carrier Eiger 60L",
+		description:
+			"Carrier Eiger Rhinos 60L. Backsystem nyaman, busa tebal. Belum pernah dipakai naik gunung, cuma tes fitting di rumah. Include rain cover original. Cocok buat pendaki pemula.",
+		price: 850000,
+		originalPrice: 1200000,
+		images: [
+			"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800&q=80"
+		],
+		category: "hobbies",
+		condition: "like_new",
+		sellerId: "user_005",
+		location: "Malang",
+		createdAt: "2024-03-16"
+	}),
+	createProduct({
+		id: "prod_017",
+		title: "Sepatu Running Adidas Ultraboost",
+		description:
+			"Adidas Ultraboost 21. Size 43. Warna Hitam Putih. Boost empuk banget, enak buat lari jarak jauh atau jalan santai. Outsole Continental masih tebal. Box replacement.",
+		price: 1100000,
+		originalPrice: 2800000,
+		images: [
+			"https://images.unsplash.com/photo-1587563871167-1ee9c731aef4?w=800&q=80"
+		],
+		category: "fashion",
+		condition: "good",
+		sellerId: "user_006",
+		location: "Yogyakarta",
+		createdAt: "2024-03-17"
+	}),
+	createProduct({
+		id: "prod_018",
+		title: "Meja Belajar Minimalis",
+		description:
+			"Meja belajar/kerja gaya scandinavian. Kaki kayu solid jati belanda, top table MDF duco putih. Ada laci 2 buah. Ukuran 120x60cm. Kondisi masih bagus, cuma ada noda tinta dikit di pojok.",
+		price: 450000,
+		images: [
+			"https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800&q=80"
+		],
+		category: "home",
+		condition: "fair",
+		sellerId: "user_007",
+		location: "Depok",
+		createdAt: "2024-03-18"
+	}),
+	createProduct({
+		id: "prod_019",
+		title: "Mainan LEGO Star Wars",
+		description:
+			"LEGO Star Wars 75300 Imperial TIE Fighter. MIB (Mint In Box), segel utuh belum rakit. Cocok buat koleksi atau kado. Dijual murah BU.",
+		price: 600000,
+		originalPrice: 750000,
+		images: [
+			"https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=800&q=80"
+		],
+		category: "hobbies",
+		condition: "new",
+		sellerId: "user_008",
+		location: "Tangerang",
+		createdAt: "2024-03-19"
+	}),
+	createProduct({
+		id: "prod_020",
+		title: "Helm KYT NF-R",
+		description:
+			"Helm Fullface KYT NF-R Motif Espargaro. Size L. Double visor lancar. Busa pipi masih kencang. Visor clear ada baret halus pemakaian, dark visor aman. Include sarung helm.",
+		price: 1300000,
+		originalPrice: 2200000,
+		images: [
+			"https://images.unsplash.com/photo-1558507308-417105cb0317?w=800&q=80"
+		],
+		category: "vehicles",
+		condition: "good",
+		sellerId: "user_009",
+		location: "Bekasi",
+		createdAt: "2024-03-20"
 	})
 ];
