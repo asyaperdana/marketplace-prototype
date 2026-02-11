@@ -7,6 +7,7 @@
 		formatRelativeTime,
 		getConditionLabel,
 		calculateDiscount,
+		getFallbackImage,
 		cn
 	} from "$lib/utils";
 
@@ -32,7 +33,7 @@
 	<!-- Image Container -->
 	<div class="relative aspect-square overflow-hidden bg-slate-100">
 		<img
-			src={product.images[0] || "/images/placeholder.png"}
+			src={product.images[0] || getFallbackImage(product.category)}
 			alt={product.title}
 			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
 			loading="lazy"

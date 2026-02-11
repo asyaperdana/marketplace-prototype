@@ -14,7 +14,7 @@
 	const products: Product[] = [
 		{
 			id: 1,
-			image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "Zara Floral Dress Original",
 			price: 250000,
 			originalPrice: 899000,
@@ -27,7 +27,7 @@
 		},
 		{
 			id: 2,
-			image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "iPhone 13 Pro 256GB",
 			price: 9500000,
 			originalPrice: 16999000,
@@ -40,7 +40,7 @@
 		},
 		{
 			id: 3,
-			image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "Nike Air Jordan 1 Low",
 			price: 1200000,
 			originalPrice: 2499000,
@@ -52,7 +52,7 @@
 		},
 		{
 			id: 4,
-			image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "MacBook Air M1 2020",
 			price: 8500000,
 			originalPrice: 14999000,
@@ -65,7 +65,7 @@
 		},
 		{
 			id: 5,
-			image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "Coach Tote Bag Authentic",
 			price: 1800000,
 			originalPrice: 4500000,
@@ -77,7 +77,7 @@
 		},
 		{
 			id: 6,
-			image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "PlayStation 5 + 2 Game",
 			price: 6500000,
 			originalPrice: 9999000,
@@ -90,7 +90,7 @@
 		},
 		{
 			id: 7,
-			image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "Koleksi Novel Tere Liye",
 			price: 350000,
 			originalPrice: 750000,
@@ -101,7 +101,7 @@
 		},
 		{
 			id: 8,
-			image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=400&fit=crop&q=80",
+			image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=400&fit=crop&q=80", // Unsplash
 			title: "Apple Watch Series 7",
 			price: 3200000,
 			originalPrice: 5999000,
