@@ -1,0 +1,76 @@
+
+> marketplace-prototype@0.0.1 build
+> svelte-kit sync && vite build
+
+vite v7.3.1 building ssr environment for production...
+transforming...
+✓ 254 modules transformed.
+rendering chunks...
+vite v7.3.1 building client environment for production...
+transforming...
+✓ 233 modules transformed.
+rendering chunks...
+computing gzip size...
+.svelte-kit/output/client/_app/version.json                        0.03 kB │ gzip:  0.05 kB
+.svelte-kit/output/client/.vite/manifest.json                     10.14 kB │ gzip:  1.32 kB
+.svelte-kit/output/client/_app/immutable/assets/9.BGVGfX_W.css     0.20 kB │ gzip:  0.14 kB
+.svelte-kit/output/client/_app/immutable/assets/3.CbTya4iW.css     4.60 kB │ gzip:  1.24 kB
+.svelte-kit/output/client/_app/immutable/assets/0.SFvlEG4D.css    91.08 kB │ gzip: 13.55 kB
+.svelte-kit/output/client/_app/immutable/chunks/Dscv48SZ.js        0.04 kB │ gzip:  0.06 kB
+.svelte-kit/output/client/_app/immutable/entry/start.DOH5FheG.js   0.08 kB │ gzip:  0.09 kB
+.svelte-kit/output/client/_app/immutable/chunks/B3oTnK50.js        0.12 kB │ gzip:  0.10 kB
+.svelte-kit/output/client/_app/immutable/chunks/D9Z0U7TT.js        0.19 kB │ gzip:  0.17 kB
+.svelte-kit/output/client/_app/immutable/chunks/DLT6Dt7I.js        0.26 kB │ gzip:  0.20 kB
+.svelte-kit/output/client/_app/immutable/chunks/D7KY0vqx.js        0.30 kB │ gzip:  0.22 kB
+.svelte-kit/output/client/_app/immutable/chunks/DG41Jia5.js        0.32 kB │ gzip:  0.25 kB
+.svelte-kit/output/client/_app/immutable/chunks/BUApaBEI.js        0.49 kB │ gzip:  0.30 kB
+.svelte-kit/output/client/_app/immutable/chunks/CHNsn1RS.js        0.52 kB │ gzip:  0.33 kB
+.svelte-kit/output/client/_app/immutable/nodes/1.fUQZMufO.js       0.55 kB │ gzip:  0.35 kB
+.svelte-kit/output/client/_app/immutable/chunks/BZM-TSQV.js        0.72 kB │ gzip:  0.35 kB
+.svelte-kit/output/client/_app/immutable/chunks/DUxx2K6Q.js        0.82 kB │ gzip:  0.45 kB
+.svelte-kit/output/client/_app/immutable/chunks/Bg18SF6m.js        1.12 kB │ gzip:  0.65 kB
+.svelte-kit/output/client/_app/immutable/chunks/CvLFTao9.js        1.15 kB │ gzip:  0.41 kB
+.svelte-kit/output/client/_app/immutable/chunks/B9VzjFq4.js        1.30 kB │ gzip:  0.70 kB
+.svelte-kit/output/client/_app/immutable/chunks/XiaexoDr.js        1.39 kB │ gzip:  0.64 kB
+.svelte-kit/output/client/_app/immutable/chunks/D0O-jtZB.js        1.53 kB │ gzip:  0.67 kB
+.svelte-kit/output/client/_app/immutable/chunks/DfkeVwQk.js        1.84 kB │ gzip:  1.00 kB
+.svelte-kit/output/client/_app/immutable/nodes/2.DolHx4g-.js       1.85 kB │ gzip:  0.94 kB
+.svelte-kit/output/client/_app/immutable/chunks/DBClS0xG.js        3.14 kB │ gzip:  1.55 kB
+.svelte-kit/output/client/_app/immutable/chunks/Di3P1-kz.js        3.40 kB │ gzip:  1.73 kB
+.svelte-kit/output/client/_app/immutable/nodes/4.CKygWJii.js       3.75 kB │ gzip:  1.76 kB
+.svelte-kit/output/client/_app/immutable/chunks/Cbu2djeZ.js        3.82 kB │ gzip:  1.81 kB
+.svelte-kit/output/client/_app/immutable/nodes/8.BKNXLgwo.js       3.94 kB │ gzip:  1.80 kB
+.svelte-kit/output/client/_app/immutable/nodes/7.DKeWCslF.js       4.01 kB │ gzip:  1.76 kB
+.svelte-kit/output/client/_app/immutable/nodes/5.CtCksg1y.js       4.30 kB │ gzip:  1.89 kB
+.svelte-kit/output/client/_app/immutable/nodes/0.B_4dhqS6.js       4.64 kB │ gzip:  2.12 kB
+.svelte-kit/output/client/_app/immutable/nodes/6.CYHvKi04.js       6.69 kB │ gzip:  2.49 kB
+.svelte-kit/output/client/_app/immutable/chunks/HXwSrE-K.js        7.72 kB │ gzip:  3.39 kB
+.svelte-kit/output/client/_app/immutable/entry/app.BB8QoTQ4.js     7.79 kB │ gzip:  3.21 kB
+.svelte-kit/output/client/_app/immutable/nodes/10.De0Xv8P0.js      9.59 kB │ gzip:  3.64 kB
+.svelte-kit/output/client/_app/immutable/nodes/9.BP9DWVIL.js      12.73 kB │ gzip:  4.91 kB
+.svelte-kit/output/client/_app/immutable/chunks/BrFkxeT0.js       21.86 kB │ gzip:  8.70 kB
+.svelte-kit/output/client/_app/immutable/chunks/CTTQ0Zs9.js       27.12 kB │ gzip: 10.67 kB
+.svelte-kit/output/client/_app/immutable/chunks/C2yXdDK8.js       32.27 kB │ gzip: 11.91 kB
+.svelte-kit/output/client/_app/immutable/nodes/3.BVWxx6vA.js      92.66 kB │ gzip: 25.17 kB
+✓ built in 9.91s
+
+node:internal/event_target:1105
+  process.nextTick(() => { throw err; });
+                           ^
+Error: The following routes were marked as prerenderable, but were not prerendered because they were not found while crawling your app:
+  - /products/[id]
+
+See the `handleUnseenRoutes` option in https://svelte.dev/docs/kit/configuration#prerender for more info.
+To suppress or handle this error, implement `handleUnseenRoutes` in https://svelte.dev/docs/kit/configuration#prerender
+    at file:///home/asya/marketplace-prototype/node_modules/@sveltejs/kit/src/core/config/options.js:263:13
+    at file:///home/asya/marketplace-prototype/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:75:25
+    at prerender (file:///home/asya/marketplace-prototype/node_modules/@sveltejs/kit/src/core/postbuild/prerender.js:589:3)
+    at async MessagePort.<anonymous> (file:///home/asya/marketplace-prototype/node_modules/@sveltejs/kit/src/utils/fork.js:23:16)
+Emitted 'error' event on Worker instance at:
+    at [kOnErrorMessage] (node:internal/worker:333:10)
+    at [kOnMessage] (node:internal/worker:344:37)
+    at MessagePort.<anonymous> (node:internal/worker:233:57)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:831:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+
+Node.js v20.20.0
