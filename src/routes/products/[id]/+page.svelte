@@ -1,14 +1,39 @@
 <script lang="ts">
 	import { cart } from "$lib/stores";
-	import { formatCurrency, getConditionLabel, formatRelativeTime, resolve } from "$lib/utils";
+	import {
+		formatCurrency,
+		getConditionLabel,
+		formatRelativeTime,
+		resolve,
+		getFallbackImage
+	} from "$lib/utils";
 	import { toasts } from "$lib/stores";
 	import Icon from "$lib/components/ui/Icon.svelte";
 	import type { PageData } from "./$types";
+
+	const GENERIC_FALLBACK =
+		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80";
 
 	let { data }: { data: PageData } = $props();
 	let product = $derived(data.product);
 	let quantity = $state(1);
 	let selectedImageIndex = $state(0);
+	let mainImageRetried = $state(false);
+
+	function handleMainImageError(event: Event) {
+		const img = event.currentTarget as HTMLImageElement;
+		if (!mainImageRetried) {
+			mainImageRetried = true;
+			img.src = getFallbackImage(product.category);
+		} else {
+			img.src = GENERIC_FALLBACK;
+		}
+	}
+
+	function handleThumbError(event: Event) {
+		const img = event.currentTarget as HTMLImageElement;
+		img.src = getFallbackImage(product.category);
+	}
 
 	function addToCart() {
 		cart.addItem(product, quantity);
@@ -83,10 +108,12 @@
 					class="relative aspect-square rounded-4xl overflow-hidden glass border border-white/10 group"
 				>
 					<img
-						src={product.images[selectedImageIndex] || "/images/placeholder.png"}
+						src={product.images[selectedImageIndex] ||
+							getFallbackImage(product.category)}
 						alt={product.title}
 						class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
 						decoding="async"
+						onerror={handleMainImageError}
 					/>
 					<!-- Discount Badge -->
 					{#if product.originalPrice && product.originalPrice > product.price}
@@ -128,6 +155,7 @@
 									class="w-full h-full object-cover"
 									loading="lazy"
 									decoding="async"
+									onerror={handleThumbError}
 								/>
 							</button>
 						{/each}

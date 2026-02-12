@@ -11,6 +11,9 @@
 		cn
 	} from "$lib/utils";
 
+	const GENERIC_FALLBACK =
+		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80";
+
 	interface Props {
 		product: Product;
 		class?: string;
@@ -21,6 +24,24 @@
 	const discount = $derived(
 		product.originalPrice ? calculateDiscount(product.originalPrice, product.price) : 0
 	);
+
+	let fallbackOverride = $state<string | null>(null);
+	let retried = $state(false);
+	const imgSrc = $derived(
+		fallbackOverride ?? product.images[0] ?? getFallbackImage(product.category)
+	);
+
+	function handleImageError(event: Event) {
+		const img = event.currentTarget as HTMLImageElement;
+		if (!retried) {
+			retried = true;
+			fallbackOverride = getFallbackImage(product.category);
+			img.src = fallbackOverride;
+		} else {
+			fallbackOverride = GENERIC_FALLBACK;
+			img.src = GENERIC_FALLBACK;
+		}
+	}
 </script>
 
 <a
@@ -33,11 +54,12 @@
 	<!-- Image Container -->
 	<div class="relative aspect-square overflow-hidden bg-slate-100">
 		<img
-			src={product.images[0] || getFallbackImage(product.category)}
+			src={imgSrc}
 			alt={product.title}
 			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
 			loading="lazy"
 			decoding="async"
+			onerror={handleImageError}
 		/>
 
 		{#if discount > 0}

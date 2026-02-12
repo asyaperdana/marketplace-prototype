@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Icon from "./Icon.svelte";
 
+	const GENERIC_FALLBACK =
+		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80";
+
 	interface Props {
 		src: string;
 		alt: string;
@@ -10,6 +13,7 @@
 		loading?: "lazy" | "eager";
 		decoding?: "async" | "auto" | "sync";
 		objectFit?: "cover" | "contain" | "fill" | "none";
+		fallbackSrc?: string;
 	}
 
 	let {
@@ -20,25 +24,36 @@
 		sizes = "100vw",
 		loading = "lazy",
 		decoding = "async",
-		objectFit = "cover"
+		objectFit = "cover",
+		fallbackSrc = GENERIC_FALLBACK
 	}: Props = $props();
 
 	let isLoaded = $state(false);
 	let hasError = $state(false);
+	let fallbackOverride = $state<string | null>(null);
+	let retried = $state(false);
+	const currentSrc = $derived(fallbackOverride ?? src);
 
 	function handleLoad() {
 		isLoaded = true;
 	}
 
-	function handleError() {
-		hasError = true;
+	function handleError(event: Event) {
+		if (!retried) {
+			retried = true;
+			fallbackOverride = fallbackSrc;
+			const img = event.currentTarget as HTMLImageElement;
+			img.src = fallbackOverride;
+		} else {
+			hasError = true;
+		}
 	}
 </script>
 
 <div class="responsive-image-container {className}" style="aspect-ratio: {aspectRatio}">
 	{#if !hasError}
 		<img
-			{src}
+			src={currentSrc}
 			{alt}
 			{sizes}
 			{loading}
