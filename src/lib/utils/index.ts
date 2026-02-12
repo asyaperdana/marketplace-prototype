@@ -157,6 +157,20 @@ export function getConditionLabel(condition: string): string {
 }
 
 /**
+ * Get condition badge color (hex) for display
+ */
+export function getConditionColor(condition: string): string {
+	switch (condition) {
+		case "new":
+			return "#10B981";
+		case "like_new":
+			return "#7C3AED";
+		default:
+			return "#F97316";
+	}
+}
+
+/**
  * Calculate discount percentage
  */
 export function calculateDiscount(originalPrice: number, currentPrice: number): number {

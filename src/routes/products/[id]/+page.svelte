@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cart } from "$lib/stores";
+	import { addToCart } from "$lib/services/cart";
 	import {
 		formatCurrency,
 		getConditionLabel,
@@ -7,7 +7,6 @@
 		resolve,
 		getFallbackImage
 	} from "$lib/utils";
-	import { toasts } from "$lib/stores";
 	import Icon from "$lib/components/ui/Icon.svelte";
 	import type { PageData } from "./$types";
 
@@ -35,13 +34,8 @@
 		img.src = getFallbackImage(product.category);
 	}
 
-	function addToCart() {
-		cart.addItem(product, quantity);
-		toasts.add({
-			type: "success",
-			message: `${product.title} ditambahkan ke keranjang`,
-			duration: 3000
-		});
+	function handleAddToCart() {
+		addToCart(product, quantity);
 	}
 
 	function increment() {
@@ -272,7 +266,7 @@
 					<!-- Action Buttons -->
 					<div class="flex gap-4">
 						<button
-							onclick={addToCart}
+							onclick={handleAddToCart}
 							class="flex-1 py-4 px-8 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-primary/30 flex items-center justify-center gap-3"
 						>
 							<Icon name="cart" size={18} ariaLabel="Tambah ke keranjang" />

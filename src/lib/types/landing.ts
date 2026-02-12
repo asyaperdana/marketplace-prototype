@@ -1,19 +1,5 @@
 import type { IconName } from "$lib/types/icons";
 
-export interface Product {
-	id: number;
-	image: string;
-	title: string;
-	price: number;
-	originalPrice: number;
-	condition: "Baru" | "Seperti Baru" | "Bekas";
-	seller: string;
-	location: string;
-	rating: number;
-	stock?: number;
-	viewers?: number;
-}
-
 export interface FilterTab {
 	id: string;
 	label: string;

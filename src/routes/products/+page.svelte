@@ -1,44 +1,25 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { config } from "$lib/config";
-	import { mockProducts } from "$lib/data/mock-products";
 	import ProductCard from "$lib/components/product/ProductCard.svelte";
 	import { cn, resolve } from "$lib/utils";
 	import Icon from "$lib/components/ui/Icon.svelte";
+	import {
+		filteredProducts,
+		allProducts,
+		productFilters,
+		isLoading,
+		error as productsError,
+		loadProducts,
+		setSearchQuery,
+		setCategory,
+		setSortBy,
+		resetFilters
+	} from "$lib/stores/products";
 
-	let searchQuery = $state("");
-	let selectedCategory = $state<string>("all");
-	let sortBy = $state<"newest" | "price_low" | "price_high">("newest");
-
-	let filteredProducts = $derived.by(() => {
-		let result = [...mockProducts];
-
-		if (selectedCategory !== "all") {
-			result = result.filter((p) => p.category === selectedCategory);
-		}
-
-		if (searchQuery.trim()) {
-			const q = searchQuery.toLowerCase();
-			result = result.filter(
-				(p) => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
-			);
-		}
-
-		if (sortBy === "price_low") {
-			result.sort((a, b) => a.price - b.price);
-		} else if (sortBy === "price_high") {
-			result.sort((a, b) => b.price - a.price);
-		} else {
-			result.sort(
-				(a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-			);
-		}
-
-		return result;
+	onMount(() => {
+		loadProducts();
 	});
-
-	function handleCategoryClick(categoryId: string) {
-		selectedCategory = categoryId;
-	}
 </script>
 
 <svelte:head>
@@ -107,14 +88,16 @@
 						</div>
 						<input
 							type="text"
-							bind:value={searchQuery}
+							value={$productFilters.searchQuery}
+							oninput={(e) => setSearchQuery(e.currentTarget.value)}
 							placeholder="Cari barang impian..."
 							class="w-full pl-12 pr-4 py-4 rounded-2xl bg-dark-lighter/80 border border-white/10 text-white placeholder-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all backdrop-blur-sm"
 						/>
 					</div>
 
 					<select
-						bind:value={sortBy}
+						value={$productFilters.sortBy}
+						onchange={(e) => setSortBy(e.currentTarget.value as any)}
 						class="px-4 py-4 rounded-2xl bg-dark-lighter/80 border border-white/10 text-white cursor-pointer focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all backdrop-blur-sm"
 					>
 						<option value="newest">Terbaru</option>
@@ -142,11 +125,11 @@
 						<button
 							class={cn(
 								"px-5 py-3 rounded-xl text-sm font-bold transition-all duration-300 whitespace-nowrap flex items-center gap-3",
-								selectedCategory === "all"
+								$productFilters.category === "all"
 									? "bg-linear-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30"
 									: "bg-dark-lighter text-slate-400 hover:text-white hover:bg-white/10 border border-white/5"
 							)}
-							onclick={() => handleCategoryClick("all")}
+							onclick={() => setCategory("all")}
 						>
 							<Icon name="tag" size={18} ariaLabel="Semua kategori" />
 							<span>Semua</span>
@@ -156,11 +139,11 @@
 							<button
 								class={cn(
 									"px-5 py-3 rounded-xl text-sm font-bold transition-all duration-300 whitespace-nowrap flex items-center gap-3",
-									selectedCategory === cat.id
+									$productFilters.category === cat.id
 										? "bg-linear-to-r from-primary to-secondary text-white shadow-lg shadow-primary/30"
 										: "bg-dark-lighter text-slate-400 hover:text-white hover:bg-white/10 border border-white/5"
 								)}
-								onclick={() => handleCategoryClick(cat.id)}
+								onclick={() => setCategory(cat.id)}
 							>
 								<Icon name={cat.icon} size={18} ariaLabel={cat.name} />
 								<span>{cat.name}</span>
@@ -192,28 +175,47 @@
 					<div class="flex items-center justify-between mb-4">
 						<span class="text-slate-400 text-sm font-medium">Total Produk</span>
 						<span class="text-2xl font-black gradient-text"
-							>{filteredProducts.length}</span
+							>{$filteredProducts.length}</span
 						>
 					</div>
 					<div class="h-2 bg-dark-lighter rounded-full overflow-hidden">
 						<div
 							class="h-full bg-linear-to-r from-primary to-secondary rounded-full transition-all duration-500"
-							style="width: {(filteredProducts.length / mockProducts.length) * 100}%"
+							style="width: {($filteredProducts.length / $allProducts.length) * 100}%"
 						></div>
 					</div>
 					<p class="text-xs text-slate-500 mt-2">
-						dari {mockProducts.length} total listing
+						dari {$allProducts.length} total listing
 					</p>
 				</div>
 			</aside>
 
 			<!-- Product Grid -->
 			<div class="flex-1">
-				{#if filteredProducts.length > 0}
+				{#if $isLoading}
+					<div class="flex flex-col items-center justify-center py-24 text-slate-400">
+						<div
+							class="w-12 h-12 border-4 border-slate-700 border-t-primary rounded-full animate-spin mb-4"
+						></div>
+						<p>Memuat produk...</p>
+					</div>
+				{:else if $productsError}
+					<div class="flex flex-col items-center justify-center py-24 text-red-400">
+						<Icon name="alert-circle" size={48} className="mb-4 text-red-500" />
+						<p class="text-lg font-bold mb-2">Terjadi Kesalahan</p>
+						<p class="mb-6 text-slate-400">{$productsError}</p>
+						<button
+							onclick={() => loadProducts(true)}
+							class="px-6 py-2 bg-primary text-white rounded-xl hover:bg-primary-dark transition"
+						>
+							Coba Lagi
+						</button>
+					</div>
+				{:else if $filteredProducts.length > 0}
 					<div class="mb-6 flex items-center justify-between">
 						<p class="text-slate-400">
 							Menampilkan <span class="text-white font-bold"
-								>{filteredProducts.length}</span
+								>{$filteredProducts.length}</span
 							> produk
 						</p>
 						<div class="flex items-center gap-2 text-slate-500 text-sm">
@@ -223,7 +225,7 @@
 					</div>
 
 					<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-						{#each filteredProducts as product, index (product.id)}
+						{#each $filteredProducts as product, index (product.id)}
 							<div
 								class="opacity-0 translate-y-10 animate-fade-in-up"
 								style="animation-delay: {index *
@@ -246,10 +248,7 @@
 							barang impianmu.
 						</p>
 						<button
-							onclick={() => {
-								selectedCategory = "all";
-								searchQuery = "";
-							}}
+							onclick={resetFilters}
 							class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-linear-to-r from-primary to-secondary text-white font-bold hover:scale-105 transition-transform shadow-lg shadow-primary/30"
 						>
 							<Icon name="refresh" size={18} ariaLabel="Reset filter" />

@@ -1,9 +1,22 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import ResponsiveImage from "../ui/ResponsiveImage.svelte";
-	import { resolve } from "$lib/utils";
+	import {
+		resolve,
+		formatCurrency,
+		calculateDiscount,
+		getConditionLabel,
+		getConditionColor
+	} from "$lib/utils";
 	import Icon from "$lib/components/ui/Icon.svelte";
+	import type { FilterTab } from "$lib/types/landing";
+	import { featuredProducts, loadProducts } from "$lib/stores/products";
 
-	import type { Product, FilterTab } from "$lib/types/landing";
+	import { reveal } from "$lib/utils/reveal";
+
+	onMount(() => {
+		loadProducts();
+	});
 
 	const filterTabs: FilterTab[] = [
 		{ id: "terbaru", label: "Terbaru", icon: "sparkles" },
@@ -11,135 +24,13 @@
 		{ id: "deals", label: "Best Deals", icon: "diamond" }
 	];
 
-	const products: Product[] = [
-		{
-			id: 1,
-			image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "Zara Floral Dress Original",
-			price: 250000,
-			originalPrice: 899000,
-			condition: "Seperti Baru",
-			seller: "FashionTrust",
-			location: "Jakarta",
-			rating: 4.9,
-			stock: 2,
-			viewers: 18
-		},
-		{
-			id: 2,
-			image: "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "iPhone 13 Pro 256GB",
-			price: 9500000,
-			originalPrice: 16999000,
-			condition: "Bekas",
-			seller: "GadgetKing",
-			location: "Bandung",
-			rating: 4.8,
-			stock: 1,
-			viewers: 45
-		},
-		{
-			id: 3,
-			image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "Nike Air Jordan 1 Low",
-			price: 1200000,
-			originalPrice: 2499000,
-			condition: "Seperti Baru",
-			seller: "SneakerHead",
-			location: "Surabaya",
-			rating: 5.0,
-			viewers: 12
-		},
-		{
-			id: 4,
-			image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "MacBook Air M1 2020",
-			price: 8500000,
-			originalPrice: 14999000,
-			condition: "Bekas",
-			seller: "TechMaster",
-			location: "Jakarta",
-			rating: 4.7,
-			stock: 3,
-			viewers: 31
-		},
-		{
-			id: 5,
-			image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "Coach Tote Bag Authentic",
-			price: 1800000,
-			originalPrice: 4500000,
-			condition: "Seperti Baru",
-			seller: "LuxBags",
-			location: "Medan",
-			rating: 4.9,
-			viewers: 22
-		},
-		{
-			id: 6,
-			image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "PlayStation 5 + 2 Game",
-			price: 6500000,
-			originalPrice: 9999000,
-			condition: "Bekas",
-			seller: "GameZone",
-			location: "Yogyakarta",
-			rating: 4.8,
-			stock: 1,
-			viewers: 67
-		},
-		{
-			id: 7,
-			image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "Koleksi Novel Tere Liye",
-			price: 350000,
-			originalPrice: 750000,
-			condition: "Seperti Baru",
-			seller: "BookLover",
-			location: "Semarang",
-			rating: 4.6
-		},
-		{
-			id: 8,
-			image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=400&fit=crop&q=80", // Unsplash
-			title: "Apple Watch Series 7",
-			price: 3200000,
-			originalPrice: 5999000,
-			condition: "Bekas",
-			seller: "WatchStore",
-			location: "Bali",
-			rating: 4.9,
-			stock: 2,
-			viewers: 28
-		}
-	];
-
-	import { reveal } from "$lib/utils/reveal";
+	// Use first 8 products from centralized mock data
 	let activeFilter = $state("terbaru");
 	let viewerCount = $state(156);
 	let isVisible = $state(false);
 
 	function setActiveFilter(filterId: string) {
 		activeFilter = filterId;
-	}
-
-	function formatPrice(price: number): string {
-		return new Intl.NumberFormat("id-ID").format(price);
-	}
-
-	function getDiscount(price: number, originalPrice: number): number {
-		return Math.round((1 - price / originalPrice) * 100);
-	}
-
-	function getConditionColor(condition: string): string {
-		switch (condition) {
-			case "Baru":
-				return "#10B981";
-			case "Seperti Baru":
-				return "#7C3AED";
-			default:
-				return "#F97316";
-		}
 	}
 
 	// Static viewer count - no interval for performance
@@ -225,7 +116,7 @@
 		</div>
 
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-			{#each products as product, index (product.id)}
+			{#each $featuredProducts as product, index (product.id)}
 				<div
 					class="glass-card group rounded-3xl overflow-hidden relative"
 					class:opacity-0={!isVisible}
@@ -236,13 +127,15 @@
 					)}s;"
 				>
 					<!-- Discount Badge - Neon Style -->
-					<div class="absolute top-4 left-4 z-20">
-						<div
-							class="bg-rose-500/90 backdrop-blur-md text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-[0_0_15px_rgba(244,63,94,0.4)] border border-rose-400/30"
-						>
-							-{getDiscount(product.price, product.originalPrice)}%
+					{#if product.originalPrice}
+						<div class="absolute top-4 left-4 z-20">
+							<div
+								class="bg-rose-500/90 backdrop-blur-md text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-[0_0_15px_rgba(244,63,94,0.4)] border border-rose-400/30"
+							>
+								-{calculateDiscount(product.originalPrice, product.price)}%
+							</div>
 						</div>
-					</div>
+					{/if}
 
 					<button
 						type="button"
@@ -272,7 +165,7 @@
 							class="absolute inset-0 bg-linear-to-t from-dark-deep/80 via-transparent to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"
 						></div>
 						<ResponsiveImage
-							src={product.image}
+							src={product.images[0]}
 							alt={product.title}
 							loading="lazy"
 							class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -285,7 +178,7 @@
 								class="px-3 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider text-white/90 backdrop-blur-md border border-white/10"
 								style="background: {getConditionColor(product.condition)}cc"
 							>
-								{product.condition}
+								{getConditionLabel(product.condition)}
 							</span>
 						</div>
 					</div>
@@ -324,33 +217,31 @@
 
 						<div class="mb-5">
 							<div class="text-2xl font-black gradient-text-color tracking-tight">
-								Rp {formatPrice(product.price)}
+								{formatCurrency(product.price)}
 							</div>
-							<div class="flex items-center gap-2 mt-1">
-								<span class="text-xs text-slate-500 line-through">
-									Rp {formatPrice(product.originalPrice)}
-								</span>
-								<span
-									class="text-[10px] text-emerald-400 font-medium bg-emerald-500/10 px-1.5 py-0.5 rounded"
-								>
-									Save {Math.round(
-										product.originalPrice - product.price
-									).toLocaleString()}
-								</span>
-							</div>
+							{#if product.originalPrice}
+								<div class="flex items-center gap-2 mt-1">
+									<span class="text-xs text-slate-500 line-through">
+										{formatCurrency(product.originalPrice)}
+									</span>
+									<span
+										class="text-[10px] text-emerald-400 font-medium bg-emerald-500/10 px-1.5 py-0.5 rounded"
+									>
+										Save {Math.round(
+											product.originalPrice - product.price
+										).toLocaleString()}
+									</span>
+								</div>
+							{/if}
 						</div>
 
 						<div class="flex items-center justify-between pt-4 border-t border-white/5">
 							<div class="flex items-center gap-2">
 								<div class="flex flex-col">
 									<span class="text-xs font-medium text-slate-300"
-										>{product.seller}</span
+										>Seller #{product.sellerId}</span
 									>
 									<div class="flex items-center gap-1">
-										<span class="text-[10px] text-yellow-400"
-											>★ {product.rating}</span
-										>
-										<span class="text-[10px] text-slate-600">•</span>
 										<span class="text-[10px] text-slate-500"
 											>{product.location}</span
 										>

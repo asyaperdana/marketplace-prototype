@@ -1,9 +1,9 @@
 import { error } from "@sveltejs/kit";
-import { mockProducts } from "$lib/data/mock-products";
+import { getProductById } from "$lib/services/products";
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = ({ params }) => {
-	const product = mockProducts.find((p) => p.id === params.id);
+export const load: PageLoad = async ({ params }) => {
+	const product = await getProductById(params.id);
 
 	if (!product) {
 		throw error(404, "Produk tidak ditemukan");
