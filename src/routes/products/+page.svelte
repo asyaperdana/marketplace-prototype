@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import { fade } from "svelte/transition";
 	import { config } from "$lib/config";
 	import ProductCard from "$lib/components/product/ProductCard.svelte";
 	import { cn, resolve } from "$lib/utils";
@@ -16,6 +17,8 @@
 		setSortBy,
 		resetFilters
 	} from "$lib/stores/products";
+
+	const skeletonCards = Array.from({ length: 9 });
 
 	onMount(() => {
 		loadProducts();
@@ -193,14 +196,36 @@
 			<!-- Product Grid -->
 			<div class="flex-1">
 				{#if $isLoading}
-					<div class="flex flex-col items-center justify-center py-24 text-slate-400">
-						<div
-							class="w-12 h-12 border-4 border-slate-700 border-t-primary rounded-full animate-spin mb-4"
-						></div>
-						<p>Memuat produk...</p>
+					<div class="space-y-6" transition:fade={{ duration: 200 }}>
+						<div class="flex items-center justify-between">
+							<div class="skeleton h-4 w-44 rounded-full"></div>
+							<div class="skeleton h-4 w-24 rounded-full"></div>
+						</div>
+						<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+							{#each skeletonCards as _, index (index)}
+								<div
+									class="rounded-2xl overflow-hidden border border-white/5 bg-white/5 {index >= 6
+										? 'hidden sm:block'
+										: ''}"
+								>
+									<div class="aspect-square skeleton"></div>
+									<div class="p-4 space-y-3">
+										<div class="skeleton h-4 w-5/6 rounded-full"></div>
+										<div class="skeleton h-4 w-2/3 rounded-full"></div>
+										<div class="flex items-center justify-between pt-2">
+											<div class="skeleton h-3 w-24 rounded-full"></div>
+											<div class="skeleton h-3 w-16 rounded-full"></div>
+										</div>
+									</div>
+								</div>
+							{/each}
+						</div>
 					</div>
 				{:else if $productsError}
-					<div class="flex flex-col items-center justify-center py-24 text-red-400">
+					<div
+						class="flex flex-col items-center justify-center py-24 text-red-400"
+						transition:fade={{ duration: 200 }}
+					>
 						<Icon name="alert-circle" size={48} className="mb-4 text-red-500" />
 						<p class="text-lg font-bold mb-2">Terjadi Kesalahan</p>
 						<p class="mb-6 text-slate-400">{$productsError}</p>
@@ -212,7 +237,7 @@
 						</button>
 					</div>
 				{:else if $filteredProducts.length > 0}
-					<div class="mb-6 flex items-center justify-between">
+					<div class="mb-6 flex items-center justify-between" transition:fade={{ duration: 200 }}>
 						<p class="text-slate-400">
 							Menampilkan <span class="text-white font-bold"
 								>{$filteredProducts.length}</span
@@ -224,7 +249,10 @@
 						</div>
 					</div>
 
-					<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+					<div
+						class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+						transition:fade={{ duration: 250 }}
+					>
 						{#each $filteredProducts as product, index (product.id)}
 							<div
 								class="opacity-0 translate-y-10 animate-fade-in-up"
@@ -236,16 +264,64 @@
 						{/each}
 					</div>
 				{:else}
-					<div class="flex flex-col items-center justify-center py-24 text-center">
+					{@const hasQuery = $productFilters.searchQuery.trim().length > 0}
+					{@const isCategoryFiltered = $productFilters.category !== "all"}
+					{@const activeCategory = config.categories.find(
+						(cat) => cat.id === $productFilters.category
+					)}
+					{@const mainIcon = hasQuery ? "search" : isCategoryFiltered ? "tag" : "box"}
+					{@const leftBadge =
+						hasQuery && isCategoryFiltered
+							? "tag"
+							: hasQuery
+								? "sparkles"
+								: isCategoryFiltered
+									? "grid"
+									: "sparkles"}
+					{@const rightBadge =
+						hasQuery && isCategoryFiltered
+							? "grid"
+							: hasQuery
+								? "box"
+								: isCategoryFiltered
+									? "box"
+									: "grid"}
+					<div
+						class="flex flex-col items-center justify-center py-24 text-center"
+						transition:fade={{ duration: 200 }}
+					>
 						<div
-							class="w-32 h-32 rounded-full bg-dark-lighter flex items-center justify-center mb-8 text-6xl"
+							class="empty-orb w-32 h-32 rounded-full bg-dark-lighter flex items-center justify-center mb-8"
 						>
-							<Icon name="search" size={22} ariaLabel="Tidak ada hasil" />
+							<Icon
+								name={mainIcon}
+								size={28}
+								className="text-slate-300"
+								ariaLabel="Ilustrasi empty state"
+							/>
+							<div class="empty-badge badge-left">
+								<Icon name={leftBadge} size={14} className="text-slate-400" />
+							</div>
+							<div class="empty-badge badge-right">
+								<Icon name={rightBadge} size={14} className="text-slate-400" />
+							</div>
 						</div>
 						<h3 class="text-2xl font-black text-white mb-3">Produk tidak ditemukan</h3>
 						<p class="text-slate-400 max-w-md mb-8">
-							Coba ubah kata kunci pencarian atau pilih kategori lain untuk menemukan
-							barang impianmu.
+							{#if hasQuery && isCategoryFiltered}
+								Tidak ada hasil untuk "{ $productFilters.searchQuery }" di kategori
+								{activeCategory?.name ?? "terpilih"}. Coba kata kunci lain atau
+								ubah kategori.
+							{:else if hasQuery}
+								Tidak ada hasil untuk "{ $productFilters.searchQuery }". Coba kata
+								kunci lain atau pilih kategori berbeda.
+							{:else if isCategoryFiltered}
+								Belum ada produk di kategori {activeCategory?.name ?? "terpilih"}.
+								Coba kategori lain atau reset filter.
+							{:else}
+								Coba ubah kata kunci pencarian atau pilih kategori lain untuk
+								menemukan barang impianmu.
+							{/if}
 						</p>
 						<button
 							onclick={resetFilters}
@@ -275,5 +351,69 @@
 
 	.animate-fade-in-up {
 		animation: fade-in-up 0.5s ease-out;
+	}
+
+	.skeleton {
+		position: relative;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.08);
+	}
+
+	.skeleton::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			90deg,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.2) 50%,
+			rgba(255, 255, 255, 0) 100%
+		);
+		transform: translateX(-100%);
+		animation: shimmer 1.2s infinite;
+	}
+
+	@keyframes shimmer {
+		100% {
+			transform: translateX(100%);
+		}
+	}
+
+	.empty-orb {
+		position: relative;
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+	}
+
+	.empty-badge {
+		position: absolute;
+		width: 32px;
+		height: 32px;
+		border-radius: 999px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.badge-left {
+		left: -6px;
+		bottom: 14px;
+	}
+
+	.badge-right {
+		right: -6px;
+		top: 14px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animate-fade-in-up {
+			animation-duration: 0.01ms;
+		}
+
+		.skeleton::after {
+			animation: none;
+		}
 	}
 </style>

@@ -27,12 +27,18 @@
 
 	let fallbackOverride = $state<string | null>(null);
 	let retried = $state(false);
+	let imageLoaded = $state(false);
 	const imgSrc = $derived(
 		fallbackOverride ?? product.images[0] ?? getFallbackImage(product.category)
 	);
 
+	function handleImageLoad() {
+		imageLoaded = true;
+	}
+
 	function handleImageError(event: Event) {
 		const img = event.currentTarget as HTMLImageElement;
+		imageLoaded = false;
 		if (!retried) {
 			retried = true;
 			fallbackOverride = getFallbackImage(product.category);
@@ -56,9 +62,11 @@
 		<img
 			src={imgSrc}
 			alt={product.title}
-			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 product-image"
+			class:loaded={imageLoaded}
 			loading="lazy"
 			decoding="async"
+			onload={handleImageLoad}
 			onerror={handleImageError}
 		/>
 
@@ -112,3 +120,14 @@
 		</div>
 	</div>
 </a>
+
+<style>
+	.product-image {
+		opacity: 0;
+		transition: opacity 0.35s ease-out, transform 0.5s;
+	}
+
+	.product-image.loaded {
+		opacity: 1;
+	}
+</style>
