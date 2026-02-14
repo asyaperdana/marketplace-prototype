@@ -203,18 +203,18 @@ export function resolve(path: string): string {
  */
 export function getFallbackImage(category: string): string {
 	const categoryImages: Record<string, string> = {
-		electronics: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=800&q=80",
-		fashion: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&q=80",
-		home: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=800&q=80",
-		vehicles: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
-		hobbies: "https://images.unsplash.com/photo-1517260739337-6799d2df9c99?w=800&q=80",
-		books: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80",
-		baby: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80",
-		beauty: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?w=800&q=80"
+		electronics: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=400&auto=format&fit=crop",
+		fashion: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400&auto=format&fit=crop",
+		home: "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=400&auto=format&fit=crop",
+		vehicles: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&auto=format&fit=crop",
+		hobbies: "https://images.unsplash.com/photo-1517260739337-6799d2df9c99?w=400&auto=format&fit=crop",
+		books: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400&auto=format&fit=crop",
+		baby: "https://images.unsplash.com/photo-1559135141-2bea6465fccf?w=400&auto=format&fit=crop",
+		beauty: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&auto=format&fit=crop"
 	};
 
 	return (
 		categoryImages[category] ||
-		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80"
+		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&auto=format&fit=crop"
 	);
 }

@@ -24,8 +24,8 @@ export const mockProducts: Product[] = [
 		price: 12500000,
 		originalPrice: 19999000,
 		images: [
-			"https://images.unsplash.com/photo-1611186871348-d1fa63198cc4?w=800&q=80",
-			"https://images.unsplash.com/photo-1517336714731-489689fd1ca4?w=800&q=80"
+			"https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1541807084-5c52b6b49c75?w=400&auto=format&fit=crop"
 		],
 		category: "electronics",
 		condition: "like_new",
@@ -41,8 +41,8 @@ export const mockProducts: Product[] = [
 		price: 8200000,
 		originalPrice: 12000000,
 		images: [
-			"https://images.unsplash.com/photo-1632661674596-df8be070a5c5?w=800&q=80",
-			"https://images.unsplash.com/photo-1695048180490-3211925b7d69?w=800&q=80"
+			"https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&auto=format&fit=crop"
 		],
 		category: "electronics",
 		condition: "good",
@@ -58,8 +58,8 @@ export const mockProducts: Product[] = [
 		price: 2800000,
 		originalPrice: 4000000,
 		images: [
-			"https://images.unsplash.com/photo-1618335829737-2228915674e0?w=800&q=80",
-			"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80"
+			"https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&auto=format&fit=crop"
 		],
 		category: "electronics",
 		condition: "like_new",
@@ -74,8 +74,8 @@ export const mockProducts: Product[] = [
 			"Kamera analog legendaris Canon AE-1 Program. Lensa 50mm f/1.8. Shutter empuk, lightmeter nyala akurat. Optik lensa bersih no fog no jamur. Body ada brassing dikit wajar vintage. Siap pakai hunting foto.",
 		price: 2500000,
 		images: [
-			"https://images.unsplash.com/photo-1518118014377-ce94f39feb4c?w=800&q=80",
-			"https://images.unsplash.com/photo-1500634245200-e5245c7574ef?w=800&q=80"
+			"https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1495707902641-75cac588d2e9?w=400&auto=format&fit=crop"
 		],
 		category: "hobbies",
 		condition: "good",
@@ -91,8 +91,8 @@ export const mockProducts: Product[] = [
 		price: 950000,
 		originalPrice: 1995000,
 		images: [
-			"https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80",
-			"https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&q=80"
+			"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=400&auto=format&fit=crop"
 		],
 		category: "home",
 		condition: "good",
@@ -108,8 +108,8 @@ export const mockProducts: Product[] = [
 		price: 28500000,
 		originalPrice: 32000000,
 		images: [
-			"https://images.unsplash.com/photo-1485965120184-e224f7a1aab7?w=800&q=80",
-			"https://images.unsplash.com/photo-1507035895480-2b3156c311a6?w=800&q=80"
+			"https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&auto=format&fit=crop"
 		],
 		category: "vehicles",
 		condition: "like_new",
@@ -123,7 +123,7 @@ export const mockProducts: Product[] = [
 		description:
 			"Air Jordan 1 Retro High OG 'Lost & Found'. Size US 9 / EUR 42.5. Baru 100% Brand New In Box (BNIB). Receipt pembelian dari Atmos ada. Dijual karena salah size. Barang kolektor, harga bakal naik terus.",
 		price: 3500000,
-		images: ["https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&q=80"],
+		images: ["https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&auto=format&fit=crop"],
 		category: "fashion",
 		condition: "new",
 		sellerId: "user_006",
@@ -137,8 +137,8 @@ export const mockProducts: Product[] = [
 			"Jual koleksi pribadi novel Harry Potter 1-7 Bahasa Indonesia terbitan Gramedia. Cetakan lama, kertas masih enak dibaca walau agak menguning (natural aging). Tidak ada halaman sobek atau coretan. Bonus bookmark asrama Hogwarts.",
 		price: 450000,
 		images: [
-			"https://images.unsplash.com/photo-1609866138210-84bb69694d58?w=800&q=80",
-			"https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=80"
+			"https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&auto=format&fit=crop"
 		],
 		category: "books",
 		condition: "good",
@@ -154,8 +154,8 @@ export const mockProducts: Product[] = [
 		price: 4800000,
 		originalPrice: 11000000,
 		images: [
-			"https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80",
-			"https://images.unsplash.com/photo-1591027480007-a42f6ef886c3?w=800&q=80"
+			"https://images.unsplash.com/photo-1559135141-2bea6465fccf?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1539893147390-a9c1d69f00be?w=400&auto=format&fit=crop"
 		],
 		category: "baby",
 		condition: "good",
@@ -171,8 +171,8 @@ export const mockProducts: Product[] = [
 		price: 3200000,
 		originalPrice: 5400000,
 		images: [
-			"https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80",
-			"https://images.unsplash.com/photo-1571781926291-28059004d3b9?w=800&q=80"
+			"https://images.unsplash.com/photo-1571781926291-28059004d3b9?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&auto=format&fit=crop"
 		],
 		category: "beauty",
 		condition: "new",
@@ -187,7 +187,7 @@ export const mockProducts: Product[] = [
 			"Gitar akustik sejuta umat, Yamaha F310 Original. Suara nyaring, senar baru ganti D'Addario 0.10. Body mulus, neck lurus, fret aman. Cocok buat pemula belajar gitar. Bonus softcase tebal.",
 		price: 850000,
 		originalPrice: 1300000,
-		images: ["https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&q=80"],
+		images: ["https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&auto=format&fit=crop"],
 		category: "hobbies",
 		condition: "good",
 		sellerId: "user_010",
@@ -201,8 +201,8 @@ export const mockProducts: Product[] = [
 			"Monstera deliciosa (King) ukuran besar. Daun sudah pecah cantik, ada 6 daun, tinggi sekitar 1 meter. Akar sehat rimbun, pot terakota diameter 40cm. Perawatan mudah. Khusus pengiriman instan kurir mobil atau ambil sendiri.",
 		price: 350000,
 		images: [
-			"https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=800&q=80",
-			"https://images.unsplash.com/photo-1600411833196-7c1f6b152789?w=800&q=80"
+			"https://images.unsplash.com/photo-1614594975525-e45190c55d0b?w=400&auto=format&fit=crop",
+			"https://images.unsplash.com/photo-1637967886160-fd78dc3ce3f5?w=400&auto=format&fit=crop"
 		],
 		category: "home",
 		condition: "good",
@@ -218,7 +218,7 @@ export const mockProducts: Product[] = [
 		price: 11500000,
 		originalPrice: 17999000,
 		images: [
-			"https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800&q=80"
+			"https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400&auto=format&fit=crop"
 		],
 		category: "electronics",
 		condition: "like_new",
@@ -234,7 +234,7 @@ export const mockProducts: Product[] = [
 		price: 1200000,
 		originalPrice: 1600000,
 		images: [
-			"https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&q=80"
+			"https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=400&auto=format&fit=crop"
 		],
 		category: "electronics",
 		condition: "good",
@@ -250,7 +250,7 @@ export const mockProducts: Product[] = [
 		price: 650000,
 		originalPrice: 999000,
 		images: [
-			"https://images.unsplash.com/photo-1542272617-08f08375810c?w=800&q=80"
+			"https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&auto=format&fit=crop"
 		],
 		category: "fashion",
 		condition: "like_new",
@@ -266,7 +266,7 @@ export const mockProducts: Product[] = [
 		price: 850000,
 		originalPrice: 1200000,
 		images: [
-			"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=800&q=80"
+			"https://images.unsplash.com/photo-1622260614153-03223fb72052?w=400&auto=format&fit=crop"
 		],
 		category: "hobbies",
 		condition: "like_new",
@@ -282,7 +282,7 @@ export const mockProducts: Product[] = [
 		price: 1100000,
 		originalPrice: 2800000,
 		images: [
-			"https://images.unsplash.com/photo-1587563871167-1ee9c731aef4?w=800&q=80"
+			"https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&auto=format&fit=crop"
 		],
 		category: "fashion",
 		condition: "good",
@@ -297,7 +297,7 @@ export const mockProducts: Product[] = [
 			"Meja belajar/kerja gaya scandinavian. Kaki kayu solid jati belanda, top table MDF duco putih. Ada laci 2 buah. Ukuran 120x60cm. Kondisi masih bagus, cuma ada noda tinta dikit di pojok.",
 		price: 450000,
 		images: [
-			"https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800&q=80"
+			"https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=400&auto=format&fit=crop"
 		],
 		category: "home",
 		condition: "fair",
@@ -313,7 +313,7 @@ export const mockProducts: Product[] = [
 		price: 600000,
 		originalPrice: 750000,
 		images: [
-			"https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=800&q=80"
+			"https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=400&auto=format&fit=crop"
 		],
 		category: "hobbies",
 		condition: "new",
@@ -329,7 +329,7 @@ export const mockProducts: Product[] = [
 		price: 1300000,
 		originalPrice: 2200000,
 		images: [
-			"https://images.unsplash.com/photo-1558507308-417105cb0317?w=800&q=80"
+			"https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&auto=format&fit=crop"
 		],
 		category: "vehicles",
 		condition: "good",

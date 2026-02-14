@@ -12,7 +12,7 @@
 	} from "$lib/utils";
 
 	const GENERIC_FALLBACK =
-		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80";
+		"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&auto=format&fit=crop";
 
 	interface Props {
 		product: Product;
