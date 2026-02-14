@@ -8,11 +8,7 @@
 // and SupabaseAuthRepository that implement these interfaces, then update
 // provider.ts to use the new implementations.
 
-import type {
-	Product,
-	ProductFilters,
-	PaginatedResponse
-} from "$lib/types";
+import type { Product, ProductFilters, PaginatedResponse } from "$lib/types";
 
 // ----- Result Types -----
 
@@ -92,7 +88,5 @@ export interface IAuthRepository {
 	getCurrentUser(): AuthUser | null;
 
 	/** Subscribe to auth state changes. Returns unsubscribe function. */
-	onAuthStateChange(
-		callback: (user: AuthUser | null) => void
-	): () => void;
+	onAuthStateChange(callback: (user: AuthUser | null) => void): () => void;
 }

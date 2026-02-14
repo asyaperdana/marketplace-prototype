@@ -123,7 +123,9 @@ export const mockProducts: Product[] = [
 		description:
 			"Air Jordan 1 Retro High OG 'Lost & Found'. Size US 9 / EUR 42.5. Baru 100% Brand New In Box (BNIB). Receipt pembelian dari Atmos ada. Dijual karena salah size. Barang kolektor, harga bakal naik terus.",
 		price: 3500000,
-		images: ["https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&auto=format&fit=crop"],
+		images: [
+			"https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&auto=format&fit=crop"
+		],
 		category: "fashion",
 		condition: "new",
 		sellerId: "user_006",
@@ -187,7 +189,9 @@ export const mockProducts: Product[] = [
 			"Gitar akustik sejuta umat, Yamaha F310 Original. Suara nyaring, senar baru ganti D'Addario 0.10. Body mulus, neck lurus, fret aman. Cocok buat pemula belajar gitar. Bonus softcase tebal.",
 		price: 850000,
 		originalPrice: 1300000,
-		images: ["https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&auto=format&fit=crop"],
+		images: [
+			"https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&auto=format&fit=crop"
+		],
 		category: "hobbies",
 		condition: "good",
 		sellerId: "user_010",

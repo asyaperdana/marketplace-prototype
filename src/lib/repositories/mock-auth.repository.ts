@@ -6,12 +6,7 @@
 // [SUPABASE-RECONNECT] Replace with SupabaseAuthRepository that
 // delegates to supabase.auth.signUp(...), supabase.auth.signInWithPassword(...), etc.
 
-import type {
-	IAuthRepository,
-	AuthUser,
-	AuthSession,
-	RepoResult
-} from "./repository";
+import type { IAuthRepository, AuthUser, AuthSession, RepoResult } from "./repository";
 import { mockUsers, type MockUserRecord } from "$lib/data/mock-users";
 import { delay } from "$lib/utils";
 
@@ -19,7 +14,6 @@ export class MockAuthRepository implements IAuthRepository {
 	private users: Map<string, MockUserRecord>;
 	private currentSession: AuthSession | null = null;
 	private listeners: Set<(user: AuthUser | null) => void> = new Set();
-
 
 	constructor() {
 		this.users = new Map(mockUsers.map((u) => [u.email, u]));

@@ -2,7 +2,6 @@
 	import { resolve } from "$lib/utils";
 	import { config } from "$lib/config";
 	import { fade } from "svelte/transition";
-	import Icon from "$lib/components/ui/Icon.svelte";
 
 	let { children } = $props();
 </script>

@@ -124,7 +124,9 @@
 <style>
 	.product-image {
 		opacity: 0;
-		transition: opacity 0.35s ease-out, transform 0.5s;
+		transition:
+			opacity 0.35s ease-out,
+			transform 0.5s;
 	}
 
 	.product-image.loaded {

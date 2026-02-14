@@ -63,8 +63,7 @@ export const filteredProducts = derived(
 		if ($filters.searchQuery.trim()) {
 			const q = $filters.searchQuery.toLowerCase();
 			result = result.filter(
-				(p) =>
-					p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+				(p) => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
 			);
 		}
 

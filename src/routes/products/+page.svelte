@@ -15,7 +15,8 @@
 		setSearchQuery,
 		setCategory,
 		setSortBy,
-		resetFilters
+		resetFilters,
+		type ProductListingFilters
 	} from "$lib/stores/products";
 
 	const skeletonCards = Array.from({ length: 9 });
@@ -100,7 +101,8 @@
 
 					<select
 						value={$productFilters.sortBy}
-						onchange={(e) => setSortBy(e.currentTarget.value as any)}
+						onchange={(e) =>
+							setSortBy(e.currentTarget.value as ProductListingFilters["sortBy"])}
 						class="px-4 py-4 rounded-2xl bg-dark-lighter/80 border border-white/10 text-white cursor-pointer focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all backdrop-blur-sm"
 					>
 						<option value="newest">Terbaru</option>
@@ -204,7 +206,8 @@
 						<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 							{#each skeletonCards as _, index (index)}
 								<div
-									class="rounded-2xl overflow-hidden border border-white/5 bg-white/5 {index >= 6
+									class="rounded-2xl overflow-hidden border border-white/5 bg-white/5 {index >=
+									6
 										? 'hidden sm:block'
 										: ''}"
 								>
@@ -237,7 +240,10 @@
 						</button>
 					</div>
 				{:else if $filteredProducts.length > 0}
-					<div class="mb-6 flex items-center justify-between" transition:fade={{ duration: 200 }}>
+					<div
+						class="mb-6 flex items-center justify-between"
+						transition:fade={{ duration: 200 }}
+					>
 						<p class="text-slate-400">
 							Menampilkan <span class="text-white font-bold"
 								>{$filteredProducts.length}</span
@@ -309,11 +315,11 @@
 						<h3 class="text-2xl font-black text-white mb-3">Produk tidak ditemukan</h3>
 						<p class="text-slate-400 max-w-md mb-8">
 							{#if hasQuery && isCategoryFiltered}
-								Tidak ada hasil untuk "{ $productFilters.searchQuery }" di kategori
-								{activeCategory?.name ?? "terpilih"}. Coba kata kunci lain atau
-								ubah kategori.
+								Tidak ada hasil untuk "{$productFilters.searchQuery}" di kategori
+								{activeCategory?.name ?? "terpilih"}. Coba kata kunci lain atau ubah
+								kategori.
 							{:else if hasQuery}
-								Tidak ada hasil untuk "{ $productFilters.searchQuery }". Coba kata
+								Tidak ada hasil untuk "{$productFilters.searchQuery}". Coba kata
 								kunci lain atau pilih kategori berbeda.
 							{:else if isCategoryFiltered}
 								Belum ada produk di kategori {activeCategory?.name ?? "terpilih"}.
